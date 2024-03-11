@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://ct7akgrsmoosc"]
+[gd_scene load_steps=15 format=3 uid="uid://ct7akgrsmoosc"]
 
+[ext_resource type="Script" path="res://playerMovement.gd" id="1_8mm2x"]
 [ext_resource type="Texture2D" uid="uid://d1c7cuou8b4im" path="res://assets/test/mainCharacter/back/back1.png" id="1_a6k5y"]
 [ext_resource type="Texture2D" uid="uid://03sq0dp06qob" path="res://assets/test/mainCharacter/back/back2.png" id="2_2ql7o"]
 [ext_resource type="Texture2D" uid="uid://0353hti0s82t" path="res://assets/test/mainCharacter/back/back3.png" id="3_l7yk0"]
@@ -11,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cuwi3q0x2i4ht" path="res://assets/test/mainCharacter/right/right3.png" id="9_7q0vq"]
 [ext_resource type="Texture2D" uid="uid://dwt4fukvwf6og" path="res://assets/test/mainCharacter/right/right4.png" id="10_qof45"]
 [ext_resource type="Texture2D" uid="uid://cdxvgly4asu1i" path="res://assets/test/mainCharacter/right/right5.png" id="11_i1m4i"]
+[ext_resource type="PackedScene" uid="uid://bsnf7mnfrii3c" path="res://weapon.tscn" id="13_5ikvp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_63iob"]
 animations = [{
@@ -65,7 +67,14 @@ animations = [{
 
 [node name="theRat" type="Node2D"]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
+[node name="playerMovement" type="CharacterBody2D" parent="."]
+script = ExtResource("1_8mm2x")
+
+[node name="playerSprites" type="AnimatedSprite2D" parent="playerMovement"]
+scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_63iob")
 animation = &"right"
+
+[node name="Area2D" type="Area2D" parent="playerMovement/playerSprites"]
+
+[node name="Weapon" parent="playerMovement" instance=ExtResource("13_5ikvp")]
