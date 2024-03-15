@@ -1,3 +1,80 @@
-[gd_scene format=3 uid="uid://ct7akgrsmoosc"]
+[gd_scene load_steps=15 format=3 uid="uid://ct7akgrsmoosc"]
+
+[ext_resource type="Script" path="res://playerMovement.gd" id="1_8mm2x"]
+[ext_resource type="Texture2D" uid="uid://d1c7cuou8b4im" path="res://assets/test/mainCharacter/back/back1.png" id="1_a6k5y"]
+[ext_resource type="Texture2D" uid="uid://03sq0dp06qob" path="res://assets/test/mainCharacter/back/back2.png" id="2_2ql7o"]
+[ext_resource type="Texture2D" uid="uid://0353hti0s82t" path="res://assets/test/mainCharacter/back/back3.png" id="3_l7yk0"]
+[ext_resource type="Texture2D" uid="uid://b4d2g33dtrirw" path="res://assets/test/mainCharacter/front/front1.png" id="4_x3y8r"]
+[ext_resource type="Texture2D" uid="uid://cuqkbotp5dsvh" path="res://assets/test/mainCharacter/front/front2.png" id="5_iwjf3"]
+[ext_resource type="Texture2D" uid="uid://cpti310mq77kt" path="res://assets/test/mainCharacter/front/front3.png" id="6_frlox"]
+[ext_resource type="Texture2D" uid="uid://bfo7aktf4jddi" path="res://assets/test/mainCharacter/right/right1.png" id="7_s4uar"]
+[ext_resource type="Texture2D" uid="uid://bg2cpp7ij8jva" path="res://assets/test/mainCharacter/right/right2.png" id="8_elamt"]
+[ext_resource type="Texture2D" uid="uid://cuwi3q0x2i4ht" path="res://assets/test/mainCharacter/right/right3.png" id="9_7q0vq"]
+[ext_resource type="Texture2D" uid="uid://dwt4fukvwf6og" path="res://assets/test/mainCharacter/right/right4.png" id="10_qof45"]
+[ext_resource type="Texture2D" uid="uid://cdxvgly4asu1i" path="res://assets/test/mainCharacter/right/right5.png" id="11_i1m4i"]
+[ext_resource type="PackedScene" uid="uid://bsnf7mnfrii3c" path="res://weapon.tscn" id="13_5ikvp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_63iob"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_a6k5y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2ql7o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_l7yk0")
+}],
+"loop": true,
+"name": &"back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_x3y8r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_iwjf3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_frlox")
+}],
+"loop": true,
+"name": &"front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_s4uar")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_elamt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_7q0vq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_qof45")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_i1m4i")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}]
 
 [node name="theRat" type="Node2D"]
+
+[node name="playerMovement" type="CharacterBody2D" parent="."]
+script = ExtResource("1_8mm2x")
+
+[node name="playerSprites" type="AnimatedSprite2D" parent="playerMovement"]
+scale = Vector2(0.15, 0.15)
+sprite_frames = SubResource("SpriteFrames_63iob")
+animation = &"right"
+
+[node name="Area2D" type="Area2D" parent="playerMovement/playerSprites"]
+
+[node name="Weapon" parent="playerMovement" instance=ExtResource("13_5ikvp")]
