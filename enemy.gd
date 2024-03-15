@@ -15,7 +15,8 @@ func _physics_process(delta):
 	targetposition = (playerposition - position).normalize()
 	
 	if position.distance_to(playerposition) > 3:
-		move_and_slide(targetposition*SPEED)
+		velocity = targetposition*SPEED
+		move_and_slide()
 		if targetposition.x > 0 and targetposition.y > 0:
 			if targetposition.x > targetposition.y:
 				$AnimatedSprite2D.animation = "side"
