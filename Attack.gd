@@ -2,6 +2,7 @@ extends Node2D
 
 var speed = 400
 var damage = 0
+var direction = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,7 +11,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	translate(Vector2(speed * delta, 0).rotated(rotation))
+	translate(direction * speed * delta)
 	
 func _on_timer_timeout():
 	queue_free()
