@@ -1,0 +1,65 @@
+[gd_scene load_steps=11 format=3 uid="uid://bd1rvmtjug7o8"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_4tbc6"]
+[ext_resource type="Texture2D" uid="uid://d3aewvc48naq" path="res://assets/test/zombie/back/back1.png" id="2_80xee"]
+[ext_resource type="Texture2D" uid="uid://ccjoj1at5nrq3" path="res://assets/test/zombie/back/back2.png" id="3_0n8e7"]
+[ext_resource type="Texture2D" uid="uid://clam86g4835yb" path="res://assets/test/zombie/front/front1.png" id="4_tped0"]
+[ext_resource type="Texture2D" uid="uid://2eqke8n28jk6" path="res://assets/test/zombie/front/front3.png" id="5_v5rhu"]
+[ext_resource type="Texture2D" uid="uid://c4767f3q7b7uu" path="res://assets/test/zombie/front/front2.png" id="6_7y86m"]
+[ext_resource type="Texture2D" uid="uid://vbg3tlg0ejja" path="res://assets/test/zombie/side/side1.png" id="7_yhfok"]
+[ext_resource type="Texture2D" uid="uid://dx7mc42b7fa0y" path="res://assets/test/zombie/side/side2.png" id="8_3uw0j"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1gqbj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_80xee")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0n8e7")
+}],
+"loop": true,
+"name": &"back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_tped0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_v5rhu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7y86m")
+}],
+"loop": true,
+"name": &"front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_yhfok")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_3uw0j")
+}],
+"loop": true,
+"name": &"side",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0oxnu"]
+radius = 234.0
+height = 822.0
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_4tbc6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1gqbj")
+animation = &"side"
+frame_progress = 0.234867
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4, -4)
+shape = SubResource("CapsuleShape2D_0oxnu")
