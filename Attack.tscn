@@ -6,6 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_l11cc"]
 radius = 13.3417
 
+
 [node name="Attack" type="Node2D"]
 script = ExtResource("1_3benm")
 
@@ -13,6 +14,7 @@ script = ExtResource("1_3benm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_l11cc")
+
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_pc7yt")

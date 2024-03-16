@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctyd5jhqe7mis"]
+
+[ext_resource type="PackedScene" uid="uid://b20ppbejqpbjv" path="res://heart_container.tscn" id="1_8m4n1"]
+
+[node name="HUD" type="CanvasLayer"]
+scale = Vector2(0.5, 0.5)
+transform = Transform2D(0.5, 0, 0, 0.5, 0, 0)
+
+[node name="HeartContainer" parent="." instance=ExtResource("1_8m4n1")]

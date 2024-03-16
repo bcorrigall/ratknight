@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ck24t8ix5ipiv"]
+[gd_scene load_steps=8 format=3 uid="uid://ck24t8ix5ipiv"]
 
+[ext_resource type="Script" path="res://main.gd" id="1_kb2s1"]
 [ext_resource type="PackedScene" uid="uid://ct7akgrsmoosc" path="res://the_rat.tscn" id="2_fgrnw"]
 [ext_resource type="PackedScene" uid="uid://bd1rvmtjug7o8" path="res://enemy.tscn" id="3_d7vqg"]
 [ext_resource type="Texture2D" uid="uid://bow5v7o1kvoam" path="res://assets/tileset.png" id="3_f0uep"]
+[ext_resource type="PackedScene" uid="uid://ctyd5jhqe7mis" path="res://hud.tscn" id="5_57i1q"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hf4va"]
 texture = ExtResource("3_f0uep")
@@ -21,6 +23,7 @@ tile_size = Vector2i(10, 10)
 sources/0 = SubResource("TileSetAtlasSource_hf4va")
 
 [node name="Main" type="Node"]
+script = ExtResource("1_kb2s1")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = 3.0
@@ -52,3 +55,5 @@ position = Vector2(591, 378)
 [node name="Enemy2" parent="." instance=ExtResource("3_d7vqg")]
 z_index = 1
 position = Vector2(519, 262)
+
+[node name="HUD" parent="." instance=ExtResource("5_57i1q")]
