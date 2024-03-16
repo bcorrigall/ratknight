@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 
 @export var SPEED = 100.0
-@export var Health = 100
-@export var Damage = 10
+@export var health = 100
+@export var damage = 10
 var playerposition
 var targetposition
 @onready var player = get_parent().get_node("theRat")
@@ -46,4 +46,10 @@ func _physics_process(delta):
 
 	else:
 		$AnimatedSprite2D.stop()
+		
+	if health < 1:
+		death()
 
+
+func death():
+	queue_free()
