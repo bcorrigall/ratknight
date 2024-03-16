@@ -52,4 +52,5 @@ func _physics_process(delta):
 
 
 func death():
+	#animation stuff
 	queue_free()
