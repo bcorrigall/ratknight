@@ -66,8 +66,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vciue"]
-radius = 605.72
-height = 1211.44
+radius = 133.333
+height = 600.0
 
 [node name="theRat" type="Node2D"]
 script = ExtResource("1_8mm2x")

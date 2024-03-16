@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnpoj7yvso6au"]
+[gd_scene load_steps=2 format=3 uid="uid://ctyd5jhqe7mis"]
 
-[ext_resource type="PackedScene" uid="uid://y7slwjmwnvul" path="res://heart_container.tscn" id="1_8m4n1"]
+[ext_resource type="PackedScene" uid="uid://b20ppbejqpbjv" path="res://heart_container.tscn" id="1_8m4n1"]
 
 [node name="HUD" type="CanvasLayer"]
 

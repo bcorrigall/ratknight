@@ -1,12 +1,9 @@
 extends Node
+@onready var hud = $HUD
 
-
-@onready var heartsContainer = $"res://heart_container.tscn"
 func _ready():
-	heartsContainer.setMaxHeart(3)
-	heartsContainer.updateHearts(1)
-	heartsContainer.setMaxHeart(get_node("theRat").maxHealth / 20)
-	heartsContainer.updateHearts(get_node("theRat").currentHealth)
+	hud.get_node("HeartContainer").setMaxHeart(get_node("theRat").maxHealth / 20)
+	hud.get_node("HeartContainer").updateHearts(get_node("theRat").health / 20)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
