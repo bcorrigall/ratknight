@@ -2,6 +2,8 @@ extends Node2D
 
 @export var speed = 300
 @export var health = 100
+var dash_timed_out
+var dash_cooldown = 2
 
 var screen_size
 
@@ -13,6 +15,11 @@ func _ready():
 func start(_pos):
 	pass
 
+func dash():
+	if (!dash_timed_out):
+		dash_timed_out = true
+		$Timer.start(dash_cooldown)
+		print("dash")
 
 func _process(delta):
 	var velocity = Vector2.ZERO # The player's movement vector.
@@ -24,6 +31,8 @@ func _process(delta):
 		velocity.y += 1
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
+	if Input.is_action_pressed("dash"):
+		dash()
 
 	if (velocity.y < 0):
 		$playerSprites.animation = "back"
@@ -45,3 +54,7 @@ func _process(delta):
 
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
+
+
+func _on_timer_timeout():
+	dash_timed_out = false

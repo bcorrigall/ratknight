@@ -78,3 +78,7 @@ animation = &"right"
 [node name="Area2D" type="Area2D" parent="playerSprites"]
 
 [node name="Weapon" parent="." instance=ExtResource("13_5ikvp")]
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

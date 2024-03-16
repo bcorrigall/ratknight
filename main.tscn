@@ -31,7 +31,7 @@ color = Color(0.368627, 0.266667, 0.2, 1)
 
 [node name="theRat" parent="." instance=ExtResource("2_fgrnw")]
 z_index = 1
-position = Vector2(192, 130)
+position = Vector2(200, 258)
 
 [node name="TileMap" type="TileMap" parent="."]
 editor_description = "work
@@ -43,3 +43,12 @@ layer_0/tile_data = PackedInt32Array(851976, 65536, 0, 917512, 65536, 0, 983048,
 
 [node name="Enemy" parent="." instance=ExtResource("3_d7vqg")]
 z_index = 1
+position = Vector2(713, 309)
+
+[node name="Enemy3" parent="." instance=ExtResource("3_d7vqg")]
+z_index = 1
+position = Vector2(591, 378)
+
+[node name="Enemy2" parent="." instance=ExtResource("3_d7vqg")]
+z_index = 1
+position = Vector2(519, 262)

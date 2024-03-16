@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 
 @export var SPEED = 100.0
-var Health = 100
-var Damage = 10
+@export var Health = 100
+@export var Damage = 10
 var playerposition
 var targetposition
 @onready var player = get_parent().get_node("theRat")
@@ -13,7 +13,7 @@ func _physics_process(delta):
 	
 	playerposition = player.position
 	targetposition = (playerposition - position).normalized()
-	
+
 	if position.distance_to(playerposition) > 3:
 		velocity = targetposition*SPEED
 		move_and_slide()
@@ -46,4 +46,4 @@ func _physics_process(delta):
 
 	else:
 		$AnimatedSprite2D.stop()
-			
+

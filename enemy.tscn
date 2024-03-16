@@ -61,5 +61,4 @@ sprite_frames = SubResource("SpriteFrames_1gqbj")
 animation = &"side"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1327, 9)
 shape = SubResource("CapsuleShape2D_0oxnu")
