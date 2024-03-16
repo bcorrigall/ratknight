@@ -10,7 +10,7 @@ var screen_size
 func _ready():
 	screen_size = get_viewport_rect().size
 	
-func start(_pos):
+func start(pos):
 	pass
 
 
