@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var speed = 300
-@export var health = 100
+@export var health = 120
 
 var screen_size
 
