@@ -14,19 +14,19 @@ func _ready():
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_pressed("left_click") and !timed_out:
 		fire()
 		
 func fire():
 	print("weapon")
-	var attack = attack_scene.instantiate()
-	add_child(attack)
+	attack = attack_scene.instantiate()
+	get_parent().get_parent().add_child(attack)
 	
-
 	attack.damage = damage
-	attack.position = position
-	attack.rotation = rotation
+	attack.position = global_position
+	attack.direction = (get_global_mouse_position() - global_position).normalized()
+
 	print(attack.position)
 	print(position)
 	timed_out = true
