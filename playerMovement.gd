@@ -2,7 +2,6 @@ extends Node2D
 
 @export var speed = 300
 @export var health = 120
-@export var health = 100
 var dash_timed_out
 var dash_cooldown =  0.5
 var dash_speed = 900
