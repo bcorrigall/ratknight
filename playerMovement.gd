@@ -3,7 +3,8 @@ extends Node2D
 @export var speed = 300
 @export var health = 100
 var dash_timed_out
-var dash_cooldown = 2
+var dash_cooldown =  0.5
+var dash_speed = 900
 
 var screen_size
 
@@ -19,6 +20,8 @@ func dash():
 	if (!dash_timed_out):
 		dash_timed_out = true
 		$Timer.start(dash_cooldown)
+		speed = dash_speed
+		$playerSprites.rotation_degrees = 90
 		print("dash")
 
 func _process(delta):
@@ -57,4 +60,8 @@ func _process(delta):
 
 
 func _on_timer_timeout():
+	speed = 300
 	dash_timed_out = false
+	$playerSprites.rotation_degrees = 0
+	
+
