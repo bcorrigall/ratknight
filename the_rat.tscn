@@ -66,15 +66,15 @@ animations = [{
 }]
 
 [node name="theRat" type="Node2D"]
-
-[node name="playerMovement" type="CharacterBody2D" parent="."]
 script = ExtResource("1_8mm2x")
 
-[node name="playerSprites" type="AnimatedSprite2D" parent="playerMovement"]
+[node name="playerMovement" type="CharacterBody2D" parent="."]
+
+[node name="playerSprites" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_63iob")
 animation = &"right"
 
-[node name="Area2D" type="Area2D" parent="playerMovement/playerSprites"]
+[node name="Area2D" type="Area2D" parent="playerSprites"]
 
-[node name="Weapon" parent="playerMovement" instance=ExtResource("13_5ikvp")]
+[node name="Weapon" parent="." instance=ExtResource("13_5ikvp")]

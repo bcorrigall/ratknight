@@ -19,18 +19,18 @@ func _process(_delta):
 		fire()
 		
 func fire():
-	print("weapon")
 	attack = attack_scene.instantiate()
-	get_parent().get_parent().add_child(attack)
+
 	
 	attack.damage = damage
 	attack.position = global_position
 	attack.direction = (get_global_mouse_position() - global_position).normalized()
-
+	get_parent().get_parent().add_child(attack)
 	print(attack.position)
 	print(position)
 	timed_out = true
 	$Timer.start(rate_of_fire)
+
 
 func _on_timer_timeout():
 	timed_out = false
