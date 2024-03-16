@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ct7akgrsmoosc"]
+[gd_scene load_steps=16 format=3 uid="uid://ct7akgrsmoosc"]
 
 [ext_resource type="Script" path="res://playerMovement.gd" id="1_8mm2x"]
 [ext_resource type="Texture2D" uid="uid://d1c7cuou8b4im" path="res://assets/test/mainCharacter/back/back1.png" id="1_a6k5y"]
@@ -65,16 +65,27 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="theRat" type="Node2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vciue"]
+radius = 605.72
+height = 1211.44
 
-[node name="playerMovement" type="CharacterBody2D" parent="."]
+[node name="theRat" type="Node2D"]
 script = ExtResource("1_8mm2x")
 
-[node name="playerSprites" type="AnimatedSprite2D" parent="playerMovement"]
+[node name="playerMovement" type="CharacterBody2D" parent="."]
+
+[node name="playerSprites" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_63iob")
 animation = &"right"
 
-[node name="Area2D" type="Area2D" parent="playerMovement/playerSprites"]
+[node name="Area2D" type="Area2D" parent="playerSprites"]
 
-[node name="Weapon" parent="playerMovement" instance=ExtResource("13_5ikvp")]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="playerSprites/Area2D"]
+shape = SubResource("CapsuleShape2D_vciue")
+
+[node name="Weapon" parent="." instance=ExtResource("13_5ikvp")]
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

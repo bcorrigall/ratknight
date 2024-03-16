@@ -49,17 +49,16 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0oxnu"]
-radius = 234.0
-height = 822.0
+radius = 40.0
+height = 124.0
 
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_4tbc6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.138125, 0.151875)
 sprite_frames = SubResource("SpriteFrames_1gqbj")
 animation = &"side"
-frame_progress = 0.234867
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-4, -4)
 shape = SubResource("CapsuleShape2D_0oxnu")

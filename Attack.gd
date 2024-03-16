@@ -1,6 +1,6 @@
 extends Node2D
 
-var speed = 400
+var speed = 700
 var damage = 0
 var direction = Vector2.ZERO
 
@@ -15,3 +15,4 @@ func _process(delta):
 	
 func _on_timer_timeout():
 	queue_free()
+
