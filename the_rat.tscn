@@ -69,34 +69,6 @@ animations = [{
 radius = 133.333
 height = 600.0
 
-[sub_resource type="Animation" id="Animation_ya0sy"]
-resource_name = "attackDown"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Weapon:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [2.0944, 4.18879]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Weapon:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(23, 21), Vector2(1, 39), Vector2(-33, 33)]
-}
-
 [sub_resource type="Animation" id="Animation_as68c"]
 length = 0.2
 tracks/0/type = "value"
@@ -152,8 +124,8 @@ tracks/1/keys = {
 "values": [Vector2(-36, -21), Vector2(0, -39), Vector2(41, -8)]
 }
 
-[sub_resource type="Animation" id="Animation_salqe"]
-resource_name = "attackRight"
+[sub_resource type="Animation" id="Animation_ya0sy"]
+resource_name = "attackDown"
 length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -162,10 +134,10 @@ tracks/0/path = NodePath("Weapon:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.750492, 1.5708, 3.88685]
+"values": [2.0944, 4.18879]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -177,7 +149,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(20, -52), Vector2(38, 0), Vector2(5, 48)]
+"values": [Vector2(23, 21), Vector2(1, 39), Vector2(-33, 33)]
 }
 
 [sub_resource type="Animation" id="Animation_q05dq"]
@@ -206,6 +178,34 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(-20, -52), Vector2(-38, 0), Vector2(-5, 48)]
+}
+
+[sub_resource type="Animation" id="Animation_salqe"]
+resource_name = "attackRight"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.750492, 1.5708, 3.88685]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Weapon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(20, -52), Vector2(38, 0), Vector2(5, 48)]
 }
 
 [sub_resource type="Animation" id="Animation_yc4a6"]
