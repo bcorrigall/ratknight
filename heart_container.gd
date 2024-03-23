@@ -1,15 +1,20 @@
 extends HBoxContainer
 @onready var HeartGuiClass = preload("res://heart_gui.tscn")
 
+
+
 func _ready():
+
 	pass
 	
 func _process(delta):
 	pass
 	
 	
+	
 func setMaxHeart(max:int):
 	for i in range(max):
+		print(max)
 		var heart = HeartGuiClass.instantiate()
 		add_child(heart)
 		
@@ -23,8 +28,8 @@ func updateHearts(currentHealth: int):
 		
 '''
 add to main.tscn
-@onready var heartsContatiner = $" "
 
+@onready var heartsContainer = $"."
 in ready:
 	heartsContainer.setMaxHeart(3)
 	heartsContainer.updateHearts(1)
