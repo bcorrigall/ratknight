@@ -8,6 +8,8 @@ var dash_timed_out
 var dash_cooldown =  0.5
 var dash_speed = 900
 
+var velocity
+
 var screen_size
 
 
@@ -27,7 +29,7 @@ func dash():
 		print("dash")
 
 func _process(delta):
-	var velocity = Vector2.ZERO # The player's movement vector.
+	velocity = Vector2.ZERO # The player's movement vector.
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
 	if Input.is_action_pressed("move_left"):
@@ -67,4 +69,9 @@ func _on_timer_timeout():
 	dash_timed_out = false
 	$playerSprites.rotation_degrees = 0
 	
-
+	
+func _on_area_2d_body_entered(body):
+	if (body.name.find("enemy")):
+		health -= body.damage
+		var direction = (body.position - position).normalized() * 100
+		position = position - direction
