@@ -7,7 +7,7 @@ extends Node2D
 @onready var weapon= $Weapon
 
 var health = 120
-var dash_timed_out
+var dash_timed_out = false
 var dash_cooldown =  0.5
 var dash_speed = 900
 
@@ -102,6 +102,8 @@ func _on_timer_timeout():
 func _on_area_2d_body_entered(body):
 	if (body.name.find("enemy") and invincible == false and dash_timed_out == false):
 		health -= body.damage
+		print("hit")
+		get_parent().hud.get_node("HeartContainer").updateHearts(health / 20)
 		var direction = (body.position - position).normalized() * 100
 		position = position - direction
 		$Invinciblilty.start(0.2)
