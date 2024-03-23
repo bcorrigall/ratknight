@@ -14,18 +14,14 @@ func _process(delta):
 		$ItemSprite.animation = "Guy"
 	if(type >= 3):
 		$ItemSprite.animation = "Heart"
-		
-
-
-
 
 
 func _on_area_entered(area):
-	
 	if(area.name.match("theRatArea2D")):
-		print("hello")
-		var new = area.get_parent().get_parent().maxHealth+10
-		print(area.get_parent().get_parent().maxHealth)
-		area.get_parent().get_parent().maxHealth = new
-		print(area.get_parent().get_parent().maxHealth)
-		get_node("Hud").updateHearts(new)
+		var new_health = area.get_parent().get_parent().health+20
+		area.get_parent().get_parent().health = new_health
+		if(area.get_parent().get_parent().maxHealth < new_health):
+			area.get_parent().get_parent().health = area.get_parent().get_parent().maxHealth
+		var hearts = get_node("../HUD/HeartContainer")
+		hearts.updateHearts(area.get_parent().get_parent().health)
+		print(hearts)

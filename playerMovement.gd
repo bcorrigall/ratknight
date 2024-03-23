@@ -7,13 +7,18 @@ extends Node2D
 @onready var weapon= $Weapon
 
 var health = 120
-var dash_timed_out = false
-var dash_cooldown =  0.5
-var dash_speed = 900
+
+var knockback_pos= Vector2.ZERO
+var can_control = true
 
 var velocity
 var invincible = false
-var dashTimeout = false
+
+var dash_cooldown = 3
+var dash_time = 0.5
+var in_dash = false
+var dash_timed_out = false
+var dash_speed = 900
 
 var screen_size
 
@@ -26,18 +31,20 @@ func start(pos):
 	pass
 
 func dash():
-	if (!dash_timed_out and !dashTimeout):
-		dash_timed_out = true
-		$Timer.start(dash_cooldown)
-		dashTimeout = true
-		$dash_timeout.start(3)
+	if (!in_dash and !dash_timed_out):
+		in_dash = true
+		$Dash.start(dash_time)
 		speed = dash_speed
 		$playerSprites.rotation_degrees = 90
+		dash_timed_out = true
+		$DashTimeout.start(dash_cooldown)
 		print("dash")
 
 func _process(delta):
 	velocity = Vector2.ZERO # The player's movement vector.
 	weapon.visible=false
+	
+	
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
 	if Input.is_action_pressed("move_left"):
@@ -48,7 +55,8 @@ func _process(delta):
 		velocity.y -= 1
 	if Input.is_action_pressed("dash"):
 		dash()
-		
+
+
 	if (velocity.y < 0):
 		$playerSprites.animation = "back"
 	elif (velocity.x < 0):
@@ -91,30 +99,28 @@ func attack_light():
 func attack_spin():
 	animations.play("attackSpin")
 	
-
-
-func _on_timer_timeout():
-	speed = 300
-	dash_timed_out = false
-	$playerSprites.rotation_degrees = 0
-
-
-	
 	
 func _on_area_2d_body_entered(body):
-	if (body.name.find("enemy") and invincible == false and dash_timed_out == false):
+	if (body.name.find("enemy") and invincible == false and in_dash == false):
 		health -= body.damage
 		print("hit")
-		get_parent().hud.get_node("HeartContainer").updateHearts(health / 20)
-		var direction = (body.position - position).normalized() * 100
-		position = position - direction
+		get_parent().hud.get_node("HeartContainer").updateHearts(health)
+		var direction = (body.global_position - global_position).normalized() * 100
+		position = global_position - direction
 		$Invinciblilty.start(0.2)
 		invincible = true
+		
 
+
+func _on_dash_timeout():
+	in_dash = false
+	speed = 300
+	$playerSprites.rotation_degrees = 0
 
 func _on_invinciblilty_timeout():
 	invincible = false
 
-
 func _on_dash_timeout_timeout():
-	dashTimeout = false
+	print("hi")
+	dash_timed_out = false
+	
