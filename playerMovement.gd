@@ -33,7 +33,7 @@ func dash():
 
 func _process(delta):
 	velocity = Vector2.ZERO # The player's movement vector.
-	weapon.visible=false
+	weapon.visible=false #invisible weapon normally, only see weapon when attacking
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
 	if Input.is_action_pressed("move_left"):

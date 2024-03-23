@@ -7,12 +7,18 @@ extends CharacterBody2D
 var playerposition
 var targetposition
 @onready var player = get_parent().get_node("theRat")
+@onready var animations= $AnimationPlayer
+@onready var effects = $Effect
+
+func _ready():
+	effects.play("RESET")
 
 
 func _physics_process(delta):
 	
 	playerposition = player.position
 	targetposition = (playerposition - position).normalized()
+	#effects.play("RESET")
 
 	if position.distance_to(playerposition) > 30:
 		velocity = targetposition*SPEED
@@ -54,3 +60,24 @@ func _physics_process(delta):
 func death():
 	#animation stuff
 	queue_free()
+
+func get_damage():
+	health-=damage*5
+	
+	#effects.play("RESET")
+	if(health<=0):
+		death()
+
+func _on_hurt_box_area_entered(area):
+	if area==$hitBox:return
+	print("hit")
+	get_damage()
+	effects.play("gethurt_right")
+	$Timer.start(0.3)
+	
+	
+
+
+func _on_timer_timeout():
+	effects.play("RESET")
+	pass # Replace with function body.
