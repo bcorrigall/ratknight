@@ -64,5 +64,6 @@ func _on_timer_timeout():
 	speed = 300
 	dash_timed_out = false
 	$playerSprites.rotation_degrees = 0
-	
+
+
 

@@ -14,6 +14,10 @@
 [ext_resource type="Texture2D" uid="uid://cdxvgly4asu1i" path="res://assets/test/mainCharacter/right/right5.png" id="11_i1m4i"]
 [ext_resource type="PackedScene" uid="uid://bsnf7mnfrii3c" path="res://weapon.tscn" id="13_5ikvp"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vciue"]
+radius = 133.333
+height = 600.0
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_63iob"]
 animations = [{
 "frames": [{
@@ -65,26 +69,25 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vciue"]
-radius = 133.333
-height = 600.0
-
 [node name="theRat" type="Node2D"]
 script = ExtResource("1_8mm2x")
 
 [node name="playerMovement" type="CharacterBody2D" parent="."]
+
+[node name="theRatArea2D" type="Area2D" parent="playerMovement"]
+scale = Vector2(0.15, 0.15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="playerMovement/theRatArea2D"]
+shape = SubResource("CapsuleShape2D_vciue")
+one_way_collision = true
 
 [node name="playerSprites" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_63iob")
 animation = &"right"
 
-[node name="Area2D" type="Area2D" parent="playerSprites"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="playerSprites/Area2D"]
-shape = SubResource("CapsuleShape2D_vciue")
-
 [node name="Weapon" parent="." instance=ExtResource("13_5ikvp")]
+position = Vector2(-3, 4)
 
 [node name="Timer" type="Timer" parent="."]
 
