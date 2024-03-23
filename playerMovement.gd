@@ -2,6 +2,7 @@ extends Node2D
 
 @export var speed = 300
 @export var maxHealth = 120
+
 var health = 120
 var dash_timed_out
 var dash_cooldown =  0.5
@@ -37,6 +38,7 @@ func _process(delta):
 		velocity.y -= 1
 	if Input.is_action_pressed("dash"):
 		dash()
+		
 
 	if (velocity.y < 0):
 		$playerSprites.animation = "back"
