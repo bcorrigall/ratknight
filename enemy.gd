@@ -14,7 +14,7 @@ func _physics_process(delta):
 	playerposition = player.position
 	targetposition = (playerposition - position).normalized()
 
-	if position.distance_to(playerposition) > 3:
+	if position.distance_to(playerposition) > 30:
 		velocity = targetposition*SPEED
 		move_and_slide()
 		if targetposition.x > 0 and targetposition.y > 0:
