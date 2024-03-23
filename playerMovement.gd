@@ -8,6 +8,7 @@ var dash_cooldown =  0.5
 var dash_speed = 900
 
 var velocity
+var invincible = false
 
 var screen_size
 
@@ -69,7 +70,13 @@ func _on_timer_timeout():
 	
 	
 func _on_area_2d_body_entered(body):
-	if (body.name.find("enemy")):
+	if (body.name.find("enemy") and invincible == false and dash_timed_out == false):
 		health -= body.damage
 		var direction = (body.position - position).normalized() * 100
 		position = position - direction
+		$Invinciblilty.start(0.2)
+		invincible = true
+
+
+func _on_invinciblilty_timeout():
+	invincible = false
