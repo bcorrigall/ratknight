@@ -13,6 +13,7 @@ var dash_speed = 900
 
 var velocity
 var invincible = false
+var dashTimeout = false
 
 var screen_size
 
@@ -25,9 +26,11 @@ func start(pos):
 	pass
 
 func dash():
-	if (!dash_timed_out):
+	if (!dash_timed_out and !dashTimeout):
 		dash_timed_out = true
 		$Timer.start(dash_cooldown)
+		dashTimeout = true
+		$dash_timeout.start(3)
 		speed = dash_speed
 		$playerSprites.rotation_degrees = 90
 		print("dash")
@@ -107,3 +110,7 @@ func _on_area_2d_body_entered(body):
 
 func _on_invinciblilty_timeout():
 	invincible = false
+
+
+func _on_dash_timeout_timeout():
+	dashTimeout = false
