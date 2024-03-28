@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bkpqj8j7i4sme"]
 
 [ext_resource type="Script" path="res://Attack.gd" id="1_3benm"]
-[ext_resource type="Texture2D" uid="uid://bgedj0hkpe1k" path="res://assets/star/star.png" id="2_kmsdl"]
+[ext_resource type="Texture2D" uid="uid://bl02ai1mt7x88" path="res://assets/SwordStroke.png" id="2_pc7yt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6k2cw"]
 
@@ -14,9 +14,7 @@ script = ExtResource("1_3benm")
 shape = SubResource("CircleShape2D_6k2cw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -1)
-scale = Vector2(0.15, 0.15)
-texture = ExtResource("2_kmsdl")
+texture = ExtResource("2_pc7yt")
 
 [node name="Timer" type="Timer" parent="."]
 

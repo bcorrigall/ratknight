@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 @export var SPEED = 100.0
 @export var health = 100
-@export var damage = 5
+@export var damage = 10
 var playerposition
 var targetposition
 @onready var player = get_parent().get_node("theRat")
