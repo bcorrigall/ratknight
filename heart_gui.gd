@@ -5,10 +5,7 @@ extends Panel
 func _ready():
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-func update(whole: bool):
-	if whole: sprite.frame=0
-	else: sprite.frame =4
+func update(whole: int):
+	sprite.frame = whole
+	#if (whole == 0): sprite.frame=0
+	#else: sprite.frame =4
