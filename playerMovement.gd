@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var speed = 300
+@export var speed = 400
 @export var maxHealth = 120
 
 @onready var animations = $AnimationPlayer
@@ -14,11 +14,20 @@ var can_control = true
 var velocity
 var invincible = false
 
+var attacking = false
+
+var attack_hold = false
+var attack_cooldown = 0.45
+var attack_direction
+
+var dash_direction = Vector2.ZERO
 var dash_cooldown = 3
 var dash_time = 0.5
 var in_dash = false
 var dash_timed_out = false
-var dash_speed = 900
+var dash_speed = 800
+
+var invincibility_time = 0.15
 
 var screen_size
 
@@ -29,52 +38,98 @@ func _ready():
 	
 func start(pos):
 	pass
+	
+func attack_animation(direction, cooldown):
+	attack_direction = rad_to_deg(direction.angle())
+	attacking = true
+	$AttackTimeout.start(attack_cooldown)
 
 func dash():
 	if (!in_dash and !dash_timed_out):
 		in_dash = true
 		$Dash.start(dash_time)
 		speed = dash_speed
-		$playerSprites.rotation_degrees = 90
 		dash_timed_out = true
 		$DashTimeout.start(dash_cooldown)
-		print("dash")
+		
+		if (dash_direction.y < 0):
+			$playerSprites.animation = "dash_back"
+		elif (dash_direction.x < 0):
+			$playerSprites.flip_h = true
+			$playerSprites.animation = "dash_side"
+		elif (dash_direction.x > 0):
+			$playerSprites.flip_h = false
+			$playerSprites.animation = "dash_side"
+		else:
+			$playerSprites.animation = "dash_front"
+
 
 func _process(delta):
 	velocity = Vector2.ZERO # The player's movement vector.
 	weapon.visible=false
-	
-	
-	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
-	if Input.is_action_pressed("move_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("move_down"):
-		velocity.y += 1
-	if Input.is_action_pressed("move_up"):
-		velocity.y -= 1
-	if Input.is_action_pressed("dash"):
-		dash()
 
+	if(in_dash):
+		velocity = dash_direction
+	elif(attacking):
+		if Input.is_action_pressed("move_right"):
+			velocity.x += 0.25
+		if Input.is_action_pressed("move_left"):
+			velocity.x -= 0.25
+		if Input.is_action_pressed("move_down"):
+			velocity.y += 0.25
+		if Input.is_action_pressed("move_up"):
+			velocity.y -= 0.25
 
-	if (velocity.y < 0):
-		$playerSprites.animation = "back"
-	elif (velocity.x < 0):
-		$playerSprites.flip_h = true
-		$playerSprites.animation = "right"
-	elif (velocity.x > 0):
-		$playerSprites.flip_h = false
-		$playerSprites.animation = "right"
+		print(attack_direction)
+		if attack_direction > -45 and attack_direction <= 45:
+			$playerSprites.animation = "attack_side"
+			$playerSprites.flip_h = false
+		elif attack_direction > 45 and attack_direction <= 135:
+			$playerSprites.animation = "attack_front"
+		elif attack_direction > 135 or attack_direction <= -135:
+			$playerSprites.animation = "attack_side"
+			$playerSprites.flip_h = true
+		else:
+			$playerSprites.animation = "attack_back"
+		$playerSprites.play()
 	else:
-		$playerSprites.animation = "front"
+		if Input.is_action_pressed("move_right"):
+			velocity.x += 1
+		if Input.is_action_pressed("move_left"):
+			velocity.x -= 1
+		if Input.is_action_pressed("move_down"):
+			velocity.y += 1
+		if Input.is_action_pressed("move_up"):
+			velocity.y -= 1
+
+
+		if (velocity.y < 0):
+			$playerSprites.animation = "move_back"
+		elif (velocity.x < 0):
+			$playerSprites.flip_h = true
+			$playerSprites.animation = "move_side"
+		elif (velocity.x > 0):
+			$playerSprites.flip_h = false
+			$playerSprites.animation = "move_side"
+		elif(velocity.y > 0):
+			$playerSprites.animation = "move_front"
 	
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 		$playerSprites.play()
-	else:
-		$playerSprites.stop()
-		$playerSprites.frame = 1
-	
+	elif(!attacking):
+		if($playerSprites.animation == "move_side"):
+			$playerSprites.animation = "idle_side"
+		elif($playerSprites.animation == "move_back"):
+			$playerSprites.animation = "idle_back"
+		elif($playerSprites.animation == "move_front"):
+			$playerSprites.animation = "idle_front"
+		$playerSprites.frame = 0
+
+	if(Input.is_action_pressed("dash") and velocity.length() > 0):
+		dash_direction = velocity
+		dash()
+
 	if Input.is_action_pressed("attack_light"):
 		weapon.visible=true
 		attack_light()
@@ -85,16 +140,22 @@ func _process(delta):
 
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
-	
 func attack_light():
-	if (velocity.y < 0): #back
-		animations.play("attackBack")	
-	elif(velocity.x<0): #left
-		animations.play("attackLeft")
-	elif(velocity.x>0):#right
-		animations.play("attackRight")
-	else:
-		animations.play("attackDown")
+	if(!attacking):
+		attacking = true
+		$AttackTimeout.start(attack_cooldown)
+		if (velocity.y < 0): #back
+			animations.play("attackBack")
+			attack_direction = -90
+		elif(velocity.x<0): #left
+			animations.play("attackLeft")
+			attack_direction = 180
+		elif(velocity.x>0):#right
+			animations.play("attackRight")
+			attack_direction = 0
+		else:
+			animations.play("attackDown")
+			attack_direction = 90
 		
 func attack_spin():
 	animations.play("attackSpin")
@@ -107,20 +168,21 @@ func _on_area_2d_body_entered(body):
 		get_parent().hud.get_node("HeartContainer").updateHearts(health)
 		var direction = (body.global_position - global_position).normalized() * 100
 		position = global_position - direction
-		$Invinciblilty.start(0.2)
+		$Invinciblilty.start(invincibility_time)
 		invincible = true
 		
 
 
 func _on_dash_timeout():
 	in_dash = false
-	speed = 300
-	$playerSprites.rotation_degrees = 0
+	$playerSprites.position.x = 0
+	speed = 400
 
 func _on_invinciblilty_timeout():
 	invincible = false
 
 func _on_dash_timeout_timeout():
-	print("hi")
 	dash_timed_out = false
-	
+
+func _on_attack_timeout_timeout():
+	attacking = false

@@ -1,6 +1,7 @@
 extends Node2D
 
-var speed = 700
+var speed = 750
+var rotation_speed = 6
 var damage = 0
 var direction = Vector2.ZERO
 
@@ -12,7 +13,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	translate(direction * speed * delta)
-	
+	rotate(rotation_speed * delta)
+
 func _on_timer_timeout():
 	queue_free()
 

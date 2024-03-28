@@ -18,10 +18,11 @@ func _process(delta):
 
 func _on_area_entered(area):
 	if(area.name.match("theRatArea2D")):
-		var new_health = area.get_parent().get_parent().health+20
-		area.get_parent().get_parent().health = new_health
-		if(area.get_parent().get_parent().maxHealth < new_health):
-			area.get_parent().get_parent().health = area.get_parent().get_parent().maxHealth
+		var the_rat = area.get_parent()
+		var new_health = the_rat.health+20
+		the_rat.health = new_health
+		if(the_rat.maxHealth < new_health):
+			the_rat.health = the_rat.maxHealth
 		var hearts = get_node("../HUD/HeartContainer")
-		hearts.updateHearts(area.get_parent().get_parent().health)
+		hearts.updateHearts(the_rat.health)
 		print(hearts)
