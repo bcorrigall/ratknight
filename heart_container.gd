@@ -7,36 +7,19 @@ func _ready():
 
 	pass
 	
-func _process(delta):
-	pass
-	
-	
-	
 func setMaxHeart(max:int):
+	max = max / 20
 	for i in range(max):
 		print(max)
 		var heart = HeartGuiClass.instantiate()
 		add_child(heart)
 		
-func updateHearts(currentHealth: int):
+func updateHearts(current_health: int):
 	var hearts = get_children()
-	for i in range(currentHealth):
-		hearts[i].update(true)
-	for i in range(currentHealth, hearts.size()):
-		hearts[i].update(false)
-	
-		
-'''
-add to main.tscn
+	var max = hearts.size()
+	var fullness = current_health/5
 
-@onready var heartsContainer = $"."
-in ready:
-	heartsContainer.setMaxHeart(3)
-	heartsContainer.updateHearts(1)
-	⬆️ if have player:
-			heartsContainer.setMaxHeart(player.maxHealth)
-			heartsContainer.updateHearts(player.currentHealth)
-			need connect heart and heartcontainer
-			
-
-'''
+	for i in range(max):
+		var current = (i + 1) * 4
+		var update_value = max(0, min(4, current - fullness))
+		hearts[i].update(update_value)
