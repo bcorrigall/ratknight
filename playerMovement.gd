@@ -7,7 +7,10 @@ extends Node2D
 @onready var weapon= $Weapon
 
 var health = 120
+var dash_timed_out
+var dash_cooldown =  0.5
 var trap_slowdown = 1
+var dash_speed = 900
 
 var knockback_pos= Vector2.ZERO
 var can_control = true
@@ -170,10 +173,12 @@ func _on_area_2d_body_entered(body):
 		
 		print("hit")
 		get_parent().hud.get_node("HeartContainer").updateHearts(health)
+		var direction = (body.global_position - global_position).normalized() * 100
+		position = global_position - direction
 		$Invinciblilty.start(invincibility_time)
 		invincible = true
 
-	elif (body.name.find("trap") and invincible == false and in_dash == false):
+	elif (body.name.find("trap")):
 		health -= body.damage
 		speed = 100
 		$Timer.start(trap_slowdown)
