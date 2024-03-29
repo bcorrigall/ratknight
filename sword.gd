@@ -4,7 +4,7 @@ extends Area2D
 
 func enable():
 	shape.disabled =false
-	print("weapon visivle")
+	#print("weapon visivle")
 
 func disable():
 	shape.disabled =true

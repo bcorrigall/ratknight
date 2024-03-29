@@ -67,7 +67,8 @@ func dash():
 
 func _process(delta):
 	velocity = Vector2.ZERO # The player's movement vector.
-	weapon.visible=false
+	if (attacking==false):
+		weapon.disable()
 
 	if(in_dash):
 		velocity = dash_direction
@@ -178,6 +179,7 @@ func _on_area_2d_body_entered(body):
 		invincible = true
 
 	elif (body.name.find("trap")):
+		pass
 		health -= body.damage
 		speed = 100
 		$Timer.start(trap_slowdown)

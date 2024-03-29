@@ -7,7 +7,7 @@ extends CharacterBody2D
 var playerposition
 var targetposition
 @onready var player = get_parent().get_node("theRat")
-@onready var animations= $AnimationPlayer
+#@onready var animations= $AnimationPlayer
 @onready var effects = $Effect
 
 
