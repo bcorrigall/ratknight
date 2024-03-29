@@ -56,9 +56,8 @@ height = 94.0
 radius = 39.0
 height = 124.0
 
-[sub_resource type="Animation" id="Animation_j8fov"]
-resource_name = "gethurt_right"
-length = 0.4
+[sub_resource type="Animation" id="Animation_x2xa4"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -66,10 +65,10 @@ tracks/0/path = NodePath("AnimatedSprite2D/ColorRect:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 0, 0, 0.643137), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_il3pb"]
@@ -104,8 +103,9 @@ tracks/0/keys = {
 "values": [Color(1, 0, 0, 0.643137), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_x2xa4"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_6ku34"]
+resource_name = "gethurt_left"
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -113,14 +113,14 @@ tracks/0/path = NodePath("AnimatedSprite2D/ColorRect:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0)]
+"values": [Color(1, 0, 0, 0.643137), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_6ku34"]
-resource_name = "gethurt_left"
+[sub_resource type="Animation" id="Animation_j8fov"]
+resource_name = "gethurt_right"
 length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false

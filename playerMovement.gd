@@ -9,6 +9,7 @@ extends Node2D
 var health = 120
 var dash_timed_out
 var dash_cooldown =  0.5
+var trap_slowdown = 1
 var dash_speed = 900
 
 var velocity
@@ -100,3 +101,9 @@ func _on_area_2d_body_entered(body):
 		health -= body.damage
 		var direction = (body.position - position).normalized() * 100
 		position = position - direction
+		
+	elif (body.name.find("trap")):
+		health -= body.damage
+		speed = 100
+		$Timer.start(trap_slowdown)
+		
