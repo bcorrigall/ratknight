@@ -7,7 +7,8 @@ extends CharacterBody2D
 var playerposition
 var targetposition
 @onready var player = get_parent().get_node("theRat")
-@onready var animations= $AnimationPlayer
+@export var Item = preload("res://item.tscn")
+#@onready var animations= $AnimationPlayer
 @onready var effects = $Effect
 
 
@@ -55,6 +56,15 @@ func _physics_process(delta):
 
 func death():
 	#animation stuff
+	randomize()
+	var type = 1
+	if(type == 1):
+		print("yo")
+		var mob = Item.instantiate()
+		print(mob)
+		add_child(mob)
+		mob.global_position = global_position 
+	
 	queue_free()
 
 
@@ -62,7 +72,7 @@ func _on_hurt_box_area_entered(area):
 	if !area.name.match("AttackArea") :return
 	#if area==:return
 	print(area)
-	#print("hit")
+	print("enemy get hit")
 	get_damage()
 	
 func get_damage():

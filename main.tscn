@@ -28,6 +28,7 @@ sources/0 = SubResource("TileSetAtlasSource_hf4va")
 script = ExtResource("1_kb2s1")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 offset_left = 3.0
 offset_top = -2.0
 offset_right = 1153.0
@@ -41,6 +42,7 @@ position = Vector2(200, 258)
 [node name="TileMap" type="TileMap" parent="."]
 editor_description = "work
 "
+visible = false
 position = Vector2(2, 1)
 tile_set = SubResource("TileSet_bbco1")
 format = 2
