@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bd1rvmtjug7o8" path="res://enemy.tscn" id="3_d7vqg"]
 [ext_resource type="Texture2D" uid="uid://bow5v7o1kvoam" path="res://assets/tileset.png" id="3_f0uep"]
 [ext_resource type="PackedScene" uid="uid://ctyd5jhqe7mis" path="res://hud.tscn" id="5_57i1q"]
-[ext_resource type="PackedScene" uid="uid://bk7r33qes2kw5" path="res://item.tscn" id="6_ebi3h"]
+[ext_resource type="PackedScene" uid="uid://pjgl4jqnk0h" path="res://item.tscn" id="6_ebi3h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hf4va"]
 texture = ExtResource("3_f0uep")
@@ -27,6 +27,7 @@ sources/0 = SubResource("TileSetAtlasSource_hf4va")
 script = ExtResource("1_kb2s1")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 offset_left = 3.0
 offset_top = -2.0
 offset_right = 1153.0
@@ -40,6 +41,7 @@ position = Vector2(200, 258)
 [node name="TileMap" type="TileMap" parent="."]
 editor_description = "work
 "
+visible = false
 position = Vector2(2, 1)
 tile_set = SubResource("TileSet_bbco1")
 format = 2

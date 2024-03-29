@@ -2,6 +2,7 @@ extends Node2D
 
 @export var w_name = "default"
 @export var damage = 25
+@export var Originaldamage = 25
 @export var rate_of_fire = 0.9
 @export var type = "default"
 @export var attack_scene = preload("res://Attack.tscn")
@@ -34,6 +35,7 @@ func fire():
 
 	timed_out = true
 	$Timer.start(rate_of_fire)
-
+func _on_damageboost_timeout():
+	damage = Originaldamage
 func _on_timer_timeout():
 	timed_out = false

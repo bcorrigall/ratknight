@@ -7,6 +7,7 @@ extends CharacterBody2D
 var playerposition
 var targetposition
 @onready var player = get_parent().get_node("theRat")
+@export var Item = preload("res://item.tscn")
 
 
 func _physics_process(delta):
@@ -53,4 +54,13 @@ func _physics_process(delta):
 
 func death():
 	#animation stuff
+	randomize()
+	var type = 1
+	if(type == 1):
+		print("yo")
+		var mob = Item.instantiate()
+		print(mob)
+		add_child(mob)
+		mob.global_position = global_position 
+	
 	queue_free()
