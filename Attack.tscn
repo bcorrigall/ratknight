@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bkpqj8j7i4sme"]
 
 [ext_resource type="Script" path="res://Attack.gd" id="1_3benm"]
-[ext_resource type="Texture2D" uid="uid://bgedj0hkpe1k" path="res://assets/star/star.png" id="2_kmsdl"]
+[ext_resource type="Texture2D" path="res://assets/star/star.png" id="2_kmsdl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6k2cw"]
 
