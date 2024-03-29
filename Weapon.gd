@@ -14,12 +14,12 @@ var rat
 func _ready():
 	rat = get_parent()
 	print(rat)
-	
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if Input.is_action_pressed("left_click") and !timed_out and not rat.in_dash and not rat.attack_hold:
 		fire()
-		
+
 func fire():
 	attack = attack_scene.instantiate()
 

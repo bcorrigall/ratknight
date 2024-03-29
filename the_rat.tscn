@@ -601,10 +601,13 @@ libraries = {
 
 [node name="AttackTimeout" type="Timer" parent="."]
 
+[node name="TrapTimer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="theRatArea2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Dash" to="." method="_on_dash_timeout"]
 [connection signal="timeout" from="Invinciblilty" to="." method="_on_invinciblilty_timeout"]
 [connection signal="timeout" from="DashTimeout" to="." method="_on_dash_timeout_timeout"]
 [connection signal="timeout" from="AttackTimeout" to="." method="_on_attack_timeout_timeout"]
+[connection signal="timeout" from="TrapTimer" to="." method="_on_trap_timer_timeout"]
 
 [editable path="Weapon"]

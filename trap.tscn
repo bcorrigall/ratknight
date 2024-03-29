@@ -1,10 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://s3hes6771ca4"]
+[gd_scene load_steps=5 format=3 uid="uid://s3hes6771ca4"]
 
 [ext_resource type="Script" path="res://trap.gd" id="1_exj36"]
+[ext_resource type="Texture2D" uid="uid://bl02ai1mt7x88" path="res://assets/SwordStroke.png" id="2_5xv1x"]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0oxnu"]
+radius = 30.0
+height = 98.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lfd7g"]
+radius = 37.0
+height = 118.0
+
+[node name="Trap" type="CharacterBody2D"]
 script = ExtResource("1_exj36")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_0oxnu")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CapsuleShape2D_lfd7g")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_5xv1x")

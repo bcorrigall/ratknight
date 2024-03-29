@@ -20,9 +20,10 @@ func _on_timer_timeout():
 
 
 func _on_area_2d_body_entered(body):
-	print(body.health)
-	body.health = body.health - damage
-	print(body.health)
-	queue_free()
+	if(body.get_name().begins_with("Enemy")):
+		print(body.health)
+		body.health = body.health - damage
+		print(body.health)
+		queue_free()
 	
 

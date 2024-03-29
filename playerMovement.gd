@@ -43,6 +43,7 @@ func start(pos):
 func attack_animation(direction, cooldown):
 	attack_direction = rad_to_deg(direction.angle())
 	attacking = true
+	speed = 200
 	$AttackTimeout.start(attack_cooldown)
 
 func dash():
@@ -73,13 +74,13 @@ func _process(delta):
 		velocity = dash_direction
 	elif(attacking):
 		if Input.is_action_pressed("move_right"):
-			velocity.x += 0.25
+			velocity.x += 1
 		if Input.is_action_pressed("move_left"):
-			velocity.x -= 0.25
+			velocity.x -= 1
 		if Input.is_action_pressed("move_down"):
-			velocity.y += 0.25
+			velocity.y += 1
 		if Input.is_action_pressed("move_up"):
-			velocity.y -= 0.25
+			velocity.y -= 1
 
 		print(attack_direction)
 		if attack_direction > -45 and attack_direction <= 45:
@@ -163,22 +164,25 @@ func attack_spin():
 	
 	
 func _on_area_2d_body_entered(body):
-	if (body.name.find("enemy") and invincible == false and in_dash == false):
+	print(body)
+	if (body.get_name().begins_with("Enemy") and invincible == false and in_dash == false):
 		health -= body.damage
 		var direction = (body.position - position).normalized() * 100
 		position = position - direction
 		
-		print("hit")
+		print("player hit")
 		get_parent().hud.get_node("HeartContainer").updateHearts(health)
 		$Invinciblilty.start(invincibility_time)
 		invincible = true
 
-	elif (body.name.find("trap")):
+	elif (body.get_name().begins_with("Trap")):
 		health -= body.damage
-		speed = 100
-		$Timer.start(trap_slowdown)
-		
-
+		speed = 200
+		$TrapTimer.start(trap_slowdown)
+		get_parent().hud.get_node("HeartContainer").updateHearts(health)
+		$Invinciblilty.start(invincibility_time)
+		invincible = true
+		print(body)
 
 func _on_dash_timeout():
 	in_dash = false
@@ -193,3 +197,8 @@ func _on_dash_timeout_timeout():
 
 func _on_attack_timeout_timeout():
 	attacking = false
+	speed = 400
+
+func _on_trap_timer_timeout():
+	speed = 400
+

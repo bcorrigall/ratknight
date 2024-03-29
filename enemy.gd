@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-@export var SPEED = 100.0
+@export var SPEED = 100
 @export var health = 100
 @export var damage = 5
 var playerposition
@@ -59,14 +59,13 @@ func death():
 
 
 func _on_hurt_box_area_entered(area):
-	if area==$HitBox:return
+	if !area.name.match("AttackArea") :return
 	#if area==:return
 	print(area)
-	print("hit")
+	#print("hit")
 	get_damage()
 	
 func get_damage():
-	health-=damage*5
 	effects.play("gethurt")
 	$Timer.start(0.4)
 	#effects.play("RESET")
