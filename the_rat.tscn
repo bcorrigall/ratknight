@@ -584,7 +584,7 @@ animation = &"attack_side"
 position = Vector2(-36, -21)
 rotation = -1.0472
 
-[node name="Sword" parent="Weapon" index="3"]
+[node name="Sword" parent="Weapon" index="0"]
 position = Vector2(0.5, 0.866028)
 scale = Vector2(7, 7)
 

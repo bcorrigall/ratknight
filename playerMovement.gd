@@ -131,11 +131,11 @@ func _process(delta):
 		dash()
 
 	if Input.is_action_pressed("attack_light"):
-		weapon.visible=true
+		weapon.enable()
 		attack_light()
 
 	if Input.is_action_pressed("attack_spin"):
-		weapon.visible=true
+		weapon.enable()
 		attack_spin()
 
 	position += velocity * delta
@@ -156,9 +156,13 @@ func attack_light():
 		else:
 			animations.play("attackDown")
 			attack_direction = 90
+		await animations.animation_finished
+		weapon.disable()
 		
 func attack_spin():
 	animations.play("attackSpin")
+	await animations.animation_finished
+	weapon.disable()
 	
 	
 func _on_area_2d_body_entered(body):

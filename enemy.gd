@@ -62,7 +62,7 @@ func _on_hurt_box_area_entered(area):
 	if area==$HitBox:return
 	#if area==:return
 	print(area)
-	print("hit")
+	print("enemy get hit")
 	get_damage()
 	
 func get_damage():
