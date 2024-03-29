@@ -7,12 +7,18 @@ extends Node2D
 @export var type = "default"
 @export var attack_scene = preload("res://Attack.tscn")
 
+var weapon:Area2D
+
 var attack
 var timed_out = false
 var rat
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	if get_children().is_empty():return
+	
+	weapon = get_children()[0]
 	rat = get_parent()
 	print(rat)
 	
@@ -39,3 +45,15 @@ func _on_damageboost_timeout():
 	damage = Originaldamage
 func _on_timer_timeout():
 	timed_out = false
+
+func enable():
+	if !weapon:return
+	
+	visible=true
+	weapon.enable()
+	
+func disable():
+	if !weapon:return
+	
+	visible=false
+	weapon.disable()

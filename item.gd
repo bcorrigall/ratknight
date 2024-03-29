@@ -7,7 +7,7 @@ var type = 0
 func _ready():
 	randomize()
 	type = randi() % 6
-	type = 3
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

@@ -7,6 +7,7 @@ extends Node2D
 @onready var weapon= $Weapon
 
 var health = 120
+var trap_slowdown = 1
 
 var knockback_pos= Vector2.ZERO
 var can_control = true
@@ -66,7 +67,8 @@ func dash():
 
 func _process(delta):
 	velocity = Vector2.ZERO # The player's movement vector.
-	weapon.visible=false
+	if (attacking==false):
+		weapon.disable()
 
 	if(in_dash):
 		velocity = dash_direction
@@ -131,11 +133,11 @@ func _process(delta):
 		dash()
 
 	if Input.is_action_pressed("attack_light"):
-		weapon.visible=true
+		weapon.enable()
 		attack_light()
 
 	if Input.is_action_pressed("attack_spin"):
-		weapon.visible=true
+		weapon.enable()
 		attack_spin()
 
 	position += velocity * delta
@@ -156,20 +158,31 @@ func attack_light():
 		else:
 			animations.play("attackDown")
 			attack_direction = 90
+		await animations.animation_finished
+		weapon.disable()
 		
 func attack_spin():
 	animations.play("attackSpin")
+	await animations.animation_finished
+	weapon.disable()
 	
 	
 func _on_area_2d_body_entered(body):
 	if (body.name.find("enemy") and invincible == false and in_dash == false):
 		health -= body.damage
+		var direction = (body.position - position).normalized() * 100
+		position = position - direction
+		
 		print("hit")
 		get_parent().hud.get_node("HeartContainer").updateHearts(health)
-		var direction = (body.global_position - global_position).normalized() * 100
-		position = global_position - direction
 		$Invinciblilty.start(invincibility_time)
 		invincible = true
+
+	elif (body.name.find("trap")):
+		pass
+		health -= body.damage
+		speed = 100
+		$Timer.start(trap_slowdown)
 		
 
 

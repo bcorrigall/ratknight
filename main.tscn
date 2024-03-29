@@ -64,3 +64,5 @@ position = Vector2(906, 521)
 [node name="Enemy3" parent="." instance=ExtResource("3_d7vqg")]
 z_index = 1
 position = Vector2(780, 360)
+
+[editable path="Enemy"]

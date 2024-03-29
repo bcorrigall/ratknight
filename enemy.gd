@@ -8,6 +8,8 @@ var playerposition
 var targetposition
 @onready var player = get_parent().get_node("theRat")
 @export var Item = preload("res://item.tscn")
+#@onready var animations= $AnimationPlayer
+@onready var effects = $Effect
 
 
 func _physics_process(delta):
@@ -64,3 +66,23 @@ func death():
 		mob.global_position = global_position 
 	
 	queue_free()
+
+
+func _on_hurt_box_area_entered(area):
+	if area==$HitBox:return
+	#if area==:return
+	print(area)
+	print("enemy get hit")
+	get_damage()
+	
+func get_damage():
+	health-=damage*5
+	effects.play("gethurt")
+	$Timer.start(0.4)
+	#effects.play("RESET")
+	if(health<=0):
+		death()
+		
+func _on_timer_timeout():
+	effects.play("RESET")
+
