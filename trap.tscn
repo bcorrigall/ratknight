@@ -8,8 +8,8 @@ radius = 30.0
 height = 98.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lfd7g"]
-radius = 37.0
-height = 118.0
+radius = 31.0
+height = 96.0
 
 [node name="Trap" type="CharacterBody2D"]
 script = ExtResource("1_exj36")

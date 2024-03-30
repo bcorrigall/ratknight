@@ -163,22 +163,25 @@ func _process(delta):
 		speed = 800
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
+
 func attack_light():
 	if(!attacking):
+		var mouse_direction = (get_global_mouse_position() - global_position).normalized()
+		var angle = atan2(mouse_direction.y, mouse_direction.x)
 		attacking = true
 		$AttackTimeout.start(attack_cooldown)
-		if (velocity.y < 0): #back
+		if (angle < -PI / 4 and angle >= -3 * PI / 4): #back
 			animations.play("attackBack")
 			attack_direction = -90
-		elif(velocity.x<0): #left
-			animations.play("attackLeft")
-			attack_direction = 180
-		elif(velocity.x>0):#right
+		elif(angle < PI / 4 and angle >= -PI / 4): #left
 			animations.play("attackRight")
 			attack_direction = 0
-		else:
+		elif(angle >= PI / 4 and angle < 3 * PI / 4):#right
 			animations.play("attackDown")
 			attack_direction = 90
+		else:
+			animations.play("attackLeft")
+			attack_direction = 180
 		await animations.animation_finished
 		weapon.disable()
 		
