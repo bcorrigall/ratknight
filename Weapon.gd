@@ -18,7 +18,7 @@ func _ready():
 	
 	if get_children().is_empty():return
 	
-	weapon = get_children()[0]
+	#weapon = get_children()[0]
 	rat = get_parent()
 	print(rat)
 

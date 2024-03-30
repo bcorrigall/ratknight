@@ -584,12 +584,9 @@ animation = &"attack_side"
 position = Vector2(-36, -21)
 rotation = -1.0472
 
-[node name="Sword" parent="Weapon" index="0"]
+[node name="Sword" parent="Weapon" index="3"]
 position = Vector2(0.5, 0.866028)
 scale = Vector2(7, 7)
-
-[node name="Damageboost" type="Timer" parent="Weapon"]
-wait_time = 10.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -607,7 +604,6 @@ libraries = {
 [node name="TrapTimer" type="Timer" parent="."]
 
 [connection signal="body_entered" from="theRatArea2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="timeout" from="Weapon/Damageboost" to="Weapon" method="_on_damageboost_timeout"]
 [connection signal="timeout" from="Dash" to="." method="_on_dash_timeout"]
 [connection signal="timeout" from="Invinciblilty" to="." method="_on_invinciblilty_timeout"]
 [connection signal="timeout" from="DashTimeout" to="." method="_on_dash_timeout_timeout"]

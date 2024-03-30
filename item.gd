@@ -8,14 +8,16 @@ func _ready():
 	randomize()
 	type = randi() % 6
 
+func set_animation(item):
+	if(item <= 2):
+		$ItemSprite.animation = "Guy"
+	if(item > 2):
+		$ItemSprite.animation = "Heart"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	type = 3
-	if(type <= 2):
-		$ItemSprite.animation = "Guy"
-	if(type >= 3):
-		$ItemSprite.animation = "Heart"
+	set_animation(type)
+
 
 
 func _on_area_entered(area):
@@ -34,8 +36,10 @@ func _on_area_entered(area):
 			var the_rat = area.get_parent()
 			var weapon = get_node("../theRat/Weapon")
 			var timer = get_node("../theRat/Weapon/Damageboost")
-			weapon.damage = weapon.damage + 25
-			timer.start()
+			weapon.damage += 25
+			$BoostTimer.start(5)
 		queue_free()
-			
 
+func _on_boost_timer_timeout():
+	var weapon = get_node("../theRat/Weapon")
+	weapon.damage -= 25

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ctyd5jhqe7mis"]
 
 [ext_resource type="PackedScene" uid="uid://b20ppbejqpbjv" path="res://heart_container.tscn" id="1_8m4n1"]
-[ext_resource type="PackedScene" path="res://skill_tree.tscn" id="2_pq0cm"]
+[ext_resource type="PackedScene" uid="uid://b2cs314jvy2yy" path="res://skill_tree.tscn" id="2_pq0cm"]
 
 [node name="HUD" type="CanvasLayer"]
 scale = Vector2(0.5, 0.5)

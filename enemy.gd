@@ -10,15 +10,29 @@ var targetposition
 @export var Item = preload("res://item.tscn")
 #@onready var animations= $AnimationPlayer
 @onready var effects = $Effect
+var jerk_time = 1
+var jerk_lower_bound = -0.2
+var jerk_upper_bound = 0.2
+var noise = Vector2(randf_range(jerk_lower_bound, jerk_upper_bound), randf_range(jerk_lower_bound, jerk_upper_bound))
+var speed_boost = 0
 
+func _ready():
+	$JerkTimer.start(jerk_time)
 
 func _physics_process(delta):
 	
 	playerposition = player.position
 	targetposition = (playerposition - position).normalized()
 
+	if global_position.distance_to(player.global_position) > 150:
+		targetposition += noise.normalized()
+		speed_boost = 0
+	else:
+		speed_boost = 50
+
+
 	if position.distance_to(playerposition) > 30:
-		velocity = targetposition*SPEED
+		velocity = targetposition*(SPEED+speed_boost)
 		move_and_slide()
 		if targetposition.x > 0 and targetposition.y > 0:
 			if targetposition.x > targetposition.y:
@@ -62,9 +76,11 @@ func death():
 		print("yo")
 		var mob = Item.instantiate()
 		print(mob)
-		add_child(mob)
-		mob.global_position = global_position 
-	
+		get_parent().add_child(mob)
+		mob.set_animation(type)
+
+		mob.position = global_position
+
 	queue_free()
 
 
@@ -85,3 +101,6 @@ func get_damage():
 func _on_timer_timeout():
 	effects.play("RESET")
 
+func _on_jerk_timer_timeout():
+	$JerkTimer.start(jerk_time)
+	noise = Vector2(randf_range(jerk_lower_bound, jerk_upper_bound), randf_range(jerk_lower_bound, jerk_upper_bound))

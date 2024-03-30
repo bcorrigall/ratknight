@@ -141,6 +141,8 @@ func _process(delta):
 		weapon.enable()
 		attack_spin()
 
+	if(in_dash):
+		speed = 800
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
 func attack_light():
@@ -180,7 +182,7 @@ func _on_area_2d_body_entered(body):
 		$Invinciblilty.start(invincibility_time)
 		invincible = true
 
-	elif (body.get_name().begins_with("Trap")):
+	elif (body.get_name().begins_with("Trap") and !in_dash):
 		health -= body.damage
 		speed = 200
 		$TrapTimer.start(trap_slowdown)
