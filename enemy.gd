@@ -85,7 +85,7 @@ func death():
 
 
 func _on_hurt_box_area_entered(area):
-	if(area.name.find("sword")):
+	if(area.name.match("Sword") or area.name.match("AttackArea")):
 		get_damage()
 	elif !area.name.match("AttackArea") :
 		return
