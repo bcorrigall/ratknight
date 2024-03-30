@@ -21,6 +21,9 @@ var attack_hold = false
 var attack_cooldown = 0.45
 var attack_direction
 
+var knockback_direction = Vector2.ZERO
+var knocked_back = false
+
 var dash_direction = Vector2.ZERO
 var dash_cooldown = 3
 var dash_time = 0.5
@@ -73,6 +76,8 @@ func _process(delta):
 
 	if(in_dash):
 		velocity = dash_direction
+	elif(knocked_back):
+		velocity = knockback_direction
 	elif(attacking):
 		if Input.is_action_pressed("move_right"):
 			velocity.x += 1
@@ -132,6 +137,19 @@ func _process(delta):
 	if(Input.is_action_pressed("dash") and velocity.length() > 0):
 		dash_direction = velocity
 		dash()
+	
+	if(knocked_back):
+		knockback_direction = velocity
+		if (knockback_direction.y < 0):
+			$playerSprites.animation = "knocked_front"
+		elif (knockback_direction.x < 0):
+			$playerSprites.flip_h = false
+			$playerSprites.animation = "knocked_side"
+		elif (knockback_direction.x > 0):
+			$playerSprites.flip_h = true
+			$playerSprites.animation = "knocked_side"
+		else:
+			$playerSprites.animation = "knocked_back"
 
 	if Input.is_action_pressed("attack_light"):
 		weapon.enable()
@@ -179,7 +197,9 @@ func _on_area_2d_body_entered(body):
 	if (body.get_name().begins_with("Enemy") and invincible == false and in_dash == false):
 		health -= body.damage
 		var direction = (body.position - position).normalized() * 100
-		position = position - direction
+		knockback_direction = -direction.normalized() 
+		knocked_back = true
+		$KnockbackTimer.start(0.15)
 		
 		print("player hit")
 		get_parent().hud.get_node("HeartContainer").updateHearts(health)
@@ -213,3 +233,5 @@ func _on_attack_timeout_timeout():
 func _on_trap_timer_timeout():
 	speed = 400
 
+func _on_knockback_timer_timeout():
+	knocked_back = false

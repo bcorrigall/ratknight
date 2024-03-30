@@ -277,6 +277,30 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("7_lpswj")
+}],
+"loop": true,
+"name": &"knocked_back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("37_lt2a7")
+}],
+"loop": true,
+"name": &"knocked_front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_faaxx")
+}],
+"loop": true,
+"name": &"knocked_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("47_khrvr")
 }, {
 "duration": 1.0,
@@ -576,7 +600,7 @@ shape = SubResource("CapsuleShape2D_vciue")
 [node name="playerSprites" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_63iob")
-animation = &"attack_side"
+animation = &"knocked_side"
 
 [node name="playerMovement" type="CharacterBody2D" parent="."]
 
@@ -603,11 +627,14 @@ libraries = {
 
 [node name="TrapTimer" type="Timer" parent="."]
 
+[node name="KnockbackTimer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="theRatArea2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Dash" to="." method="_on_dash_timeout"]
 [connection signal="timeout" from="Invinciblilty" to="." method="_on_invinciblilty_timeout"]
 [connection signal="timeout" from="DashTimeout" to="." method="_on_dash_timeout_timeout"]
 [connection signal="timeout" from="AttackTimeout" to="." method="_on_attack_timeout_timeout"]
 [connection signal="timeout" from="TrapTimer" to="." method="_on_trap_timer_timeout"]
+[connection signal="timeout" from="KnockbackTimer" to="." method="_on_knockback_timer_timeout"]
 
 [editable path="Weapon"]
