@@ -9,11 +9,11 @@ func _ready():
 	
 func setMaxHeart(max:int):
 	max = max / 20
-	for i in range(max):
+	while(get_children().size() != max):
 		print(max)
 		var heart = HeartGuiClass.instantiate()
 		add_child(heart)
-		
+
 func updateHearts(current_health: int):
 	var hearts = get_children()
 	var max = hearts.size()

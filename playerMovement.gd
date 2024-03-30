@@ -3,6 +3,8 @@ extends Node2D
 @export var speed = 400
 @export var maxHealth = 120
 
+var real_speed = speed
+
 @onready var animations = $AnimationPlayer
 @onready var weapon= $Weapon
 
@@ -35,25 +37,54 @@ var invincibility_time = 0.15
 
 var screen_size
 
+var level = 1
+var skill_points = 0
+var experience = 0
+var experience_to_next = 100
+var skill_buttons
+
+var damage_bonus = 0
+var defence_bonus = 0
+var regenerate_bonus = 0
+var regen_cap = 20
+var current_regen = 0
+
+@onready var effects = $Effect
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
-	
+	$RegenTimer.start(0.5)
+
 func start(pos):
 	pass
 	
+func damage_rat(damage):
+	var real_damage = damage - defence_bonus
+	if (real_damage > 0):
+		health -= damage
+
+func on_skill_up(skill_name):
+	print("Leveling up skill: ", skill_name)
+	match skill_name:
+		"Damage": damage_bonus += 5
+		"Defence": defence_bonus += 5
+		"Health": maxHealth += 20
+		"Speed": speed += 100
+		"Dash Speed": dash_speed += 200
+		"Regenerate": regenerate_bonus += 0.5
+
 func attack_animation(direction, cooldown):
 	attack_direction = rad_to_deg(direction.angle())
 	attacking = true
-	speed = 200
+	real_speed = real_speed/2
 	$AttackTimeout.start(attack_cooldown)
 
 func dash():
 	if (!in_dash and !dash_timed_out):
 		in_dash = true
 		$Dash.start(dash_time)
-		speed = dash_speed
+		real_speed = dash_speed
 		dash_timed_out = true
 		$DashTimeout.start(dash_cooldown)
 		
@@ -88,7 +119,6 @@ func _process(delta):
 		if Input.is_action_pressed("move_up"):
 			velocity.y -= 1
 
-		print(attack_direction)
 		if (attack_direction > -45 and attack_direction <= 45):
 			$playerSprites.animation = "attack_side"
 			$playerSprites.flip_h = false
@@ -123,7 +153,7 @@ func _process(delta):
 			$playerSprites.animation = "move_front"
 	
 	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
+		velocity = velocity.normalized() * real_speed
 		$playerSprites.play()
 	elif(!attacking):
 		if($playerSprites.animation == "move_side"):
@@ -160,7 +190,8 @@ func _process(delta):
 		attack_spin()
 
 	if(in_dash):
-		speed = 800
+		real_speed = dash_speed
+
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
 
@@ -198,30 +229,47 @@ func attack_spin():
 func _on_area_2d_body_entered(body):
 	print(body)
 	if (body.get_name().begins_with("Enemy") and invincible == false and in_dash == false):
-		health -= body.damage
+		damage_rat(body.damage)
+		
 		var direction = (body.position - position).normalized() * 100
 		knockback_direction = -direction.normalized() 
-		knocked_back = true
-		$KnockbackTimer.start(0.15)
-		
-		print("player hit")
-		get_parent().hud.get_node("HeartContainer").updateHearts(health)
+		$KnockbackTimer.start(0.2)
 		$Invinciblilty.start(invincibility_time)
+		knocked_back = true
 		invincible = true
 
 	elif (body.get_name().begins_with("Trap") and !in_dash):
-		health -= body.damage
-		speed = 200
+		damage_rat(body.damage)
+
+		var direction = (body.position - position).normalized() * 100
+		knockback_direction = -direction.normalized() 
+		$KnockbackTimer.start(0.2)
 		$TrapTimer.start(trap_slowdown)
-		get_parent().hud.get_node("HeartContainer").updateHearts(health)
 		$Invinciblilty.start(invincibility_time)
+		real_speed = real_speed/2
+		knocked_back = true
 		invincible = true
-		print(body)
+
+func earn_experience(bonus):
+	experience += bonus
+	if (experience >= experience_to_next):
+		level_up()
+
+func level_up():
+	while(experience >= experience_to_next):
+		skill_points += level
+		level += 1
+		experience -= experience_to_next
+		experience_to_next = calculate_experience()
+		print("now level " + str(level))
+
+func calculate_experience():
+	return experience_to_next + (level * 100)
 
 func _on_dash_timeout():
 	in_dash = false
 	$playerSprites.position.x = 0
-	speed = 400
+	real_speed = speed
 
 func _on_invinciblilty_timeout():
 	invincible = false
@@ -231,10 +279,16 @@ func _on_dash_timeout_timeout():
 
 func _on_attack_timeout_timeout():
 	attacking = false
-	speed = 400
+	real_speed = speed
 
 func _on_trap_timer_timeout():
-	speed = 400
+	real_speed = speed
 
 func _on_knockback_timer_timeout():
 	knocked_back = false
+
+func _on_regen_timer_timeout():
+	if(health <= maxHealth and current_regen <= regen_cap):
+		health += regenerate_bonus
+		current_regen += regenerate_bonus
+	$RegenTimer.start(0.5)

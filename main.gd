@@ -1,10 +1,18 @@
 extends Node
 @onready var hud = $HUD
+var heart_container
+var skill_buttons
 
 func _ready():
-	hud.get_node("HeartContainer").setMaxHeart(get_node("theRat").maxHealth)
-	hud.get_node("HeartContainer").updateHearts(get_node("theRat").health)
+	heart_container = hud.get_node("HeartContainer")
+	heart_container.setMaxHeart($theRat.maxHealth)
+	heart_container.updateHearts($theRat.health)
+
+	skill_buttons = get_tree().get_nodes_in_group("skill_buttons")
+	for button in skill_buttons:
+		button.connect("add_skill", $theRat.on_skill_up)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	heart_container.setMaxHeart($theRat.maxHealth)
+	heart_container.updateHearts($theRat.health)

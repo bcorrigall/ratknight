@@ -101,8 +101,7 @@ script = ExtResource("1_4tbc6")
 clip_children = 2
 scale = Vector2(0.138125, 0.151875)
 sprite_frames = SubResource("SpriteFrames_1gqbj")
-animation = &"side"
-frame_progress = 0.379525
+animation = &"front"
 
 [node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D"]
 offset_left = -463.348

@@ -2,7 +2,7 @@ extends Node2D
 
 @export var w_name = "default"
 @export var damage = 25
-@export var Originaldamage = 25
+@export var original_damage = 25
 @export var rate_of_fire = 0.9
 @export var type = "default"
 @export var attack_scene = preload("res://Attack.tscn")
@@ -24,13 +24,13 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if Input.is_action_pressed("left_click") and !timed_out and not rat.in_dash and not rat.attack_hold:
+	if Input.is_action_pressed("left_click") and !timed_out and !rat.in_dash and !rat.attack_hold:
 		fire()
 
 func fire():
 	attack = attack_scene.instantiate()
 
-	attack.damage = damage
+	attack.damage = damage + rat.damage_bonus
 	attack.position = global_position
 	attack.direction = (get_global_mouse_position() - global_position).normalized()
 
@@ -41,8 +41,10 @@ func fire():
 
 	timed_out = true
 	$Timer.start(rate_of_fire)
+	
 func _on_damageboost_timeout():
-	damage = Originaldamage
+	damage = original_damage
+
 func _on_timer_timeout():
 	timed_out = false
 

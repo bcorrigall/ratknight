@@ -4,17 +4,21 @@ extends CharacterBody2D
 @export var SPEED = 100
 @export var health = 100
 @export var damage = 5
+
 var playerposition
 var targetposition
+
 @onready var player = get_parent().get_node("theRat")
 @export var Item = preload("res://item.tscn")
-#@onready var animations= $AnimationPlayer
 @onready var effects = $Effect
+
 var jerk_time = 1
 var jerk_lower_bound = -0.2
 var jerk_upper_bound = 0.2
 var noise = Vector2(randf_range(jerk_lower_bound, jerk_upper_bound), randf_range(jerk_lower_bound, jerk_upper_bound))
 var speed_boost = 0
+
+@export var experience = 500
 
 func _ready():
 	$JerkTimer.start(jerk_time)
@@ -80,6 +84,7 @@ func death():
 		mob.set_animation(type)
 
 		mob.position = global_position
+		player.earn_experience(experience)
 
 	queue_free()
 

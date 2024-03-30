@@ -18,26 +18,23 @@ func set_animation(item):
 func _process(delta):
 	set_animation(type)
 
-
-
 func _on_area_entered(area):
 	if(area.name.match("theRatArea2D")):
-		if(type == 3):
-			var the_rat = area.get_parent()
-			var new_health = the_rat.health+20
-			the_rat.health = new_health
-			if(the_rat.maxHealth < new_health):
+		var the_rat = area.get_parent()
+		print("what's going on")
+		if(type >= 3):
+			the_rat.health += 20
+			if(the_rat.maxHealth < the_rat.health):
 				the_rat.health = the_rat.maxHealth
-			var hearts = get_node("../HUD/HeartContainer")
-			hearts.updateHearts(the_rat.health)
-			print(hearts)
-			
-		if(type == 2):
-			var the_rat = area.get_parent()
+			print("healed")
+
+		if(type <= 2):
 			var weapon = get_node("../theRat/Weapon")
 			var timer = get_node("../theRat/Weapon/Damageboost")
 			weapon.damage += 25
+			print("damage boost")
 			$BoostTimer.start(5)
+			
 		queue_free()
 
 func _on_boost_timer_timeout():

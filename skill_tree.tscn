@@ -32,6 +32,7 @@ offset_top = 87.0
 offset_right = 50.0
 offset_bottom = 187.0
 grow_horizontal = 2
+skill_name = "Damage"
 
 [node name="Skill" parent="Skill" instance=ExtResource("1_6550d")]
 layout_mode = 1
@@ -44,6 +45,7 @@ offset_right = -150.0
 offset_bottom = 250.0
 grow_horizontal = 2
 disabled = true
+skill_name = "Defence"
 
 [node name="Skill" parent="Skill/Skill" instance=ExtResource("1_6550d")]
 layout_mode = 1
@@ -56,6 +58,7 @@ offset_right = -150.0
 offset_bottom = 250.0
 grow_horizontal = 2
 disabled = true
+skill_name = "Health"
 
 [node name="Skill2" parent="Skill/Skill" instance=ExtResource("1_6550d")]
 layout_mode = 1
@@ -68,6 +71,7 @@ offset_right = 250.0
 offset_bottom = 250.0
 grow_horizontal = 2
 disabled = true
+skill_name = "Regenerate"
 
 [node name="Skill2" parent="Skill" instance=ExtResource("1_6550d")]
 layout_mode = 1
@@ -80,6 +84,7 @@ offset_right = 250.0
 offset_bottom = 250.0
 grow_horizontal = 2
 disabled = true
+skill_name = "Speed"
 
 [node name="Skill" parent="Skill/Skill2" instance=ExtResource("1_6550d")]
 layout_mode = 1
@@ -92,3 +97,4 @@ offset_right = 250.0
 offset_bottom = 250.0
 grow_horizontal = 2
 disabled = true
+skill_name = "Dash Speed"
