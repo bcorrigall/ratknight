@@ -84,7 +84,7 @@ func _process(delta):
 			velocity.y -= 1
 
 		print(attack_direction)
-		if attack_direction > -45 and attack_direction <= 45:
+		if (attack_direction > -45 and attack_direction <= 45):
 			$playerSprites.animation = "attack_side"
 			$playerSprites.flip_h = false
 		elif attack_direction > 45 and attack_direction <= 135:
@@ -165,9 +165,13 @@ func attack_light():
 		weapon.disable()
 		
 func attack_spin():
-	animations.play("attackSpin")
-	await animations.animation_finished
-	weapon.disable()
+	if(!attacking):
+		attacking = true
+		$AttackTimeout.start(attack_cooldown)
+		animations.play("attackSpin")
+		attack_direction = 90
+		await animations.animation_finished
+		weapon.disable()
 	
 	
 func _on_area_2d_body_entered(body):

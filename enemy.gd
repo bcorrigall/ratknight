@@ -85,11 +85,11 @@ func death():
 
 
 func _on_hurt_box_area_entered(area):
-	if !area.name.match("AttackArea") :return
-	#if area==:return
-	print(area)
-	print("enemy get hit")
-	get_damage()
+	if(area.name.find("sword")):
+		get_damage()
+	elif !area.name.match("AttackArea") :
+		return
+	
 	
 func get_damage():
 	effects.play("gethurt")
