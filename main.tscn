@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ck24t8ix5ipiv"]
+[gd_scene load_steps=11 format=3 uid="uid://ck24t8ix5ipiv"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kb2s1"]
 [ext_resource type="PackedScene" uid="uid://ct7akgrsmoosc" path="res://the_rat.tscn" id="2_fgrnw"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ctyd5jhqe7mis" path="res://hud.tscn" id="5_57i1q"]
 [ext_resource type="PackedScene" uid="uid://chon0078cvn0t" path="res://item.tscn" id="6_ebi3h"]
 [ext_resource type="PackedScene" uid="uid://s3hes6771ca4" path="res://trap.tscn" id="7_nj3te"]
+[ext_resource type="PackedScene" uid="uid://dwg1qggmduw0u" path="res://main_menu.tscn" id="8_y38d3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hf4va"]
 texture = ExtResource("3_f0uep")
@@ -66,5 +67,7 @@ position = Vector2(780, 360)
 
 [node name="Trap" parent="." instance=ExtResource("7_nj3te")]
 position = Vector2(638, 198)
+
+[node name="MainMenu" parent="." instance=ExtResource("8_y38d3")]
 
 [editable path="Enemy"]
