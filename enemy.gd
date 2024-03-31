@@ -88,12 +88,11 @@ func death():
 
 
 func _on_hurt_box_area_entered(area):
-	if((area.name.match("Sword") and area.visible) or area.name.match("AttackArea")):
+	if(area.name.match("Sword") and area.get_parent().visible or area.name.match("AttackArea")):
 		get_damage()
 	else:
 		return
-	
-	
+
 func get_damage():
 	effects.play("gethurt")
 	$Timer.start(0.4)

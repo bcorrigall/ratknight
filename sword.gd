@@ -11,7 +11,7 @@ func _ready():
 
 func _on_body_entered(body):
 	the_rat = get_tree().get_nodes_in_group("player")
-	if(body.get_name().begins_with("Enemy")):
+	if(body.get_name().begins_with("Enemy") and get_parent().visible):
 		print(body.health)
 		body.health = body.health - (damage + the_rat[0].damage_bonus)
 		print(body.health)
