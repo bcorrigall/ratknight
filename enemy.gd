@@ -74,7 +74,7 @@ func _physics_process(delta):
 func death():
 	#animation stuff
 	randomize()
-	var type = 1
+	var type = randi()%3
 	if(type == 1):
 		var mob = Item.instantiate()
 		print(mob)
