@@ -6,7 +6,7 @@ extends Node2D
 var real_speed = speed
 
 @onready var animations = $AnimationPlayer
-@onready var weapon= $Weapon
+@onready var weapon = $Weapon
 
 var health = 120
 var trap_slowdown = 1
@@ -32,6 +32,7 @@ var dash_time = 0.5
 var in_dash = false
 var dash_timed_out = false
 var dash_speed = 800
+var dash_attack = false
 
 var invincibility_time = 0.15
 
@@ -49,12 +50,11 @@ var regenerate_bonus = 0
 var regen_cap = 20
 var current_regen = 0
 
-@onready var effects = $Effect
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
 	$RegenTimer.start(0.5)
+	add_to_group("player")
 
 func start(pos):
 	pass
@@ -73,6 +73,7 @@ func on_skill_up(skill_name):
 		"Speed": speed += 100
 		"Dash Speed": dash_speed += 200
 		"Regenerate": regenerate_bonus += 0.5
+		"Dash Attack": dash_attack = true
 
 func attack_animation(direction, cooldown):
 	attack_direction = rad_to_deg(direction.angle())
@@ -237,6 +238,10 @@ func _on_area_2d_body_entered(body):
 		$Invinciblilty.start(invincibility_time)
 		knocked_back = true
 		invincible = true
+		
+	elif (body.get_name().begins_with("Enemy") and in_dash and dash_attack):
+		body.get_damage()
+		body.health -= 20
 
 	elif (body.get_name().begins_with("Trap") and !in_dash):
 		damage_rat(body.damage)

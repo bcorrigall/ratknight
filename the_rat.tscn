@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=3 uid="uid://ct7akgrsmoosc"]
+[gd_scene load_steps=90 format=3 uid="uid://ct7akgrsmoosc"]
 
 [ext_resource type="Script" path="res://playerMovement.gd" id="1_8mm2x"]
 [ext_resource type="Texture2D" uid="uid://btsxflqogrgjs" path="res://assets/theRat/Attack_back/1.png" id="2_ttg8v"]
@@ -79,6 +79,7 @@
 [ext_resource type="Texture2D" uid="uid://bbwf02pl0ug6c" path="res://assets/theRat/Move_side/14.png" id="76_o3rcm"]
 [ext_resource type="Texture2D" uid="uid://b776f251fdwcl" path="res://assets/theRat/Move_side/15.png" id="77_1ldn8"]
 [ext_resource type="Texture2D" uid="uid://dv5mlau8alj32" path="res://assets/theRat/Move_side/16.png" id="78_r2lx0"]
+[ext_resource type="Script" path="res://sword.gd" id="80_pcu56"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vciue"]
 radius = 133.333
@@ -611,6 +612,7 @@ rotation = -1.0472
 [node name="Sword" parent="Weapon" index="3"]
 position = Vector2(0.5, 0.866028)
 scale = Vector2(7, 7)
+script = ExtResource("80_pcu56")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -632,6 +634,7 @@ libraries = {
 [node name="RegenTimer" type="Timer" parent="."]
 
 [connection signal="body_entered" from="theRatArea2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Weapon/Sword" to="Weapon/Sword" method="_on_body_entered"]
 [connection signal="timeout" from="Dash" to="." method="_on_dash_timeout"]
 [connection signal="timeout" from="Invinciblilty" to="." method="_on_invinciblilty_timeout"]
 [connection signal="timeout" from="DashTimeout" to="." method="_on_dash_timeout_timeout"]

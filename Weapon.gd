@@ -18,7 +18,7 @@ func _ready():
 	
 	if get_children().is_empty():return
 	
-	#weapon = get_children()[0]
+	weapon = get_node("Sword")
 	rat = get_parent()
 	print(rat)
 
@@ -52,10 +52,12 @@ func enable():
 	if !weapon:return
 	
 	visible=true
-	weapon.enable()
 	
 func disable():
 	if !weapon:return
 	
 	visible=false
-	weapon.disable()
+
+
+func _on_sword_body_entered(body):
+	pass # Replace with function body.

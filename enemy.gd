@@ -71,13 +71,11 @@ func _physics_process(delta):
 	if health < 1:
 		death()
 
-
 func death():
 	#animation stuff
 	randomize()
 	var type = 1
 	if(type == 1):
-		print("yo")
 		var mob = Item.instantiate()
 		print(mob)
 		get_parent().add_child(mob)
@@ -99,8 +97,7 @@ func _on_hurt_box_area_entered(area):
 func get_damage():
 	effects.play("gethurt")
 	$Timer.start(0.4)
-	#effects.play("RESET")
-	if(health<=0):
+	if(health <= 0):
 		death()
 		
 func _on_timer_timeout():

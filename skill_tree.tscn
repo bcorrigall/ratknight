@@ -10,8 +10,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_horizontal = 0
+size_flags_vertical = 8
+size_flags_stretch_ratio = 4.16
 script = ExtResource("1_5vrhb")
 
 [node name="Panel" type="Panel" parent="."]
@@ -22,32 +23,33 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Skill" parent="." instance=ExtResource("1_6550d")]
+[node name="Skill" parent="Panel" instance=ExtResource("1_6550d")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -50.0
-offset_top = 87.0
-offset_right = 50.0
-offset_bottom = 187.0
+offset_left = -36.0
+offset_top = 38.0
+offset_right = 64.0
+offset_bottom = 138.0
 grow_horizontal = 2
 skill_name = "Damage"
 
-[node name="Skill" parent="Skill" instance=ExtResource("1_6550d")]
+[node name="Skill" parent="Panel/Skill" instance=ExtResource("1_6550d")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -250.0
-offset_top = 150.0
-offset_right = -150.0
-offset_bottom = 250.0
+offset_left = -358.0
+offset_top = 161.0
+offset_right = -258.0
+offset_bottom = 261.0
 grow_horizontal = 2
 disabled = true
 skill_name = "Defence"
+skill_cost = 2
 
-[node name="Skill" parent="Skill/Skill" instance=ExtResource("1_6550d")]
+[node name="Skill" parent="Panel/Skill/Skill" instance=ExtResource("1_6550d")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -60,7 +62,7 @@ grow_horizontal = 2
 disabled = true
 skill_name = "Health"
 
-[node name="Skill2" parent="Skill/Skill" instance=ExtResource("1_6550d")]
+[node name="Skill2" parent="Panel/Skill/Skill" instance=ExtResource("1_6550d")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -72,21 +74,23 @@ offset_bottom = 250.0
 grow_horizontal = 2
 disabled = true
 skill_name = "Regenerate"
+skill_cost = 5
 
-[node name="Skill2" parent="Skill" instance=ExtResource("1_6550d")]
+[node name="Skill2" parent="Panel/Skill" instance=ExtResource("1_6550d")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 150.0
+offset_left = 208.0
 offset_top = 150.0
-offset_right = 250.0
+offset_right = 308.0
 offset_bottom = 250.0
 grow_horizontal = 2
 disabled = true
 skill_name = "Speed"
+skill_cost = 2
 
-[node name="Skill" parent="Skill/Skill2" instance=ExtResource("1_6550d")]
+[node name="Skill" parent="Panel/Skill/Skill2" instance=ExtResource("1_6550d")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -98,3 +102,18 @@ offset_bottom = 250.0
 grow_horizontal = 2
 disabled = true
 skill_name = "Dash Speed"
+skill_cost = 3
+
+[node name="Skill2" parent="Panel/Skill/Skill2" instance=ExtResource("1_6550d")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -235.0
+offset_top = 153.0
+offset_right = -135.0
+offset_bottom = 253.0
+grow_horizontal = 2
+disabled = true
+skill_name = "Dash Attack"
+skill_cost = 6
