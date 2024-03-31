@@ -110,6 +110,20 @@ disabled = true
 skill_name = "Dash Speed"
 skill_cost = 3
 
+[node name="Skill" parent="Panel/Skill/Skill2/Skill" instance=ExtResource("1_6550d")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 60.0
+offset_top = 150.0
+offset_right = 160.0
+offset_bottom = 250.0
+grow_horizontal = 2
+disabled = true
+skill_name = "Dash Cooldown"
+skill_cost = 5
+
 [node name="Skill2" parent="Panel/Skill/Skill2" instance=ExtResource("1_6550d")]
 layout_mode = 1
 anchors_preset = 5
