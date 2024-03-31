@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2cs314jvy2yy"]
+[gd_scene load_steps=6 format=3 uid="uid://b2cs314jvy2yy"]
 
 [ext_resource type="Script" path="res://skill_tree.gd" id="1_5vrhb"]
 [ext_resource type="PackedScene" uid="uid://bqbswfmau18k" path="res://skill.tscn" id="1_6550d"]
+[ext_resource type="Texture2D" uid="uid://cepayxeh2frtq" path="res://assets/theRat/Attack_side/4.png" id="3_0mmol"]
+[ext_resource type="Texture2D" uid="uid://iumpcg2um3l4" path="res://assets/hearts/heart_4_4.png" id="4_fen5n"]
+[ext_resource type="Texture2D" uid="uid://c2qalgdxo80qu" path="res://assets/theRat/Dash_side/5.png" id="5_43j6v"]
 
 [node name="SkillTree" type="Control"]
 layout_mode = 3
@@ -33,6 +36,7 @@ offset_top = 38.0
 offset_right = 64.0
 offset_bottom = 138.0
 grow_horizontal = 2
+texture_normal = ExtResource("3_0mmol")
 skill_name = "Damage"
 
 [node name="Skill" parent="Panel/Skill" instance=ExtResource("1_6550d")]
@@ -60,6 +64,7 @@ offset_right = -150.0
 offset_bottom = 250.0
 grow_horizontal = 2
 disabled = true
+texture_normal = ExtResource("4_fen5n")
 skill_name = "Health"
 
 [node name="Skill2" parent="Panel/Skill/Skill" instance=ExtResource("1_6550d")]
@@ -73,6 +78,7 @@ offset_right = 250.0
 offset_bottom = 250.0
 grow_horizontal = 2
 disabled = true
+texture_normal = ExtResource("4_fen5n")
 skill_name = "Regenerate"
 skill_cost = 5
 
@@ -95,10 +101,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 150.0
-offset_top = 150.0
-offset_right = 250.0
-offset_bottom = 250.0
+offset_left = -227.0
+offset_top = 163.0
+offset_right = -127.0
+offset_bottom = 263.0
 grow_horizontal = 2
 disabled = true
 skill_name = "Dash Speed"
@@ -109,11 +115,12 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -235.0
-offset_top = 153.0
-offset_right = -135.0
-offset_bottom = 253.0
+offset_left = 93.0
+offset_top = 165.0
+offset_right = 193.0
+offset_bottom = 265.0
 grow_horizontal = 2
 disabled = true
+texture_normal = ExtResource("5_43j6v")
 skill_name = "Dash Attack"
 skill_cost = 6
