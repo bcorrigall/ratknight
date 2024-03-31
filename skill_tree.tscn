@@ -124,3 +124,12 @@ disabled = true
 texture_normal = ExtResource("5_43j6v")
 skill_name = "Dash Attack"
 skill_cost = 6
+
+[node name="SkillPoints" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 77.0
+offset_top = 55.0
+offset_right = 356.0
+offset_bottom = 115.0
+text = "0 level points"
+scroll_active = false

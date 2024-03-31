@@ -24,7 +24,6 @@ func _process(delta):
 	pass
 
 func _on_pressed():
-	print(the_rat[0].skill_points)
 	if (!active and the_rat[0].skill_points >= skill_cost):
 		emit_signal("add_skill", skill_name)
 		the_rat[0].skill_points -= skill_cost

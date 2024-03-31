@@ -29,14 +29,13 @@ func _on_area_entered(area):
 			print("healed")
 
 		if(type <= 2):
-			var weapon = get_node("../theRat/Weapon")
 			var timer = get_node("../theRat/Weapon/Damageboost")
-			weapon.damage += 25
+			the_rat.damage_bonus += 25
 			print("damage boost")
 			$BoostTimer.start(5)
-			
+
 		queue_free()
 
 func _on_boost_timer_timeout():
-	var weapon = get_node("../theRat/Weapon")
-	weapon.damage -= 25
+	var the_rat = get_node("../theRat")
+	the_rat.damage_bonus -= 25
