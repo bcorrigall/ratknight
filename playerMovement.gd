@@ -82,7 +82,7 @@ func attack_animation(direction, cooldown):
 	$AttackTimeout.start(attack_cooldown)
 
 func dash():
-	if (!in_dash and !dash_timed_out):
+	if (!in_dash and !dash_timed_out and !knocked_back):
 		in_dash = true
 		$Dash.start(dash_time)
 		real_speed = dash_speed

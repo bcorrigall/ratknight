@@ -19,6 +19,7 @@ func show_message(text):
 func _on_start_button_pressed():
 	$StartButton.hide()
 	$Label.hide()
+	get_node("/root/MainMenu").queue_free()
 	get_tree().root.add_child(simultaneous_scene)
 
 func game_over():
