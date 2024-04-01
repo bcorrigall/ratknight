@@ -10,7 +10,7 @@ func _ready():
 
 func set_animation(item):
 	if(item <= 2):
-		$ItemSprite.animation = "Guy"
+		$ItemSprite.animation = "Pow"
 	if(item > 2):
 		$ItemSprite.animation = "Heart"
 

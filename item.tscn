@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://chon0078cvn0t"]
 
-[ext_resource type="Texture2D" uid="uid://bjimheo2js26y" path="res://assets/pixil-frame-1.png" id="1_3gsyt"]
 [ext_resource type="Script" path="res://item.gd" id="1_fd45f"]
+[ext_resource type="Texture2D" uid="uid://c5vceanmdxt8r" path="res://assets/POW.png" id="3_1lqmj"]
 [ext_resource type="Texture2D" uid="uid://iumpcg2um3l4" path="res://assets/hearts/heart_4_4.png" id="3_5boxt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4ir3"]
@@ -11,18 +11,18 @@ size = Vector2(80, 68)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_3gsyt")
-}],
-"loop": true,
-"name": &"Guy",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": ExtResource("3_5boxt")
 }],
 "loop": true,
 "name": &"Heart",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_1lqmj")
+}],
+"loop": true,
+"name": &"Pow",
 "speed": 5.0
 }]
 
@@ -37,7 +37,7 @@ shape = SubResource("RectangleShape2D_g4ir3")
 position = Vector2(6, 0)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_fy37g")
-animation = &"Heart"
+animation = &"Pow"
 
 [node name="BoostTimer" type="Timer" parent="."]
 
