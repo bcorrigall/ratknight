@@ -235,19 +235,23 @@ func death():
 	get_node("/root/Main").queue_free()
 	get_tree().root.add_child(simultaneous_scene)
 
-func _on_area_2d_body_entered(body):
-	print(body)
-	if (body.get_name().begins_with("Enemy") and invincible == false and in_dash == false):
-		damage_rat(body.damage)
+func _on_the_rat_area_2d_area_entered(area):
+	if (area.get_name().begins_with("HurtBox") and invincible == false and in_dash == false):
+		var enemy = area.get_parent()
+		damage_rat(enemy.damage)
 		
-		var direction = (body.position - position).normalized() * 100
+		var direction = (enemy.position - position).normalized() * 100
 		knockback_direction = -direction.normalized() 
 		$KnockbackTimer.start(0.2)
 		$Invinciblilty.start(invincibility_time)
 		knocked_back = true
 		invincible = true
+
+func _on_area_2d_body_entered(body):
+	print(body)
+
 		
-	elif (body.get_name().begins_with("Enemy") and in_dash and dash_attack):
+	if (body.get_name().begins_with("Enemy") and in_dash and dash_attack):
 		body.get_damage()
 		body.health -= 20
 
@@ -305,3 +309,4 @@ func _on_regen_timer_timeout():
 		health += regenerate_bonus
 		current_regen += regenerate_bonus
 	$RegenTimer.start(0.5)
+

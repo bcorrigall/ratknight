@@ -25,5 +25,13 @@ func _on_area_2d_body_entered(body):
 		body.health = body.health - damage
 		print(body.health)
 		queue_free()
-	
 
+
+
+func _on_attack_area_area_entered(area):
+	if(area.get_name().begins_with("HurtBox")):
+		var enemy = area.get_parent()
+		print(enemy.health)
+		enemy.health = enemy.health - damage
+		print(enemy.health)
+		queue_free()
