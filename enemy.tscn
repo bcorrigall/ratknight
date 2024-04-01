@@ -1,51 +1,159 @@
-[gd_scene load_steps=15 format=3 uid="uid://bd1rvmtjug7o8"]
+[gd_scene load_steps=37 format=3 uid="uid://bd1rvmtjug7o8"]
 
 [ext_resource type="Script" path="res://enemy.gd" id="1_4tbc6"]
-[ext_resource type="Texture2D" uid="uid://d3aewvc48naq" path="res://assets/test/zombie/back/back1.png" id="2_80xee"]
-[ext_resource type="Texture2D" uid="uid://ccjoj1at5nrq3" path="res://assets/test/zombie/back/back2.png" id="3_0n8e7"]
-[ext_resource type="Texture2D" uid="uid://clam86g4835yb" path="res://assets/test/zombie/front/front1.png" id="4_tped0"]
-[ext_resource type="Texture2D" uid="uid://2eqke8n28jk6" path="res://assets/test/zombie/front/front3.png" id="5_v5rhu"]
-[ext_resource type="Texture2D" uid="uid://c4767f3q7b7uu" path="res://assets/test/zombie/front/front2.png" id="6_7y86m"]
-[ext_resource type="Texture2D" uid="uid://vbg3tlg0ejja" path="res://assets/test/zombie/side/side1.png" id="7_yhfok"]
-[ext_resource type="Texture2D" uid="uid://dx7mc42b7fa0y" path="res://assets/test/zombie/side/side2.png" id="8_3uw0j"]
+[ext_resource type="Texture2D" uid="uid://blnakttrwrjas" path="res://assets/enemies/antFighter/attack(side)/0.png" id="2_cyluj"]
+[ext_resource type="Texture2D" uid="uid://blv5e6d5y5lvd" path="res://assets/enemies/antFighter/move_back/back.png" id="2_hplpv"]
+[ext_resource type="Texture2D" uid="uid://bxch2xhyskm5w" path="res://assets/enemies/antFighter/attack(side)/1.png" id="3_id7g3"]
+[ext_resource type="Texture2D" uid="uid://ct8n4p3yta8vy" path="res://assets/enemies/antFighter/move_front/front.png" id="3_l5wl1"]
+[ext_resource type="Texture2D" uid="uid://c3uxis2aaathp" path="res://assets/enemies/antFighter/attack(side)/2.png" id="4_0hshd"]
+[ext_resource type="Texture2D" uid="uid://cacyemixrkfj0" path="res://assets/enemies/antFighter/move_side/side.png" id="4_42p2l"]
+[ext_resource type="Texture2D" uid="uid://johx64v3xmf7" path="res://assets/enemies/antFighter/attack(side)/3.png" id="5_glnjp"]
+[ext_resource type="Texture2D" uid="uid://fnxwxk166yey" path="res://assets/enemies/antFighter/move_back/1.png" id="5_krsqe"]
+[ext_resource type="Texture2D" uid="uid://bc3grb7rmq078" path="res://assets/enemies/antFighter/move_back/2.png" id="6_m5ykh"]
+[ext_resource type="Texture2D" uid="uid://dl3vvublkp4ik" path="res://assets/enemies/antFighter/attack(side)/4.png" id="6_ype3v"]
+[ext_resource type="Texture2D" uid="uid://c20nk8d8tsbk6" path="res://assets/enemies/antFighter/move_back/3.png" id="7_b3ycb"]
+[ext_resource type="Texture2D" uid="uid://diwblvrk7lbhs" path="res://assets/enemies/antFighter/attack(side)/5.png" id="7_nvf24"]
+[ext_resource type="Texture2D" uid="uid://c617uy1yeo1t" path="res://assets/enemies/antFighter/move_back/4.png" id="8_b7ha2"]
+[ext_resource type="Texture2D" uid="uid://c7spixydrplu6" path="res://assets/enemies/antFighter/move_back/5.png" id="9_rxdg4"]
+[ext_resource type="Texture2D" uid="uid://d2h8b2mho81dc" path="res://assets/enemies/antFighter/move_back/6.png" id="10_x7mvi"]
+[ext_resource type="Texture2D" uid="uid://cxp0qfmnjgr6d" path="res://assets/enemies/antFighter/move_front/1.png" id="11_2rbfg"]
+[ext_resource type="Texture2D" uid="uid://y1em1xlnmkkk" path="res://assets/enemies/antFighter/move_front/2.png" id="12_knodq"]
+[ext_resource type="Texture2D" uid="uid://bl2w41tefgal5" path="res://assets/enemies/antFighter/move_front/3.png" id="13_v47sx"]
+[ext_resource type="Texture2D" uid="uid://cgkh5vncybvi4" path="res://assets/enemies/antFighter/move_front/4.png" id="14_s68ec"]
+[ext_resource type="Texture2D" uid="uid://or4m4j7abex0" path="res://assets/enemies/antFighter/move_front/5.png" id="15_8qt3j"]
+[ext_resource type="Texture2D" uid="uid://dxsl5kqhapuix" path="res://assets/enemies/antFighter/move_front/6.png" id="16_dgwkd"]
+[ext_resource type="Texture2D" uid="uid://y3ueknl2vfxp" path="res://assets/enemies/antFighter/move_side/1.png" id="17_mi656"]
+[ext_resource type="Texture2D" uid="uid://bwt7qsmu17xik" path="res://assets/enemies/antFighter/move_side/2.png" id="18_hyegm"]
+[ext_resource type="Texture2D" uid="uid://c5b2wt6u7jpuy" path="res://assets/enemies/antFighter/move_side/3.png" id="19_sg61l"]
+[ext_resource type="Texture2D" uid="uid://ch1o7ehoflplm" path="res://assets/enemies/antFighter/move_side/4.png" id="20_gxllo"]
+[ext_resource type="Texture2D" uid="uid://c5hthp577uo07" path="res://assets/enemies/antFighter/move_side/5.png" id="21_embnh"]
+[ext_resource type="Texture2D" uid="uid://8s0oanf8utab" path="res://assets/enemies/antFighter/move_side/6.png" id="22_egr1b"]
+[ext_resource type="Texture2D" uid="uid://cc8xyl17se1u8" path="res://assets/enemies/antFighter/move_side/7.png" id="23_a8u3r"]
+[ext_resource type="Texture2D" uid="uid://ded4e7gg4lnu7" path="res://assets/enemies/antFighter/move_side/8.png" id="24_fxfxy"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1gqbj"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_80xee")
+"texture": ExtResource("2_cyluj")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_0n8e7")
+"texture": ExtResource("3_id7g3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0hshd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_glnjp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ype3v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_nvf24")
 }],
 "loop": true,
-"name": &"back",
+"name": &"attack_side",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hplpv")
+}],
+"loop": true,
+"name": &"idle_back",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_tped0")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_v5rhu")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_7y86m")
+"texture": ExtResource("3_l5wl1")
 }],
 "loop": true,
-"name": &"front",
+"name": &"idle_front",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("7_yhfok")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_3uw0j")
+"texture": ExtResource("4_42p2l")
 }],
 "loop": true,
-"name": &"side",
+"name": &"idle_side",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_krsqe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_m5ykh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_b3ycb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_b7ha2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_rxdg4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_x7mvi")
+}],
+"loop": true,
+"name": &"move_back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_2rbfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_knodq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_v47sx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_s68ec")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_8qt3j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_dgwkd")
+}],
+"loop": true,
+"name": &"move_front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_mi656")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_hyegm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_sg61l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_gxllo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_embnh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_egr1b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_a8u3r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_fxfxy")
+}],
+"loop": true,
+"name": &"move_side",
+"speed": 8.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0oxnu"]
@@ -101,7 +209,8 @@ script = ExtResource("1_4tbc6")
 clip_children = 2
 scale = Vector2(0.138125, 0.151875)
 sprite_frames = SubResource("SpriteFrames_1gqbj")
-animation = &"front"
+animation = &"attack_side"
+frame_progress = 0.714659
 
 [node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D"]
 offset_left = -463.348
@@ -112,12 +221,6 @@ color = Color(1, 0, 0, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_0oxnu")
-
-[node name="HitBox" type="Area2D" parent="."]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-shape = SubResource("CapsuleShape2D_lfd7g")
 
 [node name="HurtBox" type="Area2D" parent="."]
 
@@ -133,6 +236,9 @@ libraries = {
 
 [node name="JerkTimer" type="Timer" parent="."]
 
+[node name="AttackTimer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="JerkTimer" to="." method="_on_jerk_timer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

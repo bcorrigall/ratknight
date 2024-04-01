@@ -197,6 +197,9 @@ func _process(delta):
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
 
+	if(health <- 0):
+		death()
+
 func attack_light():
 	if(!attacking):
 		var mouse_direction = (get_global_mouse_position() - global_position).normalized()
@@ -226,8 +229,12 @@ func attack_spin():
 		attack_direction = 90
 		await animations.animation_finished
 		weapon.disable()
-	
-	
+
+func death():
+	var simultaneous_scene = load("res://main_menu.tscn").instantiate()
+	get_node("/root/Main").queue_free()
+	get_tree().root.add_child(simultaneous_scene)
+
 func _on_area_2d_body_entered(body):
 	print(body)
 	if (body.get_name().begins_with("Enemy") and invincible == false and in_dash == false):

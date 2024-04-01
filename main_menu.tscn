@@ -39,8 +39,12 @@ offset_left = 432.0
 offset_top = 398.0
 offset_right = 700.0
 offset_bottom = 447.0
-text = "Left mouse click for Star attack
+text = "You must survive as long as you can!
+
+Left mouse click for Star attack
 Right Mouse click for Sword Attack
+
+Press L to open the level menu
 "
 horizontal_alignment = 1
 vertical_alignment = 1

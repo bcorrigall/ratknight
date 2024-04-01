@@ -5,7 +5,7 @@
 [node name="enemySpawner" type="Node2D"]
 script = ExtResource("1_86hrx")
 
-[node name="monsterTime" type="Timer" parent="."]
-wait_time = 10.0
+[node name="MonsterTimer" type="Timer" parent="."]
+wait_time = 8.0
 
-[connection signal="timeout" from="monsterTime" to="." method="_on_monster_time_timeout"]
+[connection signal="timeout" from="MonsterTimer" to="." method="_on_monster_time_timeout"]
