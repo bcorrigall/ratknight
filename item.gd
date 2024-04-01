@@ -10,7 +10,7 @@ func _ready():
 
 func set_animation(item):
 	if(item <= 2):
-		$ItemSprite.animation = "Pow"
+		$ItemSprite.animation = "Guy"
 	if(item > 2):
 		$ItemSprite.animation = "Heart"
 
@@ -29,6 +29,7 @@ func _on_area_entered(area):
 			print("healed")
 
 		if(type <= 2):
+			var timer = get_node("../theRat/Weapon/Damageboost")
 			the_rat.damage_bonus += 25
 			print("damage boost")
 			$BoostTimer.start(5)
