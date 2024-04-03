@@ -75,6 +75,7 @@ func on_skill_up(skill_name):
 		"Regenerate": regenerate_bonus += 0.5
 		"Dash Attack": dash_attack = true
 		"Dash Cooldown": dash_cooldown -= 2
+		
 
 func attack_animation(direction, cooldown):
 	attack_direction = rad_to_deg(direction.angle())

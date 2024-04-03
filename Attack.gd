@@ -18,16 +18,6 @@ func _process(delta):
 func _on_timer_timeout():
 	queue_free()
 
-
-func _on_area_2d_body_entered(body):
-	if(body.get_name().begins_with("Enemy")):
-		print(body.health)
-		body.health = body.health - damage
-		print(body.health)
-		queue_free()
-
-
-
 func _on_attack_area_area_entered(area):
 	if(area.get_name().begins_with("HurtBox")):
 		var enemy = area.get_parent()
