@@ -36,6 +36,7 @@ func _physics_process(delta):
 		speed_boost = 50
 
 
+
 	if ((position.distance_to(playerposition) > 30) and !attacking):
 		velocity = targetposition*(SPEED+speed_boost)
 		move_and_slide()
@@ -90,7 +91,7 @@ func _on_hurt_box_area_entered(area):
 	elif(area.name.match("theRatArea2D")):
 		$AttackTimer.start(0.2)
 		$AnimatedSprite2D.animation = "attack_side"
-		
+
 		attacking = true
 	else:
 		return
