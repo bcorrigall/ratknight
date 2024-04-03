@@ -3,14 +3,15 @@ signal healthInc
 var type = 0
 @export var Item_scene: PackedScene
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-	type = randi() % 6
+	type = randi_range(0,6)
 
 func set_animation(item):
 	if(item <= 2):
-		$ItemSprite.animation = "Guy"
+		$ItemSprite.animation = "Pow"
 	if(item > 2):
 		$ItemSprite.animation = "Heart"
 
@@ -30,12 +31,13 @@ func _on_area_entered(area):
 
 		if(type <= 2):
 			var timer = get_node("../theRat/Weapon/Damageboost")
-			the_rat.damage_bonus += 25
-			print("damage boost")
-			$BoostTimer.start(5)
+			if(the_rat.boosted == false):
+				the_rat.damage_bonus += 25
+				print("damage boost")
+				the_rat.boosted = true
+				var time =  get_node("../theRat/BoostTimer")
+				time.start(5)
 
 		queue_free()
 
-func _on_boost_timer_timeout():
-	var the_rat = get_node("../theRat")
-	the_rat.damage_bonus -= 25
+	

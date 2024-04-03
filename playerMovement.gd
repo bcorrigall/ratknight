@@ -2,7 +2,7 @@ extends Node2D
 
 @export var speed = 400
 @export var maxHealth = 120
-
+@export var boosted = false
 var real_speed = speed
 
 @onready var animations = $AnimationPlayer
@@ -310,3 +310,10 @@ func _on_regen_timer_timeout():
 		current_regen += regenerate_bonus
 	$RegenTimer.start(0.5)
 
+
+
+
+func _on_boost_timer_timeout():
+	print("Boost gone")
+	boosted = false
+	damage_bonus -= 25
