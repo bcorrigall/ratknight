@@ -30,7 +30,6 @@ func _on_area_entered(area):
 			print("healed")
 
 		if(type <= 2):
-			var timer = get_node("../theRat/Weapon/Damageboost")
 			if(the_rat.boosted == false):
 				the_rat.damage_bonus += 25
 				print("damage boost")

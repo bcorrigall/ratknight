@@ -77,7 +77,6 @@ func death():
 		var mob = Item.instantiate()
 		print(mob)
 		get_parent().add_child(mob)
-		mob.set_animation(type)
 
 		mob.position = global_position
 		player.earn_experience(experience)
