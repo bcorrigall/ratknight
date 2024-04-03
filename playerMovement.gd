@@ -49,6 +49,8 @@ var defence_bonus = 0
 var regenerate_bonus = 0
 var regen_cap = 20
 var current_regen = 0
+var extra_attacks = 0
+var throw_rate = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -75,6 +77,11 @@ func on_skill_up(skill_name):
 		"Regenerate": regenerate_bonus += 0.5
 		"Dash Attack": dash_attack = true
 		"Dash Cooldown": dash_cooldown -= 2
+		"Damage 2": damage_bonus += 5
+		"Health 2": maxHealth += 20
+		"Extra Throwing Star": extra_attacks += 1
+		"Extra Throwing Star 2": extra_attacks += 1
+		"Increase Throw Rate": throw_rate += 0.2
 
 func attack_animation(direction, cooldown):
 	attack_direction = rad_to_deg(direction.angle())
