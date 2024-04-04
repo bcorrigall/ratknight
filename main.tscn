@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ck24t8ix5ipiv"]
+[gd_scene load_steps=11 format=3 uid="uid://ck24t8ix5ipiv"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kb2s1"]
 [ext_resource type="PackedScene" uid="uid://ct7akgrsmoosc" path="res://the_rat.tscn" id="2_fgrnw"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://chon0078cvn0t" path="res://item.tscn" id="6_ebi3h"]
 [ext_resource type="PackedScene" uid="uid://s3hes6771ca4" path="res://trap.tscn" id="7_nj3te"]
 [ext_resource type="PackedScene" uid="uid://dfca0t804oegk" path="res://enemy_spawner.tscn" id="8_hi4nx"]
+[ext_resource type="PackedScene" uid="uid://d17bi3rq3knuv" path="res://camera_2d.tscn" id="8_kjvnh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hf4va"]
 texture = ExtResource("3_f0uep")
@@ -56,3 +57,5 @@ position = Vector2(319, 204)
 position = Vector2(638, 198)
 
 [node name="enemySpawner" parent="." instance=ExtResource("8_hi4nx")]
+
+[node name="Camera2D" parent="." instance=ExtResource("8_kjvnh")]
