@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2cs314jvy2yy"]
+[gd_scene load_steps=12 format=3 uid="uid://b2cs314jvy2yy"]
 
 [ext_resource type="Script" path="res://skill_tree.gd" id="1_5vrhb"]
 [ext_resource type="PackedScene" uid="uid://bqbswfmau18k" path="res://skill.tscn" id="1_6550d"]
@@ -6,7 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://iumpcg2um3l4" path="res://assets/hearts/heart_4_4.png" id="4_fen5n"]
 [ext_resource type="Texture2D" uid="uid://c2qalgdxo80qu" path="res://assets/theRat/Dash_side/5.png" id="5_43j6v"]
 [ext_resource type="Texture2D" uid="uid://bgedj0hkpe1k" path="res://assets/star/star.png" id="5_76roj"]
+[ext_resource type="Texture2D" uid="uid://cggfa4wneg0cg" path="res://assets/theRat/Dash_front/3.png" id="6_v72ha"]
 [ext_resource type="Texture2D" uid="uid://dipydihua6r5g" path="res://assets/theRat/Attack_side/5.png" id="6_xrlel"]
+[ext_resource type="Texture2D" uid="uid://defvc1d3620n3" path="res://assets/theRat/Move_side/10.png" id="7_427xq"]
+[ext_resource type="Texture2D" uid="uid://bbwf02pl0ug6c" path="res://assets/theRat/Move_side/14.png" id="8_oxqx1"]
+[ext_resource type="Texture2D" uid="uid://cqdoiiqvva0yj" path="res://assets/AntMage/left/1.png" id="11_7kvx0"]
 
 [node name="SkillTree" type="Control"]
 layout_mode = 3
@@ -33,10 +37,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -36.0
-offset_top = 38.0
-offset_right = 64.0
-offset_bottom = 138.0
+offset_left = -49.0
+offset_top = 37.0
+offset_right = 51.0
+offset_bottom = 137.0
 grow_horizontal = 2
 texture_normal = ExtResource("3_0mmol")
 skill_name = "Damage"
@@ -150,12 +154,13 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 208.0
+offset_left = 259.0
 offset_top = 150.0
-offset_right = 308.0
+offset_right = 359.0
 offset_bottom = 250.0
 grow_horizontal = 2
 disabled = true
+texture_normal = ExtResource("6_v72ha")
 skill_name = "Speed"
 skill_cost = 2
 
@@ -164,12 +169,13 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -156.0
-offset_top = 164.0
-offset_right = -56.0
-offset_bottom = 264.0
+offset_left = -200.0
+offset_top = 165.0
+offset_right = -100.0
+offset_bottom = 265.0
 grow_horizontal = 2
 disabled = true
+texture_normal = ExtResource("7_427xq")
 skill_name = "Dash Speed"
 skill_cost = 3
 
@@ -178,10 +184,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 23.0
-offset_top = 150.0
-offset_right = 123.0
-offset_bottom = 250.0
+offset_left = 15.0
+offset_top = 145.0
+offset_right = 115.0
+offset_bottom = 245.0
 grow_horizontal = 2
 disabled = true
 skill_name = "Item Drops"
@@ -192,12 +198,13 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -132.0
-offset_top = 149.0
-offset_right = -32.0
-offset_bottom = 249.0
+offset_left = -120.0
+offset_top = 144.0
+offset_right = -20.0
+offset_bottom = 244.0
 grow_horizontal = 2
 disabled = true
+texture_normal = ExtResource("8_oxqx1")
 skill_name = "Dash Cooldown"
 skill_cost = 5
 
@@ -206,9 +213,9 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 107.0
+offset_left = 79.0
 offset_top = 160.0
-offset_right = 207.0
+offset_right = 179.0
 offset_bottom = 260.0
 grow_horizontal = 2
 disabled = true
@@ -221,14 +228,29 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 18.0
-offset_top = 155.0
-offset_right = 118.0
-offset_bottom = 255.0
+offset_left = 15.0
+offset_top = 152.0
+offset_right = 115.0
+offset_bottom = 252.0
 grow_horizontal = 2
 disabled = true
 texture_normal = ExtResource("6_xrlel")
 skill_name = "Damage 2"
+skill_cost = 5
+
+[node name="Skill3" parent="Panel/Skill/Skill2/Skill2" instance=ExtResource("1_6550d")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -126.0
+offset_top = 152.0
+offset_right = -26.0
+offset_bottom = 252.0
+grow_horizontal = 2
+disabled = true
+texture_normal = ExtResource("11_7kvx0")
+skill_name = "Enemy Slowdown"
 skill_cost = 5
 
 [node name="SkillPoints" type="RichTextLabel" parent="."]

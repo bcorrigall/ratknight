@@ -52,6 +52,7 @@ var current_regen = 0
 var extra_attacks = 0
 var throw_rate = 0
 var item_drop = 0
+var enemy_speed = 50
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -84,6 +85,7 @@ func on_skill_up(skill_name):
 		"Extra Throwing Star 2": extra_attacks += 1
 		"Increase Throw Rate": throw_rate += 0.2
 		"Item Drop": item_drop += 1
+		"Enemy Slowdown": enemy_speed += 25
 
 func attack_animation(direction, cooldown):
 	attack_direction = rad_to_deg(direction.angle())
