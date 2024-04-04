@@ -3,7 +3,7 @@ extends Node2D
 @export var w_name = "default"
 @export var damage = 25
 @export var original_damage = 25
-@export var rate_of_fire = 0.9
+@export var rate_of_fire = 0.7
 @export var type = "default"
 @export var attack_scene = preload("res://Attack.tscn")
 
@@ -28,19 +28,25 @@ func _process(_delta):
 		fire()
 
 func fire():
-	attack = attack_scene.instantiate()
+	var attacks = get_parent().extra_attacks + 1 
+	while attacks > 0:
+		attack = attack_scene.instantiate()
 
-	attack.damage = damage + rat.damage_bonus
-	attack.position = global_position
-	attack.direction = (get_global_mouse_position() - global_position).normalized()
+		attack.damage = damage + rat.damage_bonus
+		attack.position = global_position
+		attack.direction = (get_global_mouse_position() - global_position).normalized()
 
-	rat.attack_animation(attack.direction, rate_of_fire)
-	get_parent().get_parent().add_child(attack)
-	print(attack.position)
-	print(position)
-
-	timed_out = true
-	$Timer.start(rate_of_fire)
+		rat.attack_animation(attack.direction, rate_of_fire)
+		get_parent().get_parent().add_child(attack)
+		print(attack.position)
+		print(position)
+		
+		timed_out = true
+		await get_tree().create_timer(0.2).timeout
+		attacks = attacks - 1
+		print(attacks)
+	
+	$Timer.start(rate_of_fire - get_parent().throw_rate)
 	
 func _on_damageboost_timeout():
 	damage = original_damage

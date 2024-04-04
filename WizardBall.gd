@@ -1,8 +1,8 @@
-extends Node2D
+extends Area2D
 
-var speed = 750
+var speed = 300
 var rotation_speed = 6
-var damage = 0
+var damage
 var direction = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
@@ -18,10 +18,6 @@ func _process(delta):
 func _on_timer_timeout():
 	queue_free()
 
-func _on_attack_area_area_entered(area):
-	if(area.get_name().begins_with("HurtBox")):
-		var enemy = area.get_parent()
-		print(enemy.health)
-		enemy.health = enemy.health - damage
-		print(enemy.health)
+func _on_area_entered(area):
+	if(area.get_name().begins_with("theRatArea2D")):
 		queue_free()

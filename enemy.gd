@@ -32,7 +32,7 @@ func _physics_process(delta):
 	targetposition = (playerposition - position).normalized()
 
 	if global_position.distance_to(player.global_position) > 200:
-		targetposition += noise.normalized()
+		targetposition += noise.normalized()/2
 		speed_boost = 0
 	else:
 		speed_boost = 50

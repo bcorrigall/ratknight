@@ -9,9 +9,9 @@ var damage = 15
 func _ready():
 	print("sword")
 
-func _on_body_entered(body):
+func _on_area_entered(area):
 	the_rat = get_tree().get_nodes_in_group("player")
-	if(body.get_name().begins_with("Enemy") and get_parent().visible):
-		print(body.health)
-		body.health = body.health - (damage + the_rat[0].damage_bonus)
-		print(body.health)
+	if(area.get_name().begins_with("HurtBox") and get_parent().visible):
+		print(area.get_parent().health)
+		area.get_parent().health = area.get_parent().health - (damage + the_rat[0].damage_bonus)
+		print(area.get_parent().health)

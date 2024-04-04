@@ -49,6 +49,10 @@ var defence_bonus = 0
 var regenerate_bonus = 0
 var regen_cap = 20
 var current_regen = 0
+var extra_attacks = 0
+var throw_rate = 0
+var item_drop = 0
+var enemy_speed = 50
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -75,6 +79,13 @@ func on_skill_up(skill_name):
 		"Regenerate": regenerate_bonus += 0.5
 		"Dash Attack": dash_attack = true
 		"Dash Cooldown": dash_cooldown -= 2
+		"Damage 2": damage_bonus += 5
+		"Health 2": maxHealth += 20
+		"Extra Throwing Star": extra_attacks += 1
+		"Extra Throwing Star 2": extra_attacks += 1
+		"Increase Throw Rate": throw_rate += 0.2
+		"Item Drop": item_drop += 1
+		"Enemy Slowdown": enemy_speed += 25
 
 func attack_animation(direction, cooldown):
 	attack_direction = rad_to_deg(direction.angle())
@@ -246,7 +257,17 @@ func _on_the_rat_area_2d_area_entered(area):
 		$Invinciblilty.start(invincibility_time)
 		knocked_back = true
 		invincible = true
-
+	elif (area.get_name().begins_with("WizardBall")):
+		var enemy = area
+		damage_rat(enemy.damage)
+		var direction = (enemy.position - position).normalized() * 100
+		knockback_direction = -direction.normalized() 
+		$KnockbackTimer.start(0.2)
+		$Invinciblilty.start(invincibility_time)
+		knocked_back = true
+		invincible = true
+		print('hit')
+		
 func _on_area_2d_body_entered(body):
 	print(body)
 
