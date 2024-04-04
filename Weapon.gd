@@ -28,6 +28,7 @@ func _process(_delta):
 		fire()
 
 func fire():
+
 	attack = attack_scene.instantiate()
 
 	attack.damage = damage + rat.damage_bonus
@@ -40,8 +41,9 @@ func fire():
 	print(position)
 
 	timed_out = true
+
 	$Timer.start(rate_of_fire)
-	
+
 func _on_damageboost_timeout():
 	damage = original_damage
 
