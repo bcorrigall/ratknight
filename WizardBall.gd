@@ -20,6 +20,4 @@ func _on_timer_timeout():
 
 func _on_area_entered(area):
 	if(area.get_name().begins_with("theRatArea2D")):
-		var enemy = area.get_parent()
-		enemy.damage_rat(damage)
 		queue_free()

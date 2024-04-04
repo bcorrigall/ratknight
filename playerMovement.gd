@@ -255,7 +255,17 @@ func _on_the_rat_area_2d_area_entered(area):
 		$Invinciblilty.start(invincibility_time)
 		knocked_back = true
 		invincible = true
-
+	elif (area.get_name().begins_with("WizardBall")):
+		var enemy = area
+		damage_rat(enemy.damage)
+		var direction = (enemy.position - position).normalized() * 100
+		knockback_direction = -direction.normalized() 
+		$KnockbackTimer.start(0.2)
+		$Invinciblilty.start(invincibility_time)
+		knocked_back = true
+		invincible = true
+		print('hit')
+		
 func _on_area_2d_body_entered(body):
 	print(body)
 
