@@ -16,3 +16,13 @@ func _ready():
 func _process(delta):
 	heart_container.setMaxHeart($theRat.maxHealth)
 	heart_container.updateHearts($theRat.health)
+
+
+func _on_skill_tree_closed(): #
+	get_tree().paused = false
+	pass # Replace with function body.
+
+
+func _on_skill_tree_opened():
+	get_tree().paused = true
+	pass # Replace with function body.
