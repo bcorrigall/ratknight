@@ -182,6 +182,10 @@ tracks/0/keys = {
 "values": [Color(1, 0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_xha0f"]
+resource_name = "death"
+length = 0.7
+
 [sub_resource type="Animation" id="Animation_1qevy"]
 resource_name = "gethurt"
 length = 0.4
@@ -198,10 +202,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 0, 0, 0.639216), Color(1, 1, 1, 1)]
 }
-
-[sub_resource type="Animation" id="Animation_xha0f"]
-resource_name = "death"
-length = 0.7
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r6nxe"]
 _data = {

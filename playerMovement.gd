@@ -40,9 +40,11 @@ var invincibility_time = 0.15
 var screen_size
 
 var level = 1
+signal levelup
 var skill_points = 0
 var experience = 0
 var experience_to_next = 100
+signal exp
 var skill_buttons
 
 var damage_bonus = 0
@@ -291,16 +293,21 @@ func _on_area_2d_body_entered(body):
 
 func earn_experience(bonus):
 	experience += bonus
+	exp.emit()
 	if (experience >= experience_to_next):
 		level_up()
 
+
 func level_up():
+	
 	while(experience >= experience_to_next):
 		skill_points += level
 		level += 1
 		experience -= experience_to_next
 		experience_to_next = calculate_experience()
-		print("now level " + str(level))
+		#print("now level " + str(level))
+		exp.emit()
+		levelup.emit()
 
 func calculate_experience():
 	return experience_to_next + (level * 100)

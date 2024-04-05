@@ -28,6 +28,8 @@ var deltax=0# for the shake
 var isDead=false
 var dropitem=false
 
+
+
 @export var experience = 150
 
 func _ready():
