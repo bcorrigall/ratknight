@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://s3hes6771ca4"]
+[gd_scene load_steps=13 format=3 uid="uid://s3hes6771ca4"]
 
 [ext_resource type="Script" path="res://trap.gd" id="1_exj36"]
-[ext_resource type="Texture2D" uid="uid://bl02ai1mt7x88" path="res://assets/SwordStroke.png" id="2_5xv1x"]
+[ext_resource type="Texture2D" uid="uid://x4lyvywjns0d" path="res://assets/FX/Fire.png" id="2_ew5n6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0oxnu"]
 radius = 30.0
@@ -10,6 +10,63 @@ height = 98.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lfd7g"]
 radius = 31.0
 height = 96.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghjcs"]
+atlas = ExtResource("2_ew5n6")
+region = Rect2(8, 0, 8, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwlwu"]
+atlas = ExtResource("2_ew5n6")
+region = Rect2(16, 0, 8, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmbbs"]
+atlas = ExtResource("2_ew5n6")
+region = Rect2(24, 0, 8, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6srb1"]
+atlas = ExtResource("2_ew5n6")
+region = Rect2(32, 0, 8, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2m7vk"]
+atlas = ExtResource("2_ew5n6")
+region = Rect2(40, 0, 8, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_327kf"]
+atlas = ExtResource("2_ew5n6")
+region = Rect2(48, 0, 8, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t223j"]
+atlas = ExtResource("2_ew5n6")
+region = Rect2(56, 0, 8, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_etq3i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ghjcs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nwlwu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dmbbs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6srb1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2m7vk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_327kf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t223j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
 
 [node name="Trap" type="CharacterBody2D"]
 script = ExtResource("1_exj36")
@@ -27,4 +84,14 @@ one_way_collision = true
 one_way_collision_margin = 0.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_5xv1x")
+texture_filter = 3
+position = Vector2(-1.375, 8.78572)
+scale = Vector2(5.82143, 5.96429)
+texture = ExtResource("2_ew5n6")
+hframes = 12
+frame = 4
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D"]
+position = Vector2(1.43865, -3.31737)
+scale = Vector2(1.53873, 1.53873)
+sprite_frames = SubResource("SpriteFrames_etq3i")
