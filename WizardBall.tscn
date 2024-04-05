@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://c25v14f3cr2il"]
+
+[ext_resource type="Script" path="res://WizardBall.gd" id="1_quy03"]
+[ext_resource type="Texture2D" uid="uid://bgedj0hkpe1k" path="res://assets/star/star.png" id="2_uuxvo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ts8xw"]
+
+[node name="WizardBall" type="Area2D"]
+script = ExtResource("1_quy03")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ts8xw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_uuxvo")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

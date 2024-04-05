@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://d17bi3rq3knuv"]
+
+[ext_resource type="Script" path="res://Camera2D.gd" id="1_rkpda"]
+
+[node name="Camera2D" type="Camera2D"]
+position = Vector2(573, 324)
+script = ExtResource("1_rkpda")
