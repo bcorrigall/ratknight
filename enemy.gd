@@ -2,7 +2,8 @@ extends CharacterBody2D
 
 
 @export var SPEED = 125
-@export var health = 10
+@export var health = 100
+@export var maxhealth=100
 @export var damage = 5
 
 var playerposition
@@ -16,6 +17,7 @@ var targetposition
 @onready var movineAnimation= $AnimatedSprite2D
 @onready var coli=$CollisionShape2D
 @onready var coli2=$HurtBox/CollisionShape2D
+@onready var HPbar=$HPbar
 
 
 var jerk_time = 1
@@ -35,6 +37,7 @@ var dropitem=false
 func _ready():
 	$JerkTimer.start(jerk_time)
 	deathAnimation.visible = false
+	HPbar.visible=false
 
 func _physics_process(delta):
 	if isDead:pass
@@ -100,6 +103,7 @@ func death():
 
 	movineAnimation.visible=false
 	deathAnimation.visible = true
+	HPbar.visible=false
 	coli.disabled=true
 	coli2.disabled=true
 	deathAnimation.play("default")
@@ -127,6 +131,8 @@ func get_damage():
 	shake._process(deltax)
 	shake.shake_false()
 	$Timer.start(0.4)
+	HPbar.visible=true
+	HPbar.update()
 	if(health <= 0):
 		death()
 		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bd1rvmtjug7o8"]
+[gd_scene load_steps=53 format=3 uid="uid://bd1rvmtjug7o8"]
 
 [ext_resource type="Script" path="res://enemy.gd" id="1_4tbc6"]
 [ext_resource type="Texture2D" uid="uid://blnakttrwrjas" path="res://assets/enemies/antFighter/attack(side)/0.png" id="2_cyluj"]
@@ -33,6 +33,9 @@
 [ext_resource type="Texture2D" uid="uid://ded4e7gg4lnu7" path="res://assets/enemies/antFighter/move_side/8.png" id="24_fxfxy"]
 [ext_resource type="Script" path="res://AnimatedSprite2D.gd" id="32_d6bso"]
 [ext_resource type="Script" path="res://death.gd" id="33_u675q"]
+[ext_resource type="Texture2D" uid="uid://c3nx1phybkg8t" path="res://assets/GUI/LifeBarMiniUnder.png" id="34_xkxbr"]
+[ext_resource type="Texture2D" uid="uid://c6i7jwkakmuqx" path="res://assets/GUI/LifeBarMiniProgress.png" id="35_7mqao"]
+[ext_resource type="Script" path="res://HPbar.gd" id="36_cg8ur"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1gqbj"]
 animations = [{
@@ -319,6 +322,17 @@ sprite_frames = SubResource("SpriteFrames_vg07h")
 frame = 1
 frame_progress = 0.367698
 script = ExtResource("33_u675q")
+
+[node name="HPbar" type="TextureProgressBar" parent="."]
+texture_filter = 3
+offset_left = -31.0
+offset_top = -68.0
+offset_right = -13.0
+offset_bottom = -64.0
+scale = Vector2(3.64446, 2.1926)
+texture_under = ExtResource("34_xkxbr")
+texture_progress = ExtResource("35_7mqao")
+script = ExtResource("36_cg8ur")
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
