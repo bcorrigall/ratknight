@@ -29,6 +29,7 @@ func _process(_delta):
 
 func fire():
 	var attacks = get_parent().extra_attacks + 1 
+	timed_out = true
 	while attacks > 0:
 		attack = attack_scene.instantiate()
 
@@ -41,8 +42,8 @@ func fire():
 		print(attack.position)
 		print(position)
 		
-		timed_out = true
-		await get_tree().create_timer(0.2).timeout
+		
+		await get_tree().create_timer(0.1).timeout
 		attacks = attacks - 1
 		print(attacks)
 	
