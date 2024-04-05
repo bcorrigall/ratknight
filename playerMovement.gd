@@ -8,6 +8,7 @@ var real_speed = speed
 @onready var animations = $AnimationPlayer
 @onready var weapon = $Weapon
 
+
 var health = 120
 var trap_slowdown = 1
 

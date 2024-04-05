@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 @export var SPEED = 125
-@export var health = 100
+@export var health = 10
 @export var damage = 5
 
 var playerposition
@@ -12,6 +12,11 @@ var targetposition
 @export var Item = preload("res://item.tscn")
 @onready var effects = $Effect
 @onready var shake = get_parent().get_node("Camera2D")
+@onready var deathAnimation= $death
+@onready var movineAnimation= $AnimatedSprite2D
+@onready var coli=$CollisionShape2D
+@onready var coli2=$HurtBox/CollisionShape2D
+
 
 var jerk_time = 1
 var jerk_lower_bound = -0.2
@@ -20,13 +25,17 @@ var noise = Vector2(randf_range(jerk_lower_bound, jerk_upper_bound), randf_range
 var speed_boost = 0
 var attacking = false
 var deltax=0# for the shake
+var isDead=false
+var dropitem=false
 
 @export var experience = 150
 
 func _ready():
 	$JerkTimer.start(jerk_time)
+	deathAnimation.visible = false
 
 func _physics_process(delta):
+	if isDead:pass
 	deltax=delta#store the value for shake
 	playerposition = player.position
 	targetposition = (playerposition - position).normalized()
@@ -69,25 +78,36 @@ func _physics_process(delta):
 		$AnimatedSprite2D.play()
 		
 	if health < 1:
+
 		death()
 
 func death():
 	#animation stuff
 	randomize()
 	var type = 1
-	if(type == 1):
-		var mob = Item.instantiate()
-		print(mob)
-		get_parent().add_child(mob)
-		mob.set_animation(type)
+	if dropitem==false:
+		if(type == 1):
+			var mob = Item.instantiate()
+			print(mob)
+			get_parent().add_child(mob)
+			mob.set_animation(type)
 
-		mob.position = global_position
-		player.earn_experience(experience)
+			mob.position = global_position
+			player.earn_experience(experience)
+			dropitem=true
 
-	queue_free()
+	movineAnimation.visible=false
+	deathAnimation.visible = true
+	coli.disabled=true
+	coli2.disabled=true
+	deathAnimation.play("default")
+	isDead=true
+	
+
 
 
 func _on_hurt_box_area_entered(area):
+	if isDead:pass
 	if(area.name.match("Sword") and area.get_parent().visible or area.name.match("AttackArea")):
 		get_damage()
 	elif(area.name.match("theRatArea2D")):
@@ -99,6 +119,7 @@ func _on_hurt_box_area_entered(area):
 		return
 
 func get_damage():
+	if isDead:pass
 	effects.play("gethurt")
 	shake.shake_change()
 	shake._process(deltax)
@@ -116,3 +137,9 @@ func _on_jerk_timer_timeout():
 
 func _on_attack_timer_timeout():
 	attacking = false
+	
+func _on_death_animation_finished():
+	deathAnimation.visible = false
+	queue_free()
+
+	
