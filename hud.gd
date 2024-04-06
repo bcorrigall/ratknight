@@ -3,6 +3,9 @@ extends CanvasLayer
 @onready var skilltree= $SkillTree
 @onready var player=$"../theRat"
 @onready var pow_animation=$pow_icon
+@onready var killtimer=$KillTimer
+@onready var kill_panel=$killcomble
+@onready var kill_com=$killcomble/kill
 
 func _input(event):
 	if event.is_action_pressed("level"): #new close and open fuction
@@ -57,8 +60,28 @@ func _on_the_rat_endpow():
 
 
 func update_kill():
+	if(player.killcomble>0):
+		setKill()
+	
+		
+func setKill():
+	if !killtimer.is_stopped():
+		killtimer.stop()
+	kill_panel.show()	
+	var tween = create_tween().set_ease(Tween.EASE_IN)
+	tween.tween_property(kill_com,"scale",Vector2(1,1),0.3).from(Vector2(2,2))
+	tween.parallel().tween_property(kill_com,"modulate",Color.TOMATO,0.3)
+	tween.parallel().tween_property(kill_com,"modulate",Color('#fff381'),0.3).set_delay
 	$killcomble/kill.text = 'KILL %s !!!' %player.killcomble
+	killtimer.start()
+	
 	
 func _on_the_rat_kill():
 	update_kill()
+	pass # Replace with function body.
+
+
+func _on_kill_timer_timeout():
+	player.killcomble=0
+	kill_panel.hide()
 	pass # Replace with function body.

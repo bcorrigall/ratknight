@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ck24t8ix5ipiv"]
+[gd_scene load_steps=20 format=3 uid="uid://ck24t8ix5ipiv"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kb2s1"]
 [ext_resource type="PackedScene" uid="uid://ct7akgrsmoosc" path="res://the_rat.tscn" id="2_fgrnw"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://d17bi3rq3knuv" path="res://camera_2d.tscn" id="8_kjvnh"]
 [ext_resource type="Script" path="res://ExperienceBar.gd" id="8_rlkhw"]
 [ext_resource type="Texture2D" uid="uid://ctjdp7k6mx3pw" path="res://assets/icon/attack_boost.png" id="9_aaiqu"]
+[ext_resource type="Script" path="res://killtime.gd" id="10_n8wol"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hf4va"]
 texture = ExtResource("3_f0uep")
@@ -199,6 +200,7 @@ libraries = {
 }
 
 [node name="killcomble" type="Panel" parent="HUD"]
+visible = false
 self_modulate = Color(1, 1, 1, 0)
 anchors_preset = -1
 anchor_left = 1.0
@@ -218,7 +220,17 @@ offset_bottom = 23.0
 theme_override_font_sizes/font_size = 100
 text = "Kill 1 !!!"
 
+[node name="killtime" type="ProgressBar" parent="HUD/killcomble"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 118.0
+offset_right = 332.0
+offset_bottom = 132.0
+show_percentage = false
+script = ExtResource("10_n8wol")
+
 [node name="KillTimer" type="Timer" parent="HUD"]
+wait_time = 10.0
 
 [node name="Item" parent="." instance=ExtResource("6_ebi3h")]
 position = Vector2(319, 204)
@@ -238,6 +250,7 @@ position = Vector2(638, 198)
 [connection signal="playpow" from="theRat" to="HUD" method="_on_the_rat_playpow"]
 [connection signal="closed" from="HUD/SkillTree" to="." method="_on_skill_tree_closed"]
 [connection signal="opened" from="HUD/SkillTree" to="." method="_on_skill_tree_opened"]
+[connection signal="timeout" from="HUD/KillTimer" to="HUD" method="_on_kill_timer_timeout"]
 
 [editable path="HUD"]
 [editable path="enemySpawner"]
