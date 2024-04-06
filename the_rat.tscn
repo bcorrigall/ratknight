@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://ct7akgrsmoosc"]
+[gd_scene load_steps=95 format=3 uid="uid://ct7akgrsmoosc"]
 
 [ext_resource type="Script" path="res://playerMovement.gd" id="1_8mm2x"]
 [ext_resource type="Texture2D" uid="uid://btsxflqogrgjs" path="res://assets/theRat/Attack_back/1.png" id="2_ttg8v"]
@@ -85,6 +85,9 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vciue"]
 radius = 133.333
 height = 600.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v3sbl"]
+radius = 573.488
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_63iob"]
 animations = [{
@@ -661,10 +664,14 @@ scale = Vector2(0.15, 0.15)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="theRatArea2D"]
 shape = SubResource("CapsuleShape2D_vciue")
 
+[node name="dashArea" type="CollisionShape2D" parent="theRatArea2D"]
+shape = SubResource("CircleShape2D_v3sbl")
+disabled = true
+
 [node name="playerSprites" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_63iob")
-animation = &"knocked_back"
+animation = &"dash_back"
 
 [node name="playerMovement" type="CharacterBody2D" parent="."]
 

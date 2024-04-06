@@ -198,6 +198,28 @@ libraries = {
 "": SubResource("AnimationLibrary_hs72j")
 }
 
+[node name="killcomble" type="Panel" parent="HUD"]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.966
+anchor_bottom = 0.152
+offset_left = 560.0
+offset_top = 220.0
+offset_right = -242.832
+offset_bottom = 281.504
+grow_horizontal = 0
+size_flags_horizontal = 8
+
+[node name="kill" type="Label" parent="HUD/killcomble"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 100
+text = "Kill 1 !!!"
+
+[node name="KillTimer" type="Timer" parent="HUD"]
+
 [node name="Item" parent="." instance=ExtResource("6_ebi3h")]
 position = Vector2(319, 204)
 
@@ -211,9 +233,11 @@ position = Vector2(638, 198)
 [connection signal="endpow" from="theRat" to="HUD" method="_on_the_rat_endpow"]
 [connection signal="exp" from="theRat" to="HUD" method="_on_the_rat_exp"]
 [connection signal="exp" from="theRat" to="HUD/ExperienceBar" method="_on_the_rat_exp"]
+[connection signal="kill" from="theRat" to="HUD" method="_on_the_rat_kill"]
 [connection signal="levelup" from="theRat" to="HUD" method="_on_the_rat_levelup"]
 [connection signal="playpow" from="theRat" to="HUD" method="_on_the_rat_playpow"]
 [connection signal="closed" from="HUD/SkillTree" to="." method="_on_skill_tree_closed"]
 [connection signal="opened" from="HUD/SkillTree" to="." method="_on_skill_tree_opened"]
 
 [editable path="HUD"]
+[editable path="enemySpawner"]

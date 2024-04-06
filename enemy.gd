@@ -32,6 +32,7 @@ var dropitem=false
 
 
 
+
 @export var experience = 150
 
 func _ready():
@@ -99,6 +100,7 @@ func death():
 
 			mob.position = global_position
 			player.earn_experience(experience)
+			player.earn_kill()
 			dropitem=true
 
 	movineAnimation.visible=false
@@ -109,6 +111,7 @@ func death():
 	coli2.disabled=true
 	deathAnimation.play("default")
 	isDead=true
+
 	
 
 
@@ -116,7 +119,7 @@ func death():
 func _on_hurt_box_area_entered(area):
 	if isDead:pass
 	if(area.name.match("Sword") and area.get_parent().visible or area.name.match("AttackArea")):
-		get_damage()
+		get_damage(area)
 	elif(area.name.match("theRatArea2D")):
 		$AttackTimer.start(0.2)
 		$AnimatedSprite2D.animation = "attack_side"
@@ -125,12 +128,22 @@ func _on_hurt_box_area_entered(area):
 	else:
 		return
 
-func get_damage():
+func shakey(area):
+	if area is String:
+		shake._hit(Vector2(0.950,0.950),Vector2(7,-9))
+		shake.frameFreeze(0.1,0.09)#camera freeze
+	elif(area.name.match("Sword")):
+		shake._hit(Vector2(0.950,0.950),Vector2(7,-9))
+		shake.frameFreeze(0.1,0.09)#camera freeze
+	else:
+		shake.shake_change()
+		shake._process(deltax)
+		shake.shake_false()
+	
+func get_damage(area):
 	if isDead:pass
 	effects.play("gethurt")
-	shake.shake_change()
-	shake._process(deltax)
-	shake.shake_false()
+	shakey(area)
 	$Timer.start(0.4)
 	HPbar.visible=true
 	HPbar.update()

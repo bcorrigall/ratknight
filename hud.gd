@@ -14,6 +14,8 @@ func _input(event):
 func _ready():
 	skilltree.close()
 	update_level()
+	update_kill()
+	update_exp()
 	pass # Replace with function body.
 
 
@@ -33,6 +35,7 @@ func update_exp():
 	$exp.text=str(player.experience)+str(" / ")+str(player.experience_to_next)
 
 
+
 func _on_the_rat_exp():
 	update_exp()
 
@@ -50,4 +53,12 @@ func _on_the_rat_playpow():
 
 func _on_the_rat_endpow():
 	pow_animation.play("RESET")
+	pass # Replace with function body.
+
+
+func update_kill():
+	$killcomble/kill.text = 'KILL %s !!!' %player.killcomble
+	
+func _on_the_rat_kill():
+	update_kill()
 	pass # Replace with function body.

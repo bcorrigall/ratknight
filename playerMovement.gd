@@ -44,11 +44,13 @@ signal levelup
 var skill_points = 0
 var experience = 0
 var experience_to_next = 100
+var killcomble=0
 signal exp
 var skill_buttons
 
 signal playpow
 signal endpow
+signal kill
 var damage_bonus = 0
 var limited_damage_bonus=0
 var defence_bonus = 0
@@ -100,6 +102,7 @@ func attack_animation(direction, cooldown):
 	$AttackTimeout.start(attack_cooldown)
 
 func dash():
+	$theRatArea2D/dashArea.disabled=false
 	if (!in_dash and !dash_timed_out and !knocked_back):
 		in_dash = true
 		$Dash.start(dash_time)
@@ -275,12 +278,16 @@ func _on_the_rat_area_2d_area_entered(area):
 		print('hit')
 		
 func _on_area_2d_body_entered(body):
-	#print(body)
+	print(body)
 
 		
 	if (body.get_name().begins_with("Enemy") and in_dash and dash_attack):
-		body.get_damage()
-		body.health -= 20
+		body.get_damage("dash")
+		body.health -= 20+damage_bonus
+	elif(body.get_name().begins_with("@CharacterBody2D") and in_dash and dash_attack):
+		body.get_damage("dash")
+		body.health -= 20+damage_bonus
+
 
 	elif (body.get_name().begins_with("Trap") and !in_dash):
 		damage_rat(body.damage)
@@ -299,7 +306,9 @@ func earn_experience(bonus):
 	exp.emit()
 	if (experience >= experience_to_next):
 		level_up()
-
+func earn_kill():
+	killcomble+=1
+	kill.emit()
 
 func level_up():
 	
@@ -346,6 +355,7 @@ func _on_dash_timeout():
 	in_dash = false
 	$playerSprites.position.x = 0
 	real_speed = speed
+	$theRatArea2D/dashArea.disabled=true
 
 func _on_invinciblilty_timeout():
 	invincible = false
