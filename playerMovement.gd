@@ -7,7 +7,7 @@ var real_speed = speed
 
 @onready var animations = $AnimationPlayer
 @onready var weapon = $Weapon
-
+@onready var effect=$Effect
 
 var health = 120
 var trap_slowdown = 1
@@ -48,6 +48,7 @@ signal exp
 var skill_buttons
 
 var damage_bonus = 0
+var limited_damage_bonus=0
 var defence_bonus = 0
 var regenerate_bonus = 0
 var regen_cap = 20
@@ -272,7 +273,7 @@ func _on_the_rat_area_2d_area_entered(area):
 		print('hit')
 		
 func _on_area_2d_body_entered(body):
-	print(body)
+	#print(body)
 
 		
 	if (body.get_name().begins_with("Enemy") and in_dash and dash_attack):
@@ -311,6 +312,32 @@ func level_up():
 
 func calculate_experience():
 	return experience_to_next + (level * 100)
+	
+func playeffect(num):
+	if num==0:
+		effect.play("powerup")
+func endeffect():
+	effect.play("RESET")
+
+func getboost(time):
+	if $boost.get_time_left()!=0: #the timer is working
+		print("timer is working")
+		$boost.start(time) #reset timer
+		damage_bonus-=limited_damage_bonus
+		limited_damage_bonus+=25
+	else:
+		$boost.start(time)
+		limited_damage_bonus+=25	
+		playeffect(0)
+
+	damage_bonus+=limited_damage_bonus
+
+
+	
+func endboost():
+	damage_bonus-=limited_damage_bonus #delete all power
+	limited_damage_bonus=0
+	endeffect()
 
 func _on_dash_timeout():
 	in_dash = false
@@ -339,3 +366,11 @@ func _on_regen_timer_timeout():
 		current_regen += regenerate_bonus
 	$RegenTimer.start(0.5)
 
+
+
+func _on_boost_timeout():
+	endboost()
+	print("end boost")
+	print("damage_bonus: "+str(damage_bonus))
+	print("damage_bonus: "+str(limited_damage_bonus))
+	$boost.stop()

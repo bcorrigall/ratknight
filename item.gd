@@ -10,7 +10,7 @@ func _ready():
 
 func set_animation(item):
 	if(item <= 2):
-		$ItemSprite.animation = "Guy"
+		$ItemSprite.animation = "Pow"
 	if(item > 2):
 		$ItemSprite.animation = "Heart"
 
@@ -21,21 +21,24 @@ func _process(delta):
 func _on_area_entered(area):
 	if(area.name.match("theRatArea2D")):
 		var the_rat = area.get_parent()
-		print("what's going on")
+		#print("what's going on")
 		if(type >= 3):
 			the_rat.health += 20
 			if(the_rat.maxHealth < the_rat.health):
 				the_rat.health = the_rat.maxHealth
-			print("healed")
+			#print("healed")
 
 		if(type <= 2):
 			var timer = get_node("../theRat/Weapon/Damageboost")
-			the_rat.damage_bonus += 25
-			print("damage boost")
-			$BoostTimer.start(5)
+			the_rat.getboost(5)
+			#the_rat.damage_bonus += 25
+			#print("damage boost")
+			#$BoostTimer.start(5)
 
 		queue_free()
 
 func _on_boost_timer_timeout():
 	var the_rat = get_node("../theRat")
-	the_rat.damage_bonus -= 25
+	#the_rat.damage_bonus -= 25
+	#print("time is out!")
+	the_rat.endeffect(0)

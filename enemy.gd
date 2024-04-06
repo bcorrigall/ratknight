@@ -93,7 +93,7 @@ func death():
 	if dropitem==false:
 		if(type == 1):
 			var mob = Item.instantiate()
-			print(mob)
+			#print(mob)
 			get_parent().add_child(mob)
 			mob.set_animation(type)
 
