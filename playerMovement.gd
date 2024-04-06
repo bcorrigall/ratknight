@@ -48,6 +48,7 @@ var killcomble=0
 signal exp
 var skill_buttons
 
+signal gameover
 signal playpow
 signal endpow
 signal kill
@@ -251,9 +252,11 @@ func attack_spin():
 		weapon.disable()
 
 func death():
+	gameover.emit()
 	var simultaneous_scene = load("res://main_menu.tscn").instantiate()
 	get_node("/root/Main").queue_free()
 	get_tree().root.add_child(simultaneous_scene)
+	simultaneous_scene.game_over()
 
 func _on_the_rat_area_2d_area_entered(area):
 	if (area.get_name().begins_with("HurtBox") and invincible == false and in_dash == false):

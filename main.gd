@@ -4,6 +4,7 @@ var heart_container
 var skill_buttons
 var kill_number=0
 func _ready():
+	$Background.play()
 	heart_container = hud.get_node("HeartContainer")
 	heart_container.setMaxHeart($theRat.maxHealth)
 	heart_container.updateHearts($theRat.health)
@@ -26,4 +27,9 @@ func _on_skill_tree_closed(): #
 
 func _on_skill_tree_opened():
 	get_tree().paused = true
+	pass # Replace with function body.
+
+
+func _on_the_rat_gameover():
+	$Background.stop()
 	pass # Replace with function body.
