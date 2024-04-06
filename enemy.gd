@@ -102,6 +102,7 @@ func death():
 			dropitem=true
 
 	movineAnimation.visible=false
+	effects.pause()
 	deathAnimation.visible = true
 	HPbar.visible=false
 	coli.disabled=true
