@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ck24t8ix5ipiv"]
+[gd_scene load_steps=19 format=3 uid="uid://ck24t8ix5ipiv"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kb2s1"]
 [ext_resource type="PackedScene" uid="uid://ct7akgrsmoosc" path="res://the_rat.tscn" id="2_fgrnw"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dfca0t804oegk" path="res://enemy_spawner.tscn" id="8_hi4nx"]
 [ext_resource type="PackedScene" uid="uid://d17bi3rq3knuv" path="res://camera_2d.tscn" id="8_kjvnh"]
 [ext_resource type="Script" path="res://ExperienceBar.gd" id="8_rlkhw"]
+[ext_resource type="Texture2D" uid="uid://ctjdp7k6mx3pw" path="res://assets/icon/attack_boost.png" id="9_aaiqu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hf4va"]
 texture = ExtResource("3_f0uep")
@@ -28,6 +29,91 @@ texture_region_size = Vector2i(10, 10)
 [sub_resource type="TileSet" id="TileSet_bbco1"]
 tile_size = Vector2i(10, 10)
 sources/0 = SubResource("TileSetAtlasSource_hf4va")
+
+[sub_resource type="Animation" id="Animation_x21ry"]
+resource_name = "pow_timer"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_aaiqu")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_qp3jh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_aaiqu")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hs72j"]
+_data = {
+"RESET": SubResource("Animation_qp3jh"),
+"pow_timer": SubResource("Animation_x21ry")
+}
 
 [node name="Main" type="Node"]
 script = ExtResource("1_kb2s1")
@@ -99,6 +185,19 @@ theme_override_font_sizes/font_size = 72
 horizontal_alignment = 2
 vertical_alignment = 1
 
+[node name="pow" type="Sprite2D" parent="HUD"]
+self_modulate = Color(1, 1, 1, 0)
+texture_filter = 3
+position = Vector2(2144, 110)
+scale = Vector2(11.8125, 11.8125)
+texture = ExtResource("9_aaiqu")
+
+[node name="pow_icon" type="AnimationPlayer" parent="HUD"]
+root_node = NodePath("../pow")
+libraries = {
+"": SubResource("AnimationLibrary_hs72j")
+}
+
 [node name="Item" parent="." instance=ExtResource("6_ebi3h")]
 position = Vector2(319, 204)
 
@@ -109,9 +208,11 @@ position = Vector2(638, 198)
 
 [node name="Camera2D" parent="." instance=ExtResource("8_kjvnh")]
 
+[connection signal="endpow" from="theRat" to="HUD" method="_on_the_rat_endpow"]
 [connection signal="exp" from="theRat" to="HUD" method="_on_the_rat_exp"]
 [connection signal="exp" from="theRat" to="HUD/ExperienceBar" method="_on_the_rat_exp"]
 [connection signal="levelup" from="theRat" to="HUD" method="_on_the_rat_levelup"]
+[connection signal="playpow" from="theRat" to="HUD" method="_on_the_rat_playpow"]
 [connection signal="closed" from="HUD/SkillTree" to="." method="_on_skill_tree_closed"]
 [connection signal="opened" from="HUD/SkillTree" to="." method="_on_skill_tree_opened"]
 

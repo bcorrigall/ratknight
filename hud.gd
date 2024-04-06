@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @onready var skilltree= $SkillTree
 @onready var player=$"../theRat"
+@onready var pow_animation=$pow_icon
 
 func _input(event):
 	if event.is_action_pressed("level"): #new close and open fuction
@@ -34,3 +35,19 @@ func update_exp():
 
 func _on_the_rat_exp():
 	update_exp()
+
+
+func _on_the_rat_playpow():
+	
+	if pow_animation.is_playing():
+		print("replay!")
+		pow_animation.stop()
+		pow_animation.play("pow_timer")
+	else:
+		pow_animation.play("pow_timer")
+	
+
+
+func _on_the_rat_endpow():
+	pow_animation.play("RESET")
+	pass # Replace with function body.

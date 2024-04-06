@@ -41,4 +41,4 @@ func _on_boost_timer_timeout():
 	var the_rat = get_node("../theRat")
 	#the_rat.damage_bonus -= 25
 	#print("time is out!")
-	the_rat.endeffect(0)
+	#the_rat.endeffect(0)

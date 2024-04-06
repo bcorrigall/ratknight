@@ -47,6 +47,8 @@ var experience_to_next = 100
 signal exp
 var skill_buttons
 
+signal playpow
+signal endpow
 var damage_bonus = 0
 var limited_damage_bonus=0
 var defence_bonus = 0
@@ -329,7 +331,7 @@ func getboost(time):
 		$boost.start(time)
 		limited_damage_bonus+=25	
 		playeffect(0)
-
+	playpow.emit()
 	damage_bonus+=limited_damage_bonus
 
 
@@ -337,6 +339,7 @@ func getboost(time):
 func endboost():
 	damage_bonus-=limited_damage_bonus #delete all power
 	limited_damage_bonus=0
+	endpow.emit()
 	endeffect()
 
 func _on_dash_timeout():
@@ -370,7 +373,7 @@ func _on_regen_timer_timeout():
 
 func _on_boost_timeout():
 	endboost()
-	print("end boost")
-	print("damage_bonus: "+str(damage_bonus))
-	print("damage_bonus: "+str(limited_damage_bonus))
+	#print("end boost")
+	#print("damage_bonus: "+str(damage_bonus))
+	#print("damage_bonus: "+str(limited_damage_bonus))
 	$boost.stop()

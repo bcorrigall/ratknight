@@ -7,7 +7,7 @@ var direction = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print("bullet")
+	#print("bullet")
 	$Timer.start(0.7)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -21,6 +21,7 @@ func _on_timer_timeout():
 func _on_attack_area_area_entered(area):
 	if(area.get_name().begins_with("HurtBox")):
 		var enemy = area.get_parent()
+		print("damage: "+str(damage))
 		print(enemy.health)
 		enemy.health = enemy.health - damage
 		print(enemy.health)
