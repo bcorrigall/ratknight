@@ -1,16 +1,21 @@
-[gd_scene load_steps=12 format=3 uid="uid://b2cs314jvy2yy"]
+[gd_scene load_steps=15 format=3 uid="uid://b2cs314jvy2yy"]
 
 [ext_resource type="Script" path="res://skill_tree.gd" id="1_5vrhb"]
 [ext_resource type="PackedScene" uid="uid://bqbswfmau18k" path="res://skill.tscn" id="1_6550d"]
-[ext_resource type="Texture2D" uid="uid://cepayxeh2frtq" path="res://assets/theRat/Attack_side/4.png" id="3_0mmol"]
-[ext_resource type="Texture2D" uid="uid://iumpcg2um3l4" path="res://assets/hearts/heart_4_4.png" id="4_fen5n"]
-[ext_resource type="Texture2D" uid="uid://c2qalgdxo80qu" path="res://assets/theRat/Dash_side/5.png" id="5_43j6v"]
-[ext_resource type="Texture2D" uid="uid://bgedj0hkpe1k" path="res://assets/star/star.png" id="5_76roj"]
-[ext_resource type="Texture2D" uid="uid://cggfa4wneg0cg" path="res://assets/theRat/Dash_front/3.png" id="6_v72ha"]
-[ext_resource type="Texture2D" uid="uid://dipydihua6r5g" path="res://assets/theRat/Attack_side/5.png" id="6_xrlel"]
-[ext_resource type="Texture2D" uid="uid://defvc1d3620n3" path="res://assets/theRat/Move_side/10.png" id="7_427xq"]
-[ext_resource type="Texture2D" uid="uid://bbwf02pl0ug6c" path="res://assets/theRat/Move_side/14.png" id="8_oxqx1"]
-[ext_resource type="Texture2D" uid="uid://cqdoiiqvva0yj" path="res://assets/AntMage/left/1.png" id="11_7kvx0"]
+[ext_resource type="Texture2D" uid="uid://ctjdp7k6mx3pw" path="res://assets/icon/attack_boost.png" id="3_q6oxy"]
+[ext_resource type="Texture2D" uid="uid://dlhek3nuccvjn" path="res://assets/icon/defense_boost.png" id="4_apfcp"]
+[ext_resource type="Texture2D" uid="uid://ddiilvg3gvk3o" path="res://assets/icon/heart.png" id="5_unnv7"]
+[ext_resource type="Texture2D" uid="uid://bwojx27q0q4ki" path="res://assets/icon/regeneration.png" id="6_cojlb"]
+[ext_resource type="Texture2D" uid="uid://ckgch58v550rl" path="res://assets/icon/Shuriken.png" id="7_sfqvj"]
+[ext_resource type="Texture2D" uid="uid://d2bx4835mq1ir" path="res://assets/icon/swiftness.png" id="8_58thj"]
+[ext_resource type="Texture2D" uid="uid://cqkjlb8nmafpe" path="res://assets/icon/spead2.png" id="9_xlmea"]
+[ext_resource type="Texture2D" uid="uid://dluh4oaejroo7" path="res://assets/icon/lucky_boost.png" id="10_jid5n"]
+[ext_resource type="Texture2D" uid="uid://dtvi1q76d71vx" path="res://assets/icon/cooldown.png" id="11_vu28u"]
+[ext_resource type="Texture2D" uid="uid://dw62o8krm7nmm" path="res://assets/icon/dash_attack.png" id="12_jvycv"]
+[ext_resource type="Texture2D" uid="uid://ck5qt71wkqahx" path="res://assets/icon/slowed.png" id="13_oyc3b"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v6k06"]
+load_path = "res://.godot/imported/attack_boost.png-a237031f644aeeb48f0c86601e52a692.ctex"
 
 [node name="SkillTree" type="Control"]
 layout_mode = 3
@@ -33,6 +38,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Skill" parent="Panel" instance=ExtResource("1_6550d")]
+texture_filter = 3
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -42,7 +48,7 @@ offset_top = 37.0
 offset_right = 51.0
 offset_bottom = 137.0
 grow_horizontal = 2
-texture_normal = ExtResource("3_0mmol")
+texture_normal = ExtResource("3_q6oxy")
 skill_name = "Damage"
 
 [node name="Skill" parent="Panel/Skill" instance=ExtResource("1_6550d")]
@@ -56,6 +62,7 @@ offset_right = -230.0
 offset_bottom = 261.0
 grow_horizontal = 2
 disabled = true
+texture_normal = ExtResource("4_apfcp")
 skill_name = "Defence"
 skill_cost = 2
 
@@ -70,7 +77,7 @@ offset_right = -102.0
 offset_bottom = 257.0
 grow_horizontal = 2
 disabled = true
-texture_normal = ExtResource("4_fen5n")
+texture_normal = ExtResource("5_unnv7")
 skill_name = "Health"
 skill_cost = 2
 
@@ -85,7 +92,7 @@ offset_right = -26.0
 offset_bottom = 243.0
 grow_horizontal = 2
 disabled = true
-texture_normal = ExtResource("4_fen5n")
+texture_normal = ExtResource("5_unnv7")
 skill_name = "Health 2"
 skill_cost = 3
 
@@ -100,7 +107,7 @@ offset_right = 122.0
 offset_bottom = 243.0
 grow_horizontal = 2
 disabled = true
-texture_normal = ExtResource("4_fen5n")
+texture_normal = ExtResource("6_cojlb")
 skill_name = "Regenerate"
 skill_cost = 5
 
@@ -115,7 +122,7 @@ offset_right = 193.0
 offset_bottom = 260.0
 grow_horizontal = 2
 disabled = true
-texture_normal = ExtResource("5_76roj")
+texture_normal = ExtResource("7_sfqvj")
 skill_name = "Extra Throwing Star"
 skill_cost = 4
 
@@ -130,7 +137,7 @@ offset_right = -18.0
 offset_bottom = 239.0
 grow_horizontal = 2
 disabled = true
-texture_normal = ExtResource("5_76roj")
+texture_normal = ExtResource("7_sfqvj")
 skill_name = "Increase Throw Rate"
 skill_cost = 3
 
@@ -145,7 +152,7 @@ offset_right = 129.0
 offset_bottom = 238.0
 grow_horizontal = 2
 disabled = true
-texture_normal = ExtResource("5_76roj")
+texture_normal = ExtResource("7_sfqvj")
 skill_name = "Extra Throwing Star 2"
 skill_cost = 5
 
@@ -160,7 +167,7 @@ offset_right = 359.0
 offset_bottom = 250.0
 grow_horizontal = 2
 disabled = true
-texture_normal = ExtResource("6_v72ha")
+texture_normal = ExtResource("8_58thj")
 skill_name = "Speed"
 skill_cost = 2
 
@@ -175,7 +182,7 @@ offset_right = -100.0
 offset_bottom = 265.0
 grow_horizontal = 2
 disabled = true
-texture_normal = ExtResource("7_427xq")
+texture_normal = ExtResource("9_xlmea")
 skill_name = "Dash Speed"
 skill_cost = 3
 
@@ -190,6 +197,7 @@ offset_right = 115.0
 offset_bottom = 245.0
 grow_horizontal = 2
 disabled = true
+texture_normal = ExtResource("10_jid5n")
 skill_name = "Item Drops"
 skill_cost = 3
 
@@ -204,7 +212,7 @@ offset_right = -20.0
 offset_bottom = 244.0
 grow_horizontal = 2
 disabled = true
-texture_normal = ExtResource("8_oxqx1")
+texture_normal = ExtResource("11_vu28u")
 skill_name = "Dash Cooldown"
 skill_cost = 5
 
@@ -219,7 +227,7 @@ offset_right = 179.0
 offset_bottom = 260.0
 grow_horizontal = 2
 disabled = true
-texture_normal = ExtResource("5_43j6v")
+texture_normal = ExtResource("12_jvycv")
 skill_name = "Dash Attack"
 skill_cost = 6
 
@@ -234,7 +242,7 @@ offset_right = 115.0
 offset_bottom = 252.0
 grow_horizontal = 2
 disabled = true
-texture_normal = ExtResource("6_xrlel")
+texture_normal = SubResource("CompressedTexture2D_v6k06")
 skill_name = "Damage 2"
 skill_cost = 5
 
@@ -249,15 +257,17 @@ offset_right = -26.0
 offset_bottom = 252.0
 grow_horizontal = 2
 disabled = true
-texture_normal = ExtResource("11_7kvx0")
+texture_normal = ExtResource("13_oyc3b")
 skill_name = "Enemy Slowdown"
 skill_cost = 5
 
 [node name="SkillPoints" type="RichTextLabel" parent="."]
+texture_filter = 3
 layout_mode = 0
 offset_left = 77.0
 offset_top = 55.0
 offset_right = 356.0
 offset_bottom = 115.0
+theme_override_font_sizes/normal_font_size = 42
 text = "0 level points"
 scroll_active = false

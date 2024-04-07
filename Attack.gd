@@ -21,8 +21,8 @@ func _on_timer_timeout():
 func _on_attack_area_area_entered(area):
 	if(area.get_name().begins_with("HurtBox")):
 		var enemy = area.get_parent()
-		print("damage: "+str(damage))
-		print(enemy.health)
+		#print("damage: "+str(damage))
+		#print(enemy.health)
 		enemy.health = enemy.health - damage
-		print(enemy.health)
+		#print(enemy.health)
 		queue_free()

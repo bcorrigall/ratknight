@@ -24,6 +24,11 @@ func _on_area_entered(area):
 		#print("what's going on")
 		if(type >= 3):
 			the_rat.health += 20
+			the_rat.FXPlay("heart")
+			if(the_rat.health>20):
+				if(the_rat.dying==true):
+					the_rat.dying=false
+					the_rat.FXPlay("stopdying")
 			if(the_rat.maxHealth < the_rat.health):
 				the_rat.health = the_rat.maxHealth
 			#print("healed")

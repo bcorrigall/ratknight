@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://binl84qqvsyx5"]
+[gd_scene load_steps=5 format=3 uid="uid://binl84qqvsyx5"]
 
 [ext_resource type="Script" path="res://MainMenu.gd" id="1_5aduo"]
 [ext_resource type="AudioStream" uid="uid://nidjid7mwxye" path="res://assets/music/Menu_Light Ambience 1.wav" id="2_rii4u"]
 [ext_resource type="AudioStream" uid="uid://ltq6wyllq6k2" path="res://assets/sound/menu_button.wav" id="3_p11vm"]
+[ext_resource type="AudioStream" uid="uid://co0q6rncsgqi6" path="res://assets/sound/gameover.wav" id="4_wom3u"]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_5aduo")
@@ -35,7 +36,7 @@ theme_override_font_sizes/font_size = 40
 text = "Rat Knight!"
 
 [node name="MessageTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.5
 
 [node name="Label2" type="Label" parent="."]
 offset_left = 432.0
@@ -63,6 +64,9 @@ visible = false
 offset_right = 1164.0
 offset_bottom = 681.0
 color = Color(0, 0, 0, 0)
+
+[node name="gameover_music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_wom3u")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

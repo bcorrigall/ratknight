@@ -1,6 +1,6 @@
 extends Area2D
 
-@onready var shape =$CollisionShape2D
+@onready var shape =$SwordsShape
 var the_rat
 
 var damage = 15

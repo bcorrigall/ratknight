@@ -19,6 +19,7 @@ func _ready():
 	update_level()
 	update_kill()
 	update_exp()
+	update_dash()
 	pass # Replace with function body.
 
 
@@ -37,7 +38,8 @@ func update_exp():
 	$ExperienceBar.update()
 	$exp.text=str(player.experience)+str(" / ")+str(player.experience_to_next)
 
-
+func update_dash():
+	$dashBar.update()
 
 func _on_the_rat_exp():
 	update_exp()
@@ -46,7 +48,6 @@ func _on_the_rat_exp():
 func _on_the_rat_playpow():
 	
 	if pow_animation.is_playing():
-		print("replay!")
 		pow_animation.stop()
 		pow_animation.play("pow_timer")
 	else:
@@ -84,4 +85,10 @@ func _on_the_rat_kill():
 func _on_kill_timer_timeout():
 	player.killcomble=0
 	kill_panel.hide()
+	pass # Replace with function body.
+
+
+func _on_the_rat_dash_cool():
+	$dashBar.show()
+	$dashBar.update()
 	pass # Replace with function body.

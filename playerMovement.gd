@@ -11,6 +11,9 @@ var real_speed = speed
 
 var health = 120
 var trap_slowdown = 1
+var dying=false
+
+
 
 var knockback_pos= Vector2.ZERO
 var can_control = true
@@ -41,7 +44,7 @@ var screen_size
 
 var level = 1
 signal levelup
-var skill_points = 0
+var skill_points = 1000
 var experience = 0
 var experience_to_next = 100
 var killcomble=0
@@ -52,6 +55,7 @@ signal gameover
 signal playpow
 signal endpow
 signal kill
+signal dash_cool
 var damage_bonus = 0
 var limited_damage_bonus=0
 var defence_bonus = 0
@@ -65,27 +69,40 @@ var enemy_speed = 50
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	randomize()
 	screen_size = get_viewport_rect().size
-	$RegenTimer.start(0.5)
 	add_to_group("player")
 
 func start(pos):
 	pass
 	
-func damage_rat(damage):
+func damage_rat(type,damage):
+	$RegenTimer.stop()
+	if(type=="physic"):
+		FXPlay("hit")
+	else:
+		FXPlay("fire_hit")
 	var real_damage = damage - defence_bonus
+	#print("real damage:"+str(real_damage))
 	if (real_damage > 0):
 		health -= damage
+		if(health < 0):
+			death()
+	
+	if(health<20):
+		dying=true
+		FXPlay("dying")
+		$RegenTimer.start(5)
 
 func on_skill_up(skill_name):
-	print("Leveling up skill: ", skill_name)
+	#print("Leveling up skill: ", skill_name)
 	match skill_name:
 		"Damage": damage_bonus += 5
 		"Defence": defence_bonus += 5
 		"Health": maxHealth += 20
 		"Speed": speed += 100
 		"Dash Speed": dash_speed += 200
-		"Regenerate": regenerate_bonus += 0.5
+		"Regenerate": regenerate_bonus += 5
 		"Dash Attack": dash_attack = true
 		"Dash Cooldown": dash_cooldown -= 2
 		"Damage 2": damage_bonus += 5
@@ -93,7 +110,7 @@ func on_skill_up(skill_name):
 		"Extra Throwing Star": extra_attacks += 1
 		"Extra Throwing Star 2": extra_attacks += 1
 		"Increase Throw Rate": throw_rate += 0.2
-		"Item Drop": item_drop += 1
+		"Item Drops": item_drop += 20
 		"Enemy Slowdown": enemy_speed += 25
 
 func attack_animation(direction, cooldown):
@@ -105,11 +122,13 @@ func attack_animation(direction, cooldown):
 func dash():
 	$theRatArea2D/dashArea.disabled=false
 	if (!in_dash and !dash_timed_out and !knocked_back):
+		FXPlay("dash_fx")
 		in_dash = true
 		$Dash.start(dash_time)
 		real_speed = dash_speed
 		dash_timed_out = true
 		$DashTimeout.start(dash_cooldown)
+		dash_cool.emit()
 		
 		if (dash_direction.y < 0):
 			$playerSprites.animation = "dash_back"
@@ -223,6 +242,7 @@ func _process(delta):
 
 func attack_light():
 	if(!attacking):
+		FXPlay("Slash_light")
 		var mouse_direction = (get_global_mouse_position() - global_position).normalized()
 		var angle = atan2(mouse_direction.y, mouse_direction.x)
 		attacking = true
@@ -244,6 +264,7 @@ func attack_light():
 		
 func attack_spin():
 	if(!attacking):
+		FXPlay("Slash_spin")
 		attacking = true
 		$AttackTimeout.start(attack_cooldown)
 		animations.play("attackSpin")
@@ -261,7 +282,7 @@ func death():
 func _on_the_rat_area_2d_area_entered(area):
 	if (area.get_name().begins_with("HurtBox") and invincible == false and in_dash == false):
 		var enemy = area.get_parent()
-		damage_rat(enemy.damage)
+		damage_rat("physic",enemy.damage)
 		
 		var direction = (enemy.position - position).normalized() * 100
 		knockback_direction = -direction.normalized() 
@@ -271,7 +292,7 @@ func _on_the_rat_area_2d_area_entered(area):
 		invincible = true
 	elif (area.get_name().begins_with("WizardBall")):
 		var enemy = area
-		damage_rat(enemy.damage)
+		damage_rat("fire",enemy.damage)
 		var direction = (enemy.position - position).normalized() * 100
 		knockback_direction = -direction.normalized() 
 		$KnockbackTimer.start(0.2)
@@ -281,7 +302,7 @@ func _on_the_rat_area_2d_area_entered(area):
 		print('hit')
 		
 func _on_area_2d_body_entered(body):
-	print(body)
+	#print(body)
 
 		
 	if (body.get_name().begins_with("Enemy") and in_dash and dash_attack):
@@ -293,7 +314,7 @@ func _on_area_2d_body_entered(body):
 
 
 	elif (body.get_name().begins_with("Trap") and !in_dash):
-		damage_rat(body.damage)
+		damage_rat("fire",body.damage)
 
 		var direction = (body.position - position).normalized() * 100
 		knockback_direction = -direction.normalized() 
@@ -314,7 +335,7 @@ func earn_kill():
 	kill.emit()
 
 func level_up():
-	
+	FXPlay("levelup_fx")
 	while(experience >= experience_to_next):
 		skill_points += level
 		level += 1
@@ -330,12 +351,13 @@ func calculate_experience():
 func playeffect(num):
 	if num==0:
 		effect.play("powerup")
+		
 func endeffect():
 	effect.play("RESET")
 
 func getboost(time):
 	if $boost.get_time_left()!=0: #the timer is working
-		print("timer is working")
+		#print("timer is working")
 		$boost.start(time) #reset timer
 		damage_bonus-=limited_damage_bonus
 		limited_damage_bonus+=25
@@ -343,6 +365,7 @@ func getboost(time):
 		$boost.start(time)
 		limited_damage_bonus+=25	
 		playeffect(0)
+	FXPlay("PowerUp_fx")
 	playpow.emit()
 	damage_bonus+=limited_damage_bonus
 
@@ -377,10 +400,12 @@ func _on_knockback_timer_timeout():
 	knocked_back = false
 
 func _on_regen_timer_timeout():
-	if(health <= maxHealth and current_regen <= regen_cap):
+	if(health < 20):
 		health += regenerate_bonus
 		current_regen += regenerate_bonus
-	$RegenTimer.start(0.5)
+		if(health>=20):
+			FXPlay("stopdying")
+	$RegenTimer.start(5)
 
 
 
@@ -390,3 +415,43 @@ func _on_boost_timeout():
 	#print("damage_bonus: "+str(damage_bonus))
 	#print("damage_bonus: "+str(limited_damage_bonus))
 	$boost.stop()
+
+
+func FXPlay(name):
+	if name=="dash_fx":
+		$SoundEffect/dash_fx.play()
+		
+	elif name=="levelup_fx":
+		if $SoundEffect/levelup_fx.is_playing():
+			$SoundEffect/levelup_fx.stop()
+			$SoundEffect/levelup_fx.playing()
+		$SoundEffect/levelup_fx.play()
+	elif name=="PowerUp_fx":
+		#if $SoundEffect/PowerUp_fx.is_playing():
+			#$SoundEffect/PowerUp_fx.stop()
+		$SoundEffect/PowerUp_fx.play()
+	elif name=="fire_hit":
+		$SoundEffect/fire_hit.play()
+	elif name=="heart":
+		$SoundEffect/heart.play()
+	elif name=="Slash_light":
+		$SoundEffect/Slash_light.play()
+	elif name=="Slash_spin":
+		$SoundEffect/Slash_spin.play()
+	elif name=="hit":
+		var type= randi() % 2 #3 type of get hit 0,1,2
+		if type==0:
+			$SoundEffect/hit_fx_1.play()
+		elif type==1:
+			$SoundEffect/hit_fx_2.play()
+		else:
+			$SoundEffect/hit_fx_3.play()
+	elif name=="dying":
+		$SoundEffect/dying_loop.play()
+	elif name=="stopdying":
+		$SoundEffect/dying_loop.stop()
+	else:
+		print("FX error: "+str(name))
+		pass
+
+

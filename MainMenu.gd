@@ -38,15 +38,29 @@ func start_effect():
 
 func game_over():
 	Title_show_message("Game Over")
+	var tweenword=get_tree().create_tween()
+	tweenword.set_ease(Tween.EASE_IN_OUT)
+	$gameover_music.play()
 	$StartButton.hide()
 	# Wait until the MessageTimer has counted down.
-	await $MessageTimer.timeout
-	$Label.text = "Rat Knight!"
-	#$Label.show()
+	#await $MessageTimer.timeout
+	await tweenword.tween_interval(0.5)
+	await tweenword.tween_property($Label, "text", "Rat Knight!", 1.5).finished
+	
+	
+	#$Label.text = "Rat Knight!"
 	# Make a one-shot timer and wait for it to finish.
-	await get_tree().create_timer(1.0).timeout
 	$StartButton.set_text ("TRY AGAIN!")
+	$StartButton.self_modulate.a=0
 	$StartButton.show()
+	var tween=get_tree().create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	await tween.tween_property($StartButton, "self_modulate:a", 1, 1.5).finished
+	tween.tween_callback($StartButton.queue_free)
+	
+	#await get_tree().create_timer(0.3).timeout
+
+
 
 
 func _on_message_timer_timeout():
