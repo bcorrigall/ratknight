@@ -53,10 +53,10 @@ Press L to open the level menu
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Menu_music" type="AudioStreamPlayer2D" parent="."]
+[node name="Menu_music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_rii4u")
 
-[node name="start_music" type="AudioStreamPlayer2D" parent="."]
+[node name="start_music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_p11vm")
 
 [node name="Panel" type="ColorRect" parent="."]
@@ -65,7 +65,7 @@ offset_right = 1164.0
 offset_bottom = 681.0
 color = Color(0, 0, 0, 0)
 
-[node name="gameover_music" type="AudioStreamPlayer2D" parent="."]
+[node name="gameover_music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_wom3u")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

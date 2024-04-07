@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://s3hes6771ca4"]
+[gd_scene load_steps=14 format=3 uid="uid://s3hes6771ca4"]
 
 [ext_resource type="Script" path="res://trap.gd" id="1_exj36"]
 [ext_resource type="Texture2D" uid="uid://x4lyvywjns0d" path="res://assets/FX/Fire.png" id="2_ew5n6"]
+[ext_resource type="AudioStream" uid="uid://b3b86mrrf7imt" path="res://assets/sound/Big Fire_1.wav" id="3_t04u2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0oxnu"]
 radius = 30.0
@@ -95,3 +96,7 @@ frame = 4
 position = Vector2(1.43865, -3.31737)
 scale = Vector2(1.53873, 1.53873)
 sprite_frames = SubResource("SpriteFrames_etq3i")
+
+[node name="effect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_t04u2")
+max_distance = 250.0

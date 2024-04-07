@@ -5,6 +5,7 @@ var damage = 30
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	animation.play("default")
+	$effect.play()
 	pass # Replace with function body.
 
 

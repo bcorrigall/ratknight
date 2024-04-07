@@ -1,4 +1,4 @@
-[gd_scene load_steps=106 format=3 uid="uid://ct7akgrsmoosc"]
+[gd_scene load_steps=107 format=3 uid="uid://ct7akgrsmoosc"]
 
 [ext_resource type="Script" path="res://playerMovement.gd" id="1_8mm2x"]
 [ext_resource type="Texture2D" uid="uid://btsxflqogrgjs" path="res://assets/theRat/Attack_back/1.png" id="2_ttg8v"]
@@ -92,6 +92,7 @@
 [ext_resource type="AudioStream" uid="uid://b8l35jt337til" path="res://assets/sound/player/heart.wav" id="90_42ije"]
 [ext_resource type="AudioStream" uid="uid://bkhobyg7o0t0n" path="res://assets/sound/attack/Slash_light.wav" id="91_g2066"]
 [ext_resource type="AudioStream" uid="uid://b0pyho0jeda7j" path="res://assets/sound/attack/slash_spin.wav" id="92_xb6di"]
+[ext_resource type="Script" path="res://followCamera.gd" id="93_gjec6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vciue"]
 radius = 133.333
@@ -731,38 +732,45 @@ libraries = {
 
 [node name="SoundEffect" type="Node" parent="."]
 
-[node name="dash_fx" type="AudioStreamPlayer2D" parent="SoundEffect"]
+[node name="dash_fx" type="AudioStreamPlayer" parent="SoundEffect"]
 stream = ExtResource("82_yxfxd")
 
-[node name="dying_loop" type="AudioStreamPlayer2D" parent="SoundEffect"]
+[node name="dying_loop" type="AudioStreamPlayer" parent="SoundEffect"]
 stream = ExtResource("82_en2fm")
 
-[node name="levelup_fx" type="AudioStreamPlayer2D" parent="SoundEffect"]
+[node name="levelup_fx" type="AudioStreamPlayer" parent="SoundEffect"]
 stream = ExtResource("82_ys5jc")
 
-[node name="PowerUp_fx" type="AudioStreamPlayer2D" parent="SoundEffect"]
+[node name="PowerUp_fx" type="AudioStreamPlayer" parent="SoundEffect"]
 stream = ExtResource("83_p46sq")
 
-[node name="hit_fx_1" type="AudioStreamPlayer2D" parent="SoundEffect"]
+[node name="hit_fx_1" type="AudioStreamPlayer" parent="SoundEffect"]
 stream = ExtResource("85_3lgr3")
 
-[node name="hit_fx_2" type="AudioStreamPlayer2D" parent="SoundEffect"]
+[node name="hit_fx_2" type="AudioStreamPlayer" parent="SoundEffect"]
 stream = ExtResource("86_d1tw1")
 
-[node name="hit_fx_3" type="AudioStreamPlayer2D" parent="SoundEffect"]
+[node name="hit_fx_3" type="AudioStreamPlayer" parent="SoundEffect"]
 stream = ExtResource("87_l07a7")
 
-[node name="fire_hit" type="AudioStreamPlayer2D" parent="SoundEffect"]
+[node name="fire_hit" type="AudioStreamPlayer" parent="SoundEffect"]
 stream = ExtResource("88_ahp5e")
 
-[node name="heart" type="AudioStreamPlayer2D" parent="SoundEffect"]
+[node name="heart" type="AudioStreamPlayer" parent="SoundEffect"]
 stream = ExtResource("90_42ije")
 
-[node name="Slash_light" type="AudioStreamPlayer2D" parent="SoundEffect"]
+[node name="Slash_light" type="AudioStreamPlayer" parent="SoundEffect"]
 stream = ExtResource("91_g2066")
 
-[node name="Slash_spin" type="AudioStreamPlayer2D" parent="SoundEffect"]
+[node name="Slash_spin" type="AudioStreamPlayer" parent="SoundEffect"]
 stream = ExtResource("92_xb6di")
+
+[node name="followCamera" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
+limit_right = 5509
+limit_bottom = 2257
+script = ExtResource("93_gjec6")
 
 [connection signal="area_entered" from="theRatArea2D" to="." method="_on_the_rat_area_2d_area_entered"]
 [connection signal="body_entered" from="theRatArea2D" to="." method="_on_area_2d_body_entered"]

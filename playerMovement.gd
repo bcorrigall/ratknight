@@ -70,7 +70,7 @@ var enemy_speed = 50
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-	screen_size = get_viewport_rect().size
+	#screen_size = get_viewport_rect().size
 	add_to_group("player")
 
 func start(pos):
@@ -235,7 +235,8 @@ func _process(delta):
 		real_speed = dash_speed
 
 	position += velocity * delta
-	position = position.clamp(Vector2.ZERO, screen_size)
+	#position = position.clamp(Vector2.ZERO, screen_size)
+	position = position.clamp(Vector2.ZERO, $followCamera.worldSizeInPixels)
 
 	if(health <- 0):
 		death()
