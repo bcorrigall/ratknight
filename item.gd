@@ -35,7 +35,7 @@ func _on_area_entered(area):
 
 		if(type <= 2):
 			var timer = get_node("../theRat/Weapon/Damageboost")
-			the_rat.getboost(5)
+			the_rat.getboost(7)
 			#the_rat.damage_bonus += 25
 			#print("damage boost")
 			#$BoostTimer.start(5)

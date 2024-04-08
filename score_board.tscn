@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://cfxvqlnvrp3p7"]
+
+[node name="ScoreBoard" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="bigScoreRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.545098, 0.482353, 0.443137, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="FinalScore" type="Label" parent="bigScoreRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.282118
+anchor_right = 0.717882
+anchor_bottom = 0.169753
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 80
+text = "FINAL SCORE"
+metadata/_edit_use_anchors_ = true
+
+[node name="scoreRect" type="ColorRect" parent="bigScoreRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.249132
+anchor_top = 0.268519
+anchor_right = 0.750868
+anchor_bottom = 0.825617
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.443137)
+metadata/_edit_use_anchors_ = true
+
+[node name="score" type="Label" parent="bigScoreRect/scoreRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "SCORE:50"

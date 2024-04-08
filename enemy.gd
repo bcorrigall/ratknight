@@ -94,12 +94,14 @@ func death():
 	type+=player.item_drop
 	if dropitem==false:
 		if(type >= 70):
+			print("drop item")
 			var mob = Item.instantiate()
 			get_parent().add_child(mob)
 			mob.set_animation(type)
 			mob.position = global_position
 			dropitem=true
 		else:
+			print("posi: "+str(type))
 			dropitem=true
 		player.earn_experience(experience)
 		player.earn_kill()

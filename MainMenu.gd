@@ -37,10 +37,25 @@ func start_effect():
 
 
 func game_over():
+	$ScoreBoard.visible=true
+	$gameover_music.play()
+	var scoretween=get_tree().create_tween()
+
+	await scoretween.tween_property($ScoreBoard/bigScoreRect/scoreRect/score, "text", "SOCRE:30!", 3).finished
+	$ScoreBoard.visible=false
+	
+	
+	
+	
+
+
+	
 	Title_show_message("Game Over")
 	var tweenword=get_tree().create_tween()
 	tweenword.set_ease(Tween.EASE_IN_OUT)
-	$gameover_music.play()
+	
+	
+	
 	$StartButton.hide()
 	# Wait until the MessageTimer has counted down.
 	#await $MessageTimer.timeout

@@ -30,15 +30,17 @@ func _process(_delta):
 func fire():
 	var attacks = get_parent().extra_attacks + 1 
 	timed_out = true
-	rat.attacking=true
+	rat.attack_star()
+	var shootanimation=false
 	while attacks > 0:
 		attack = attack_scene.instantiate()
 
 		attack.damage = damage + rat.damage_bonus
 		attack.position = global_position
 		attack.direction = (get_global_mouse_position() - global_position).normalized()
-
-		rat.attack_animation(attack.direction, rate_of_fire)
+		if !shootanimation:
+			shootanimation=true
+			rat.attack_animation(attack.direction, rate_of_fire)
 		get_parent().get_parent().add_child(attack)
 		#print(attack.position)
 		#print(position)
@@ -46,7 +48,7 @@ func fire():
 		FX_play(attacks)
 		await get_tree().create_timer(0.1).timeout
 		attacks = attacks - 1
-		#print(attacks)
+		print(attacks)
 	
 	$Timer.start(rate_of_fire - get_parent().throw_rate)
 	

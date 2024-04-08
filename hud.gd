@@ -56,7 +56,7 @@ func _on_the_rat_playpow():
 
 
 func _on_the_rat_endpow():
-	pow_animation.play("RESET")
+	#pow_animation.play("RESET")
 	pass # Replace with function body.
 
 

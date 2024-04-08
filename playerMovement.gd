@@ -64,7 +64,7 @@ var regen_cap = 20
 var current_regen = 0
 var extra_attacks = 0
 var throw_rate = 0
-var item_drop = 0
+var item_drop = 100
 var enemy_speed = 50
 
 # Called when the node enters the scene tree for the first time.
@@ -116,7 +116,7 @@ func on_skill_up(skill_name):
 func attack_animation(direction, cooldown):
 	attack_direction = rad_to_deg(direction.angle())
 	attacking = true
-	real_speed = real_speed/2
+	real_speed = real_speed/1.5
 	$AttackTimeout.start(attack_cooldown)
 
 func dash():
@@ -262,6 +262,11 @@ func attack_light():
 			attack_direction = 180
 		await animations.animation_finished
 		weapon.disable()
+func attack_star():
+	if(!attacking):
+		attacking=true
+		pass
+		
 		
 func attack_spin():
 	if(!attacking):
@@ -359,7 +364,11 @@ func endeffect():
 func getboost(time):
 	if $boost.get_time_left()!=0: #the timer is working
 		#print("timer is working")
-		$boost.start(time) #reset timer
+		if($boost.get_time_left()>=3):
+			$boost.start(time)
+		else:
+			time=$boost.get_time_left()+4
+			$boost.start(time) #reset timer
 		damage_bonus-=limited_damage_bonus
 		limited_damage_bonus+=25
 	else:
@@ -367,7 +376,8 @@ func getboost(time):
 		limited_damage_bonus+=25	
 		playeffect(0)
 	FXPlay("PowerUp_fx")
-	playpow.emit()
+	#playpow.emit()
+	''' need to delate'''
 	damage_bonus+=limited_damage_bonus
 
 
@@ -376,7 +386,7 @@ func endboost():
 	damage_bonus-=limited_damage_bonus #delete all power
 	limited_damage_bonus=0
 	endpow.emit()
-	endeffect()
+	#endeffect()
 
 func _on_dash_timeout():
 	in_dash = false
@@ -433,6 +443,7 @@ func FXPlay(name):
 		$SoundEffect/PowerUp_fx.play()
 	elif name=="fire_hit":
 		$SoundEffect/fire_hit.play()
+		print("fire")
 	elif name=="heart":
 		$SoundEffect/heart.play()
 	elif name=="Slash_light":
