@@ -32,21 +32,186 @@ metadata/_edit_use_anchors_ = true
 [node name="scoreRect" type="ColorRect" parent="bigScoreRect"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.249132
+anchor_left = 0.248264
 anchor_top = 0.268519
-anchor_right = 0.750868
+anchor_right = 0.75
 anchor_bottom = 0.825617
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.443137)
 metadata/_edit_use_anchors_ = true
 
-[node name="score" type="Label" parent="bigScoreRect/scoreRect"]
+[node name="EnemyKill" type="Panel" parent="bigScoreRect/scoreRect"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_left = 0.0017301
+anchor_top = -0.00277009
+anchor_right = 0.99654
+anchor_bottom = 0.191136
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="bigScoreRect/scoreRect/EnemyKill"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.00173913
+anchor_top = 0.0142857
+anchor_right = 0.297391
+anchor_bottom = 1.07143
+theme_override_font_sizes/font_size = 50
+text = "EnemyKill"
+metadata/_edit_use_anchors_ = true
+
+[node name="score" type="Label" parent="bigScoreRect/scoreRect/EnemyKill"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.29913
+anchor_right = 1.00174
+anchor_bottom = 0.985714
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
-text = "SCORE:50"
+text = "50"
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Damage" type="Panel" parent="bigScoreRect/scoreRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.00173
+anchor_top = 0.193905
+anchor_right = 0.99654
+anchor_bottom = 0.387811
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="bigScoreRect/scoreRect/Damage"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.00173913
+anchor_top = 0.0142857
+anchor_right = 0.297391
+anchor_bottom = 1.07143
+theme_override_font_sizes/font_size = 50
+text = "Damage"
+metadata/_edit_use_anchors_ = true
+
+[node name="score" type="Label" parent="bigScoreRect/scoreRect/Damage"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.29913
+anchor_right = 1.00174
+anchor_bottom = 0.985714
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "50"
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="HPS" type="Panel" parent="bigScoreRect/scoreRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.00173
+anchor_top = 0.387811
+anchor_right = 0.99654
+anchor_bottom = 0.581717
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="bigScoreRect/scoreRect/HPS"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.00173913
+anchor_top = 0.0142857
+anchor_right = 0.297391
+anchor_bottom = 1.07143
+theme_override_font_sizes/font_size = 50
+text = "Healing"
+metadata/_edit_use_anchors_ = true
+
+[node name="score" type="Label" parent="bigScoreRect/scoreRect/HPS"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.29913
+anchor_right = 1.00174
+anchor_bottom = 0.985714
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "50"
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="boss" type="Panel" parent="bigScoreRect/scoreRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.00173
+anchor_top = 0.581717
+anchor_right = 0.99654
+anchor_bottom = 0.775624
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="bigScoreRect/scoreRect/boss"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.00173913
+anchor_top = 0.0142857
+anchor_right = 0.297391
+anchor_bottom = 1.07143
+theme_override_font_sizes/font_size = 50
+text = "BOSS"
+metadata/_edit_use_anchors_ = true
+
+[node name="score" type="Label" parent="bigScoreRect/scoreRect/boss"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.29913
+anchor_right = 1.00174
+anchor_bottom = 0.985714
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "50"
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Total_Mark" type="Panel" parent="bigScoreRect/scoreRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0034601
+anchor_top = 0.778394
+anchor_right = 0.99827
+anchor_bottom = 0.9723
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="bigScoreRect/scoreRect/Total_Mark"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.00173913
+anchor_top = 0.0142857
+anchor_right = 0.297391
+anchor_bottom = 1.07143
+theme_override_font_sizes/font_size = 50
+text = "Total"
+metadata/_edit_use_anchors_ = true
+
+[node name="score" type="Label" parent="bigScoreRect/scoreRect/Total_Mark"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.29913
+anchor_right = 1.00174
+anchor_bottom = 0.985714
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "50"
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true

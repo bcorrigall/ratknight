@@ -78,7 +78,52 @@ stream = ExtResource("4_wom3u")
 visible = false
 script = ExtResource("6_mmujv")
 
+[node name="scoreRect" parent="ScoreBoard/bigScoreRect" index="1"]
+anchor_top = 0.174383
+anchor_bottom = 0.731481
+
+[node name="score" parent="ScoreBoard/bigScoreRect/scoreRect/EnemyKill" index="1"]
+text = ""
+
+[node name="score" parent="ScoreBoard/bigScoreRect/scoreRect/Damage" index="1"]
+text = ""
+
+[node name="score" parent="ScoreBoard/bigScoreRect/scoreRect/HPS" index="1"]
+text = ""
+
+[node name="score" parent="ScoreBoard/bigScoreRect/scoreRect/boss" index="1"]
+text = ""
+
+[node name="score" parent="ScoreBoard/bigScoreRect/scoreRect/Total_Mark" index="1"]
+text = ""
+
+[node name="Close_button" type="Button" parent="ScoreBoard/bigScoreRect" index="2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.439236
+anchor_top = 0.867284
+anchor_right = 0.555556
+anchor_bottom = 0.96142
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "CLOSE"
+
+[node name="Logs" type="Label" parent="ScoreBoard/bigScoreRect" index="3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.24566
+anchor_top = 0.733025
+anchor_right = 0.750868
+anchor_bottom = 0.861111
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
+[connection signal="pressed" from="ScoreBoard/bigScoreRect/Close_button" to="." method="_on_close_button_pressed"]
 
 [editable path="ScoreBoard"]
