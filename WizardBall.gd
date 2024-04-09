@@ -10,7 +10,7 @@ var direction = Vector2.ZERO
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("bullet")
-	$Timer.start(0.7)
+	$Timer.start(2.5)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

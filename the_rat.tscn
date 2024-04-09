@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=3 uid="uid://ct7akgrsmoosc"]
+[gd_scene load_steps=106 format=3 uid="uid://ct7akgrsmoosc"]
 
 [ext_resource type="Script" path="res://playerMovement.gd" id="1_8mm2x"]
 [ext_resource type="Texture2D" uid="uid://btsxflqogrgjs" path="res://assets/theRat/Attack_back/1.png" id="2_ttg8v"]
@@ -55,14 +55,14 @@
 [ext_resource type="Texture2D" uid="uid://d4jbicuwabc05" path="res://assets/theRat/Move_back/6.png" id="52_eqnmu"]
 [ext_resource type="Texture2D" uid="uid://blvd840n3l4sl" path="res://assets/theRat/Move_back/7.png" id="53_vmtin"]
 [ext_resource type="Texture2D" uid="uid://bj3i8u1kewe3o" path="res://assets/theRat/Move_back/8.png" id="54_40eip"]
-[ext_resource type="Texture2D" uid="uid://cer1wpterfo66" path="res://assets/theRat/Move_front/1.png" id="55_qr65y"]
-[ext_resource type="Texture2D" uid="uid://cqwtqj5luuf6y" path="res://assets/theRat/Move_front/2.png" id="56_17w0j"]
-[ext_resource type="Texture2D" uid="uid://b8l25h2nwdb72" path="res://assets/theRat/Move_front/3.png" id="57_4v12n"]
-[ext_resource type="Texture2D" uid="uid://cootg4c2dd3nd" path="res://assets/theRat/Move_front/4.png" id="58_6s2yw"]
-[ext_resource type="Texture2D" uid="uid://b2ufu80kdhhaq" path="res://assets/theRat/Move_front/5.png" id="59_1rtxw"]
-[ext_resource type="Texture2D" uid="uid://cmbsijb71ww4v" path="res://assets/theRat/Move_front/6.png" id="60_ruqte"]
-[ext_resource type="Texture2D" uid="uid://bub4tbjp6ghiq" path="res://assets/theRat/Move_front/7.png" id="61_rdur0"]
-[ext_resource type="Texture2D" uid="uid://2fmadtgexvam" path="res://assets/theRat/Move_front/8.png" id="62_2ycui"]
+[ext_resource type="Texture2D" uid="uid://dw33vup2hj3ga" path="res://assets/theRat/Move_front/1.png" id="55_qr65y"]
+[ext_resource type="Texture2D" uid="uid://bu5kn6bpfer2r" path="res://assets/theRat/Move_front/2.png" id="56_17w0j"]
+[ext_resource type="Texture2D" uid="uid://xhgij4ngcjx" path="res://assets/theRat/Move_front/3.png" id="57_4v12n"]
+[ext_resource type="Texture2D" uid="uid://majgvhlrmlra" path="res://assets/theRat/Move_front/4.png" id="58_6s2yw"]
+[ext_resource type="Texture2D" uid="uid://e1nt0wouir08" path="res://assets/theRat/Move_front/5.png" id="59_1rtxw"]
+[ext_resource type="Texture2D" uid="uid://c8te226qg5xwt" path="res://assets/theRat/Move_front/6.png" id="60_ruqte"]
+[ext_resource type="Texture2D" uid="uid://dfle1yo3m2lao" path="res://assets/theRat/Move_front/7.png" id="61_rdur0"]
+[ext_resource type="Texture2D" uid="uid://dgr1d046fryp" path="res://assets/theRat/Move_front/8.png" id="62_2ycui"]
 [ext_resource type="Texture2D" uid="uid://b4our32avafc" path="res://assets/theRat/Move_side/1.png" id="63_d4dwd"]
 [ext_resource type="Texture2D" uid="uid://b7mtjohvp0rtk" path="res://assets/theRat/Move_side/2.png" id="64_7hop6"]
 [ext_resource type="Texture2D" uid="uid://dvygbdl2od3u5" path="res://assets/theRat/Move_side/3.png" id="65_7b1ww"]
@@ -79,7 +79,6 @@
 [ext_resource type="Texture2D" uid="uid://bbwf02pl0ug6c" path="res://assets/theRat/Move_side/14.png" id="76_o3rcm"]
 [ext_resource type="Texture2D" uid="uid://b776f251fdwcl" path="res://assets/theRat/Move_side/15.png" id="77_1ldn8"]
 [ext_resource type="Texture2D" uid="uid://dv5mlau8alj32" path="res://assets/theRat/Move_side/16.png" id="78_r2lx0"]
-[ext_resource type="Script" path="res://sword.gd" id="80_pcu56"]
 [ext_resource type="Texture2D" uid="uid://btqb3r2ejtgs1" path="res://assets/FX/pow/pow.png" id="81_jvpo2"]
 [ext_resource type="AudioStream" uid="uid://dp0xd3cfxqnmm" path="res://assets/sound/player/dying.wav" id="82_en2fm"]
 [ext_resource type="AudioStream" uid="uid://cht6fk8ychmut" path="res://assets/sound/player/levelup.wav" id="82_ys5jc"]
@@ -683,7 +682,7 @@ disabled = true
 [node name="playerSprites" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_63iob")
-animation = &"dash_back"
+animation = &"dash_front"
 
 [node name="playerMovement" type="CharacterBody2D" parent="."]
 
@@ -694,7 +693,6 @@ rotation = -1.0472
 [node name="Sword" parent="Weapon" index="2"]
 position = Vector2(0.5, 0.866028)
 scale = Vector2(7, 7)
-script = ExtResource("80_pcu56")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsnf7mnfrii3c"]
+[gd_scene load_steps=5 format=3 uid="uid://bsnf7mnfrii3c"]
 
 [ext_resource type="Script" path="res://Weapon.gd" id="1_ui66y"]
 [ext_resource type="PackedScene" uid="uid://ra1fajjxpybg" path="res://sword.tscn" id="2_e5ohj"]
+[ext_resource type="Script" path="res://sword.gd" id="3_5txkl"]
 [ext_resource type="AudioStream" uid="uid://dvbvrij7dw48u" path="res://assets/sound/attack/Star.wav" id="3_qu4rg"]
 
 [node name="Weapon" type="Node2D"]
@@ -12,6 +13,7 @@ script = ExtResource("1_ui66y")
 [node name="Timer" type="Timer" parent="."]
 
 [node name="Sword" parent="." instance=ExtResource("2_e5ohj")]
+script = ExtResource("3_5txkl")
 
 [node name="star1" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_qu4rg")

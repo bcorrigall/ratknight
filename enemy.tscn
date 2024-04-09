@@ -332,7 +332,7 @@ animations = [{
 "speed": 15.0
 }]
 
-[node name="AntFighter" type="CharacterBody2D"]
+[node name="AntFighter" type="CharacterBody2D" groups=["Ant"]]
 script = ExtResource("1_4tbc6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

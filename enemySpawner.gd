@@ -11,9 +11,9 @@ func _ready():
 	$MonsterTimer.start(1)
 
 func spawn_monster():
-	var choose = randi_range(1,2)
+	var choose = randi_range(1,3)
 	var enemyt
-	if(choose == 1):
+	if(choose <= 2):
 		enemyt = enemy.instantiate()
 	else:
 		enemyt = wizard.instantiate()
@@ -25,6 +25,12 @@ func spawn_monster():
 	get_parent().add_child(enemyt)
 
 func _on_monster_time_timeout():
+	var enemynumber=get_tree().get_nodes_in_group("Ant").size()
+	enemynumber+=get_tree().get_nodes_in_group("Wizard").size()
+	if(enemynumber==30):
+		#print("enemy is 30")
+		return
+	#print("Node right now:" +str(enemynumber))
 	if(start_spawn == false):
 		for i in range(starting_monsters):
 			spawn_monster()

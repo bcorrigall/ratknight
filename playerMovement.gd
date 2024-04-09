@@ -14,6 +14,7 @@ var trap_slowdown = 1
 var dying=false
 
 
+var friend = true
 
 var knockback_pos= Vector2.ZERO
 var can_control = true
@@ -44,7 +45,7 @@ var screen_size
 
 var level = 1
 signal levelup
-var skill_points = 1000
+var skill_points = 0
 var experience = 0
 var experience_to_next = 100
 var killcomble=0
@@ -311,6 +312,8 @@ func _on_the_rat_area_2d_area_entered(area):
 	elif (area.get_name().begins_with("HitBox")):
 		return
 	else:
+		if(invincible): return
+		if(in_dash):return
 		var enemy = area
 		if enemy.friend==true:return
 		damage_rat("fire",enemy.damage)

@@ -1,14 +1,45 @@
-[gd_scene load_steps=6 format=3 uid="uid://chon0078cvn0t"]
+[gd_scene load_steps=10 format=3 uid="uid://chon0078cvn0t"]
 
 [ext_resource type="Script" path="res://item.gd" id="1_fd45f"]
+[ext_resource type="Texture2D" uid="uid://csd7oeqo5tg8" path="res://assets/connor1.png" id="2_bq2i2"]
+[ext_resource type="Texture2D" uid="uid://fby6opd7vbi3" path="res://assets/connor.png" id="2_rnk8s"]
 [ext_resource type="Texture2D" uid="uid://c5vceanmdxt8r" path="res://assets/POW.png" id="3_1lqmj"]
 [ext_resource type="Texture2D" uid="uid://iumpcg2um3l4" path="res://assets/hearts/heart_4_4.png" id="3_5boxt"]
+[ext_resource type="Texture2D" uid="uid://ci5idf5ammy03" path="res://assets/connor2.png" id="4_80wuu"]
+[ext_resource type="Texture2D" uid="uid://by0x30sf57g5s" path="res://assets/connor3.png" id="5_lmbwk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4ir3"]
 size = Vector2(80, 68)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fy37g"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bq2i2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_rnk8s")
+}],
+"loop": true,
+"name": &"Connor1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_80wuu")
+}],
+"loop": true,
+"name": &"Connor2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_lmbwk")
+}],
+"loop": true,
+"name": &"Connor3",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("3_5boxt")
@@ -26,7 +57,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Item" type="Area2D"]
+[node name="Item" type="Area2D" groups=["item"]]
 script = ExtResource("1_fd45f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -34,10 +65,10 @@ position = Vector2(5, -5)
 shape = SubResource("RectangleShape2D_g4ir3")
 
 [node name="ItemSprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(6, 0)
-scale = Vector2(0.5, 0.5)
+position = Vector2(4, -5)
+scale = Vector2(0.621094, 0.621094)
 sprite_frames = SubResource("SpriteFrames_fy37g")
-animation = &"Heart"
+animation = &"Connor2"
 
 [node name="BoostTimer" type="Timer" parent="."]
 

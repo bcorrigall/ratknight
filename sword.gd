@@ -1,7 +1,7 @@
 extends Area2D
 
 @onready var shape =$SwordsShape
-
+var friend =true
 var the_rat
 
 var damage = 15

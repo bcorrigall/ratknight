@@ -58,6 +58,8 @@ func update_Logs(value:int):
 	$ScoreBoard/bigScoreRect/Logs.text="Logs:"+str(value)
 
 func game_over(killcomble,kill,damage,hps):
+	get_tree().call_group("Ant", "queue_free")
+	get_tree().call_group("Wizard", "queue_free")
 	$ScoreBoard.visible=true
 	$gameover_music.play()
 	score_tween(killcomble,kill,damage,hps)

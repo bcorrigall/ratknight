@@ -7,6 +7,7 @@ var timed_out = false
 var attack
 var running = false
 var friend = false
+var spelling = false
 
 func _ready():
 	$JerkTimer.start(jerk_time)
@@ -20,7 +21,8 @@ func _ready():
 	randomize()
 
 func _physics_process(delta):
-	if isDead:pass
+	if isDead:return
+	if spelling:return
 	playerposition = player.position
 	targetposition = (playerposition - position).normalized()
 	if (running == true):
@@ -62,13 +64,16 @@ func _physics_process(delta):
 				w_movineAnimation.animation = "move_left"
 			elif -targetposition.y > -targetposition.x:
 				w_movineAnimation.animation = "move_back"
-
+		if spelling:
+			w_movineAnimation.animation = "attack_side"
 		w_movineAnimation.play()
 		
 	if health < 1:
 		death()
 
 func fire():
+	if spelling:return
+	spelling= true
 	if isDead:pass
 	FX_play("fire")
 	attack = attack_scene.instantiate()
@@ -151,4 +156,9 @@ func _on_runtimer_timeout():
 
 func _on_timer_timeout_2():
 	effects.play("RESET")
+	pass # Replace with function body.
+
+
+func _on_w_fire_animation_finished():
+	spelling=false
 	pass # Replace with function body.

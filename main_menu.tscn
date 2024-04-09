@@ -34,41 +34,42 @@ size_flags_horizontal = 6
 texture = ExtResource("2_a8tdu")
 
 [node name="StartButton" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -34.0
-offset_top = -21.5
-offset_right = 34.0
-offset_bottom = 21.5
+anchors_preset = -1
+anchor_left = 0.470486
+anchor_top = 0.466821
+anchor_right = 0.529514
+anchor_bottom = 0.533179
+offset_bottom = 3.05176e-05
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 25
 text = "Start"
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="."]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -102.0
-offset_top = 123.0
-offset_right = 109.0
-offset_bottom = 178.0
+anchors_preset = -1
+anchor_left = 0.411458
+anchor_top = 0.189815
+anchor_right = 0.594618
+anchor_bottom = 0.274691
+offset_bottom = 1.52588e-05
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 40
 text = "Rat Knight!"
+metadata/_edit_use_anchors_ = true
 
 [node name="MessageTimer" type="Timer" parent="."]
 wait_time = 2.5
 
 [node name="Label2" type="Label" parent="."]
-offset_left = 432.0
-offset_top = 398.0
-offset_right = 700.0
-offset_bottom = 447.0
+anchors_preset = -1
+anchor_left = 0.375
+anchor_top = 0.614198
+anchor_right = 0.619792
+anchor_bottom = 0.850309
+offset_right = -14.0
+offset_bottom = -104.0
 text = "You must survive as long as you can!
 
 Left mouse click for Star attack
@@ -78,6 +79,7 @@ Press L to open the level menu
 "
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Menu_music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_rii4u")
@@ -93,6 +95,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0)
+metadata/_edit_use_anchors_ = true
 
 [node name="gameover_music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_wom3u")
@@ -143,7 +146,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 60
 horizontal_alignment = 2
-metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
