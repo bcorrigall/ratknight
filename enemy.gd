@@ -13,12 +13,6 @@ var targetposition
 @export var Item = preload("res://item.tscn")
 @onready var effects = $Effect
 @onready var shake = get_parent().get_node("Camera2D")
-@onready var deathAnimation= $death
-@onready var movineAnimation= $AnimatedSprite2D
-@onready var coli=$CollisionShape2D
-@onready var coli2=$HurtBox/CollisionShape2D
-@onready var HPbar=$HPbar
-
 
 var jerk_time = 1
 var jerk_lower_bound = -0.2
@@ -27,11 +21,6 @@ var noise = Vector2(randf_range(jerk_lower_bound, jerk_upper_bound), randf_range
 var speed_boost = 0
 var attacking = false
 var deltax=0# for the shake
-var isDead=false
-var dropitem=false
-
-
-
 
 @export var experience = 150
 
@@ -43,7 +32,6 @@ func _ready():
 
 
 func _physics_process(delta):
-	if isDead:pass
 	deltax=delta#store the value for shake
 	playerposition = player.position
 	targetposition = (playerposition - position).normalized()
@@ -124,9 +112,8 @@ func get_hurt_star(number):
 	player.damage_count_fun(number)
 
 func _on_hurt_box_area_entered(area):
-	if isDead:pass
 	if(area.name.match("Sword") and area.get_parent().visible or area.name.match("AttackArea")):
-		get_damage(area)
+		get_damage()
 	elif(area.name.match("theRatArea2D")):
 		$AttackTimer.start(0.2)
 		$AnimatedSprite2D.animation = "attack_side"
@@ -136,22 +123,11 @@ func _on_hurt_box_area_entered(area):
 		
 		return
 
-func shakey(area):
-	if area is String:
-		shake._hit(Vector2(0.950,0.950),Vector2(7,-9))
-		shake.frameFreeze(0.1,0.09)#camera freeze
-	elif(area.name.match("Sword")):
-		shake._hit(Vector2(0.950,0.950),Vector2(7,-9))
-		shake.frameFreeze(0.1,0.09)#camera freeze
-	else:
-		shake.shake_change()
-		shake._process(deltax)
-		shake.shake_false()
-	
-func get_damage(area):
-	if isDead:pass
+func get_damage():
 	effects.play("gethurt")
-	shakey(area)
+	shake.shake_change()
+	shake._process(deltax)
+	shake.shake_false()
 	$Timer.start(0.4)
 	HPbar.visible=true
 	HPbar.update()

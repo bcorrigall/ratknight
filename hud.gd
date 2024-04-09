@@ -1,18 +1,6 @@
 extends CanvasLayer
 
-@onready var skilltree= $SkillTree
-@onready var player=$"../theRat"
-@onready var pow_animation=$pow_icon
-@onready var killtimer=$KillTimer
-@onready var kill_panel=$killcomble
-@onready var kill_com=$killcomble/kill
 
-func _input(event):
-	if event.is_action_pressed("level"): #new close and open fuction
-		if skilltree.isOpen:
-			skilltree.close()
-		else:
-			skilltree.open()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	skilltree.close()
@@ -25,10 +13,13 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
-
-func update_level():
-	$Level.text=str("Level: ")+str(player.level)
+	var rat = get_node("../theRat")
+	var level = rat.level
+	var levelold = 1
+	$CurrentLevel.text = str(level)
+	if(level>levelold):
+		$LEVELUP.show()
+		$LevelUPTIME.start()
 
 
 func _on_the_rat_levelup():
