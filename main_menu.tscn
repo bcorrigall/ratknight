@@ -98,6 +98,7 @@ color = Color(0, 0, 0, 0)
 stream = ExtResource("4_wom3u")
 
 [node name="ScoreBoard" parent="." instance=ExtResource("5_tyujk")]
+visible = false
 script = ExtResource("6_mmujv")
 
 [node name="scoreRect" parent="ScoreBoard/bigScoreRect" index="1"]
