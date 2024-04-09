@@ -2,11 +2,12 @@ extends Node2D
 
 @export var speed = 400
 @export var maxHealth = 120
-@export var boosted = false
+
 var real_speed = speed
 
 @onready var animations = $AnimationPlayer
 @onready var weapon = $Weapon
+@onready var effect=$Effect
 
 var health = 120
 var trap_slowdown = 1
@@ -46,6 +47,8 @@ signal levelup
 var skill_points = 1000
 var experience = 0
 var experience_to_next = 100
+var killcomble=0
+signal exp
 var skill_buttons
 
 signal gameover
@@ -54,6 +57,7 @@ signal endpow
 signal kill
 signal dash_cool
 var damage_bonus = 0
+var limited_damage_bonus=0
 var defence_bonus = 0
 var regenerate_bonus = 0
 var regen_cap = 20
@@ -125,6 +129,7 @@ func attack_animation(direction, cooldown):
 	$AttackTimeout.start(attack_cooldown)
 
 func dash():
+	$theRatArea2D/dashArea.disabled=false
 	if (!in_dash and !dash_timed_out and !knocked_back):
 		FXPlay("dash_fx")
 		in_dash = true
@@ -336,6 +341,7 @@ func _on_area_2d_body_entered(body):
 
 func earn_experience(bonus):
 	experience += bonus
+	exp.emit()
 	if (experience >= experience_to_next):
 		level_up()
 func earn_kill():
@@ -355,7 +361,9 @@ func level_up():
 		level += 1
 		experience -= experience_to_next
 		experience_to_next = calculate_experience()
-		print("now level " + str(level))
+		#print("now level " + str(level))
+		exp.emit()
+		levelup.emit()
 
 func calculate_experience():
 	return experience_to_next + (level * 100)
@@ -398,6 +406,7 @@ func _on_dash_timeout():
 	in_dash = false
 	$playerSprites.position.x = 0
 	real_speed = speed
+	$theRatArea2D/dashArea.disabled=true
 
 func _on_invinciblilty_timeout():
 	invincible = false

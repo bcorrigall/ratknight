@@ -3,11 +3,10 @@ signal healthInc
 var type = 0
 @export var Item_scene: PackedScene
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-	type = randi_range(0,6)
+	type = randi() % 6
 
 func set_animation(item):
 	if(item <= 2):
@@ -22,7 +21,7 @@ func _process(delta):
 func _on_area_entered(area):
 	if(area.name.match("theRatArea2D")):
 		var the_rat = area.get_parent()
-		print("what's going on")
+		#print("what's going on")
 		if(type >= 3):
 			the_rat.health += 20
 			the_rat.FXPlay("heart")
@@ -42,4 +41,8 @@ func _on_area_entered(area):
 
 		queue_free()
 
-	
+func _on_boost_timer_timeout():
+	var the_rat = get_node("../theRat")
+	#the_rat.damage_bonus -= 25
+	#print("time is out!")
+	#the_rat.endeffect(0)
