@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bd1rvmtjug7o8"]
+[gd_scene load_steps=54 format=3 uid="uid://bd1rvmtjug7o8"]
 
 [ext_resource type="Script" path="res://enemy.gd" id="1_4tbc6"]
 [ext_resource type="Texture2D" uid="uid://blnakttrwrjas" path="res://assets/enemies/antFighter/attack(side)/0.png" id="2_cyluj"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://c20nk8d8tsbk6" path="res://assets/enemies/antFighter/move_back/3.png" id="7_b3ycb"]
 [ext_resource type="Texture2D" uid="uid://diwblvrk7lbhs" path="res://assets/enemies/antFighter/attack(side)/5.png" id="7_nvf24"]
 [ext_resource type="Texture2D" uid="uid://c617uy1yeo1t" path="res://assets/enemies/antFighter/move_back/4.png" id="8_b7ha2"]
+[ext_resource type="Texture2D" uid="uid://chusapi3xfe04" path="res://assets/FX/death.png" id="8_er71u"]
 [ext_resource type="Texture2D" uid="uid://c7spixydrplu6" path="res://assets/enemies/antFighter/move_back/5.png" id="9_rxdg4"]
 [ext_resource type="Texture2D" uid="uid://d2h8b2mho81dc" path="res://assets/enemies/antFighter/move_back/6.png" id="10_x7mvi"]
 [ext_resource type="Texture2D" uid="uid://cxp0qfmnjgr6d" path="res://assets/enemies/antFighter/move_front/1.png" id="11_2rbfg"]
@@ -30,6 +31,12 @@
 [ext_resource type="Texture2D" uid="uid://8s0oanf8utab" path="res://assets/enemies/antFighter/move_side/6.png" id="22_egr1b"]
 [ext_resource type="Texture2D" uid="uid://cc8xyl17se1u8" path="res://assets/enemies/antFighter/move_side/7.png" id="23_a8u3r"]
 [ext_resource type="Texture2D" uid="uid://ded4e7gg4lnu7" path="res://assets/enemies/antFighter/move_side/8.png" id="24_fxfxy"]
+[ext_resource type="Texture2D" uid="uid://crp0jtnqjxckk" path="res://assets/FX/Hit_Effect.png" id="32_2bctd"]
+[ext_resource type="Script" path="res://AnimatedSprite2D.gd" id="32_d6bso"]
+[ext_resource type="Script" path="res://death.gd" id="33_u675q"]
+[ext_resource type="Texture2D" uid="uid://c3nx1phybkg8t" path="res://assets/GUI/LifeBarMiniUnder.png" id="34_xkxbr"]
+[ext_resource type="Texture2D" uid="uid://c6i7jwkakmuqx" path="res://assets/GUI/LifeBarMiniProgress.png" id="35_7mqao"]
+[ext_resource type="Script" path="res://HPbar.gd" id="36_cg8ur"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1gqbj"]
 animations = [{
@@ -178,11 +185,40 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 0, 0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hiteffect:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("hiteffect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_xha0f"]
+resource_name = "death"
+length = 0.7
 
 [sub_resource type="Animation" id="Animation_1qevy"]
 resource_name = "gethurt"
-length = 0.4
+length = 0.2
 loop_mode = 1
+step = 0.02
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -195,21 +231,112 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 0, 0, 0.639216), Color(1, 1, 1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hiteffect:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.04, 0.06, 0.08),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("hiteffect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r6nxe"]
 _data = {
 "RESET": SubResource("Animation_hq5i6"),
+"death": SubResource("Animation_xha0f"),
 "gethurt": SubResource("Animation_1qevy")
 }
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ekjnx"]
+atlas = ExtResource("8_er71u")
+region = Rect2(0, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_81fab"]
+atlas = ExtResource("8_er71u")
+region = Rect2(72, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2y16"]
+atlas = ExtResource("8_er71u")
+region = Rect2(144, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otjsu"]
+atlas = ExtResource("8_er71u")
+region = Rect2(216, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tf0pu"]
+atlas = ExtResource("8_er71u")
+region = Rect2(288, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dgu3i"]
+atlas = ExtResource("8_er71u")
+region = Rect2(360, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85yni"]
+atlas = ExtResource("8_er71u")
+region = Rect2(432, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_07qdr"]
+atlas = ExtResource("8_er71u")
+region = Rect2(504, 0, 72, 72)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vg07h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ekjnx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_81fab")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m2y16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otjsu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tf0pu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dgu3i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85yni")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07qdr")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
 
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_4tbc6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 clip_children = 2
+texture_filter = 3
 scale = Vector2(0.138125, 0.151875)
 sprite_frames = SubResource("SpriteFrames_1gqbj")
-animation = &"move_front"
+animation = &"attack_side"
+script = ExtResource("32_d6bso")
 
 [node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D"]
 offset_left = -463.348
@@ -239,8 +366,36 @@ libraries = {
 
 [node name="shakeTimer" type="Timer" parent="."]
 
+[node name="hiteffect" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.138, 0.138)
+texture = ExtResource("32_2bctd")
+hframes = 5
+
+[node name="death" type="AnimatedSprite2D" parent="."]
+visible = false
+texture_filter = 3
+sprite_frames = SubResource("SpriteFrames_vg07h")
+frame = 1
+frame_progress = 0.367698
+script = ExtResource("33_u675q")
+
+[node name="HPbar" type="TextureProgressBar" parent="."]
+visible = false
+texture_filter = 3
+offset_left = -31.0
+offset_top = -68.0
+offset_right = -13.0
+offset_bottom = -64.0
+scale = Vector2(3.64446, 2.1926)
+texture_under = ExtResource("34_xkxbr")
+texture_progress = ExtResource("35_7mqao")
+script = ExtResource("36_cg8ur")
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="JerkTimer" to="." method="_on_jerk_timer_timeout"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="shakeTimer" to="." method="_on_shake_timer_timeout"]
+[connection signal="animation_finished" from="death" to="." method="_on_death_animation_finished"]
+[connection signal="visibility_changed" from="death" to="." method="_on_death_visibility_changed"]

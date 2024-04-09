@@ -1,10 +1,8 @@
-extends Node2D
+extends AnimatedSprite2D
 
-var damage = 30
-@onready var animation=$Sprite2D/AnimatedSprite2D
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	animation.play("default")
 	pass # Replace with function body.
 
 

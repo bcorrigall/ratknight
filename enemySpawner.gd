@@ -7,15 +7,15 @@ var start_spawn = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print("im here")
+	#print("im here")
 	$MonsterTimer.start(1)
 	
 func spawn_monster():
 	var enemyt = enemy.instantiate()
 	enemyt.position.x = randi_range(31,1057)
 	enemyt.position.y = randi_range(93,456)
-	print(enemyt.get_node("CollisionShape2D"))
-	print(get_parent())
+	#print(enemyt.get_node("CollisionShape2D"))
+	#print(get_parent())
 	get_parent().add_child(enemyt)
 
 func _on_monster_time_timeout():

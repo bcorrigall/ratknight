@@ -1,13 +1,10 @@
-extends Node2D
+extends ProgressBar
+@onready var timer=$"../../KillTimer"
 
-var damage = 30
-@onready var animation=$Sprite2D/AnimatedSprite2D
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	animation.play("default")
-	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	var gonetime=10-timer.get_time_left()
+	value=gonetime*100/10
 	pass
