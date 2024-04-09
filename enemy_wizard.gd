@@ -81,3 +81,7 @@ func _on_ranged_timer_timeout():
 
 func _on_runtimer_timeout():
 	running = false
+
+func _on_death_animation_finished():
+	deathAnimation.visible = false
+	queue_free()
