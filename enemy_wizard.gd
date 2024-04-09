@@ -3,11 +3,12 @@ extends 'res://enemy.gd'
 @export var attack_scene = preload("res://WizardBall.tscn")
 var timed_out = false
 var attack
+var running = false
 
 func _ready():
 	$JerkTimer.start(jerk_time)
 	SPEED = 250
-	health = 50
+	health = 25
 	damage = 15
 	experience = 250
 
@@ -15,17 +16,20 @@ func _physics_process(delta):
 	
 	playerposition = player.position
 	targetposition = (playerposition - position).normalized()
-
-	if global_position.distance_to(player.global_position) > 400:
-		targetposition += noise.normalized()/2
-	elif global_position.distance_to(player.global_position) > 250:
-		targetposition += noise.normalized()/2
-		if (!timed_out):
-			fire()
-	else:
+	if (running == true):
 		var direction_to_player = (playerposition - global_position).normalized()
 		if direction_to_player.dot(targetposition.normalized()) > 0: 
 			targetposition *= -1
+	else:
+		if global_position.distance_to(player.global_position) > 400 :
+			targetposition += noise.normalized()/2
+		elif global_position.distance_to(player.global_position) > 250:
+			targetposition += noise.normalized()/2
+			if (!timed_out):
+				fire()
+		else:
+			running = true
+			$Runtimer.start(0.5)
 
 
 	if ((position.distance_to(playerposition) > 30) and !attacking):
@@ -74,3 +78,6 @@ func fire():
 
 func _on_ranged_timer_timeout():
 	timed_out = false
+
+func _on_runtimer_timeout():
+	running = false

@@ -306,6 +306,7 @@ func _on_the_rat_area_2d_area_entered(area):
 		knocked_back = true
 		invincible = true
 	elif (area.get_name().begins_with("WizardBall")):
+		print('hi')
 		var enemy = area
 		damage_rat("fire",enemy.damage)
 		var direction = (enemy.position - position).normalized() * 100
@@ -316,19 +317,17 @@ func _on_the_rat_area_2d_area_entered(area):
 		invincible = true
 		print('hit')
 		
-func _on_area_2d_body_entered(body):
-	#print(body)
-
+	if (area.get_name().begins_with("HurtBox") and in_dash and dash_attack):
+		area.get_parent().get_damage("dash")
+		area.get_parent().health -= 20+damage_bonus
+	elif(area.get_name().begins_with("@CharacterBody2D") and in_dash and dash_attack):
+		area.get_parent().get_damage("dash")
+		area.get_parent().health -= 20+damage_bonus
 		
-	if (body.get_name().begins_with("Enemy") and in_dash and dash_attack):
-		body.get_damage("dash")
-		body.health -= 20+damage_bonus
-	elif(body.get_name().begins_with("@CharacterBody2D") and in_dash and dash_attack):
-		body.get_damage("dash")
-		body.health -= 20+damage_bonus
+func _on_area_2d_body_entered(body):
 
 
-	elif (body.get_name().begins_with("Trap") and !in_dash):
+	if (body.get_name().begins_with("Trap") and !in_dash):
 		damage_rat("fire",body.damage)
 
 		var direction = (body.position - position).normalized() * 100
@@ -451,7 +450,7 @@ func FXPlay(name):
 	elif name=="levelup_fx":
 		if $SoundEffect/levelup_fx.is_playing():
 			$SoundEffect/levelup_fx.stop()
-			$SoundEffect/levelup_fx.playing()
+
 		$SoundEffect/levelup_fx.play()
 	elif name=="PowerUp_fx":
 		#if $SoundEffect/PowerUp_fx.is_playing():

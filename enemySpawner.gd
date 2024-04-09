@@ -1,21 +1,29 @@
 extends Node
 @export var enemy = preload("res://enemy.tscn")
+@export var enemy_wizard = preload("res://enemy_wizard.tscn")
 @export var monster_time = 5
 @export var starting_monsters = 10
 @export var starting_timer = 1
 var start_spawn = false
+var the_rat
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#print("im here")
 	$MonsterTimer.start(1)
-	
+
 func spawn_monster():
-	var enemyt = enemy.instantiate()
-	enemyt.position.x = randi_range(31,1057)
-	enemyt.position.y = randi_range(93,456)
-	#print(enemyt.get_node("CollisionShape2D"))
-	#print(get_parent())
+	var random_number = randf()
+	var enemyt
+	if (random_number <= 0.8):
+		enemyt = enemy.instantiate()
+	else:
+		enemyt = enemy_wizard.instantiate()
+
+	the_rat = get_tree().get_nodes_in_group("player")
+	enemyt.position = the_rat[0].global_position
+	enemyt.position.x += randi_range(-1057,1057)
+	enemyt.position.y += randi_range(-456,456)
 	get_parent().add_child(enemyt)
 
 func _on_monster_time_timeout():

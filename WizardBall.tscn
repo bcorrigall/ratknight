@@ -10,7 +10,7 @@ script = ExtResource("1_quy03")
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="WizardBall" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ts8xw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

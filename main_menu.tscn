@@ -58,9 +58,11 @@ vertical_alignment = 1
 
 [node name="Menu_music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_rii4u")
+volume_db = -15.036
 
 [node name="start_music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_p11vm")
+volume_db = -14.991
 
 [node name="Panel" type="ColorRect" parent="."]
 visible = false

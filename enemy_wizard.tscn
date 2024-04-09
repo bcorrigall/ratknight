@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://b2exw3ufrb416"]
+[gd_scene load_steps=41 format=3 uid="uid://b2exw3ufrb416"]
 
 [ext_resource type="Script" path="res://enemy_wizard.gd" id="1_77pnd"]
 [ext_resource type="Texture2D" uid="uid://b3fdeaej8tt2d" path="res://assets/AntMage/attack/1.png" id="1_xgg51"]
@@ -24,6 +24,15 @@
 [ext_resource type="Texture2D" uid="uid://dya4yk4lpceex" path="res://assets/AntMage/right/1.png" id="21_up7w2"]
 [ext_resource type="Texture2D" uid="uid://bmjvs88mhock4" path="res://assets/AntMage/right/2.png" id="22_vnjff"]
 [ext_resource type="Texture2D" uid="uid://j65m1hk2he1v" path="res://assets/AntMage/right/3.png" id="23_q6j1a"]
+[ext_resource type="Texture2D" uid="uid://crp0jtnqjxckk" path="res://assets/FX/Hit_Effect.png" id="25_c5ffa"]
+[ext_resource type="Script" path="res://death.gd" id="27_e1t32"]
+[ext_resource type="Texture2D" uid="uid://c3nx1phybkg8t" path="res://assets/GUI/LifeBarMiniUnder.png" id="28_qfcd0"]
+[ext_resource type="Texture2D" uid="uid://c6i7jwkakmuqx" path="res://assets/GUI/LifeBarMiniProgress.png" id="29_dma10"]
+[ext_resource type="Script" path="res://HPbar.gd" id="30_yd104"]
+[ext_resource type="AudioStream" uid="uid://dvir83bd772dd" path="res://assets/sound/enemy/enemy_die.wav" id="31_h2thn"]
+[ext_resource type="AudioStream" uid="uid://dd4o7rskfw3pu" path="res://assets/sound/enemy/star_Hit1.wav" id="32_c7q0g"]
+[ext_resource type="AudioStream" uid="uid://dukxvg3dkm4k2" path="res://assets/sound/attack/sword_hit.wav" id="33_3yf2w"]
+[ext_resource type="AudioStream" uid="uid://c3pet3ctdbv2l" path="res://assets/sound/attack/sword_hit_spin.wav" id="34_8513k"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_un6mi"]
 animations = [{
@@ -189,6 +198,14 @@ _data = {
 "gethurt": SubResource("Animation_1qevy")
 }
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_a0c0s"]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_77pnd")
 
@@ -226,4 +243,47 @@ libraries = {
 
 [node name="RangedTimer" type="Timer" parent="."]
 
+[node name="Runtimer" type="Timer" parent="."]
+
+[node name="shakeTimer" type="Timer" parent="."]
+
+[node name="hiteffect" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.138, 0.138)
+texture = ExtResource("25_c5ffa")
+hframes = 5
+
+[node name="death" type="AnimatedSprite2D" parent="."]
+visible = false
+texture_filter = 3
+sprite_frames = SubResource("SpriteFrames_a0c0s")
+script = ExtResource("27_e1t32")
+
+[node name="HPbar" type="TextureProgressBar" parent="."]
+visible = false
+texture_filter = 3
+offset_left = -31.0
+offset_top = -68.0
+offset_right = -13.0
+offset_bottom = -64.0
+scale = Vector2(3.64446, 2.1926)
+texture_under = ExtResource("28_qfcd0")
+texture_progress = ExtResource("29_dma10")
+script = ExtResource("30_yd104")
+
+[node name="SoundFX" type="Node" parent="."]
+
+[node name="die" type="AudioStreamPlayer2D" parent="SoundFX"]
+stream = ExtResource("31_h2thn")
+
+[node name="star_hit" type="AudioStreamPlayer2D" parent="SoundFX"]
+stream = ExtResource("32_c7q0g")
+
+[node name="Ehit_1" type="AudioStreamPlayer2D" parent="SoundFX"]
+stream = ExtResource("33_3yf2w")
+
+[node name="Ehit_2" type="AudioStreamPlayer2D" parent="SoundFX"]
+stream = ExtResource("34_8513k")
+
 [connection signal="timeout" from="RangedTimer" to="." method="_on_ranged_timer_timeout"]
+[connection signal="timeout" from="Runtimer" to="." method="_on_runtimer_timeout"]
