@@ -1,5 +1,7 @@
 extends Area2D
 
+var friend = false
+
 var speed = 300
 var rotation_speed = 6
 var damage
@@ -20,4 +22,5 @@ func _on_timer_timeout():
 
 func _on_area_entered(area):
 	if(area.get_name().begins_with("theRatArea2D")):
+		#print("hit")
 		queue_free()

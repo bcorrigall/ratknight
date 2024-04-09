@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bgedj0hkpe1k" path="res://assets/star/star.png" id="2_uuxvo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ts8xw"]
+radius = 15.0
 
 [node name="WizardBall" type="Area2D"]
 script = ExtResource("1_quy03")

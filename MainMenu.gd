@@ -75,7 +75,83 @@ func score_tween(killcomble,kill,damage,hps):
 	var total_score=kill*10+damage+hps+killcomble
 	scoretween.tween_method(update_Total, 0, total_score, 1)
 	$ScoreBoard/bigScoreRect/Logs.visible=true
-	scoretween.tween_method(update_Logs, 0, 100, 2).set_ease(Tween.EASE_IN_OUT)
+	var log=int(100*total_score/7190)#7190
+	
+	#scoretween.tween_method(update_Logs, 0, log, 2).set_ease(Tween.EASE_IN_OUT)
+
+	
+	if(log<25):
+		print("gray")
+		scoretween.tween_method(update_Logs, 0, log, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.GRAY, 1)
+	elif(log<50 ):
+		print("green")
+		scoretween.tween_method(update_Logs, 0, 24, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.GRAY, 1)
+		scoretween.tween_method(update_Logs, 25, log, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.GREEN_YELLOW, 1)
+	elif(log<75 ):
+		print("blue")
+		scoretween.tween_method(update_Logs, 0, 24, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.GRAY, 1)
+		scoretween.tween_method(update_Logs, 25, 49, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.GREEN_YELLOW, 1)
+		scoretween.tween_method(update_Logs, 50, 74, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.BLUE, 1)
+		pass
+	elif(log<95 ):
+		scoretween.tween_method(update_Logs, 0, 24, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.GRAY, 1)
+		scoretween.tween_method(update_Logs, 25, 49, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.GREEN_YELLOW, 1)
+		scoretween.tween_method(update_Logs, 50, 74, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.BLUE, 1)
+		scoretween.tween_method(update_Logs, 75, log, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.PURPLE, 1)
+		print("purple")
+	elif(log<99):
+		scoretween.tween_method(update_Logs, 0, 24, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.GRAY, 1)
+		scoretween.tween_method(update_Logs, 25, 49, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.GREEN_YELLOW, 1)
+		scoretween.tween_method(update_Logs, 50, 74, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.BLUE, 1)
+		scoretween.tween_method(update_Logs, 75, 94, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.PURPLE, 1)
+		scoretween.tween_method(update_Logs, 95, log, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.ORANGE, 2)
+		print("orange")
+	elif(log<100 ):
+		scoretween.tween_method(update_Logs, 0, 24, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.GRAY, 1)
+		scoretween.tween_method(update_Logs, 25, 49, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.GREEN_YELLOW, 1)
+		scoretween.tween_method(update_Logs, 50, 74, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.BLUE, 1)
+		scoretween.tween_method(update_Logs, 75, 94, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.PURPLE, 1)
+		scoretween.tween_method(update_Logs, 95, 98, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.ORANGE, 1)
+		scoretween.tween_method(update_Logs, 99, log, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.HOT_PINK, 2)
+		print("pink")
+	else:
+		print("gold")
+		scoretween.tween_method(update_Logs, 0, 24, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.GRAY, 1)
+		scoretween.tween_method(update_Logs, 25, 49, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.GREEN_YELLOW, 1)
+		scoretween.tween_method(update_Logs, 50, 74, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.BLUE, 1)
+		scoretween.tween_method(update_Logs, 75, 94, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.PURPLE, 1)
+		scoretween.tween_method(update_Logs, 95, 98, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.ORANGE, 1)
+		scoretween.tween_method(update_Logs, 98, 99, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.HOT_PINK, 2)
+		scoretween.tween_method(update_Logs, 99, 100, 2)
+		scoretween.parallel().tween_property($ScoreBoard/bigScoreRect/Logs, "modulate",Color.GOLD, 2)
+	
 	$ScoreBoard/bigScoreRect/Close_button.show()
 	
 

@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bgedj0hkpe1k" path="res://assets/star/star.png" id="2_kmsdl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6k2cw"]
+radius = 12.3693
 
 [node name="Attack" type="Node2D"]
 script = ExtResource("1_3benm")

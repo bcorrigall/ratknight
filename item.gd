@@ -3,6 +3,8 @@ signal healthInc
 var type = 0
 @export var Item_scene: PackedScene
 
+var friend = true
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()

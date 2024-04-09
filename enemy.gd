@@ -43,7 +43,7 @@ func _ready():
 
 
 func _physics_process(delta):
-	if isDead:pass
+	if isDead:return
 	deltax=delta#store the value for shake
 	playerposition = player.position
 	targetposition = (playerposition - position).normalized()
@@ -90,6 +90,11 @@ func _physics_process(delta):
 
 func death():
 	#animation stuff
+	if isDead:return
+	
+	print("isDead:"+str(isDead))
+	FX_play("die")
+	isDead=true
 	var type = randf()*100
 	type+=player.item_drop
 	if dropitem==false:
@@ -104,7 +109,7 @@ func death():
 			print("posi: "+str(type))
 			dropitem=true
 		player.earn_experience(experience)
-		player.earn_kill()
+		player.earn_kill(maxhealth)
 	movineAnimation.visible=false
 	effects.pause()
 	deathAnimation.visible = true
@@ -112,19 +117,19 @@ func death():
 	coli.disabled=true
 	coli2.disabled=true
 	deathAnimation.play("default")
-	if(isDead!=true):
-		FX_play("die")
-	isDead=true
+
+
+	
+
 	
 
 	
 
 func get_hurt_star(number):
 	health-=number
-	player.damage_count_fun(number)
 
 func _on_hurt_box_area_entered(area):
-	if isDead:pass
+	if isDead:return
 	if(area.name.match("Sword") and area.get_parent().visible or area.name.match("AttackArea")):
 		get_damage(area)
 	elif(area.name.match("theRatArea2D")):
@@ -149,7 +154,7 @@ func shakey(area):
 		shake.shake_false()
 	
 func get_damage(area):
-	if isDead:pass
+	if isDead:return
 	effects.play("gethurt")
 	shakey(area)
 	$Timer.start(0.4)
@@ -180,20 +185,27 @@ func _on_attack_timer_timeout():
 func _on_death_animation_finished():
 	deathAnimation.visible = false
 	queue_free()
+	pass
 
 	
 func FX_play(name):
 	if name=="die":
 		$SoundFX/die.play()
+		print("die")
 	elif name=="star":
 		$SoundFX/star_hit.play()
+		print("star")
 	elif name=="hit":
 		var type= randi() % 2
+		print("hit")
 		if(type==0):
 			$SoundFX/Ehit_1.play()
 			print("play hit1")
 		else:
 			$SoundFX/Ehit_2.play()
 			print("play hit2")
+	elif name=="fire":
+		print("fire")
+		$SoundFX/Fire_ball.play()
 	else:
 		print("error:" +str(name))

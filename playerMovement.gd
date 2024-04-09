@@ -295,6 +295,7 @@ func death():
 	simultaneous_scene.game_over(killcomble_bonus,kill_count,damage_count,hps)
 
 func _on_the_rat_area_2d_area_entered(area):
+	print(area)
 	if (area.get_name().begins_with("HurtBox") and invincible == false and in_dash == false):
 		var enemy = area.get_parent()
 		damage_rat("physic",enemy.damage)
@@ -305,8 +306,13 @@ func _on_the_rat_area_2d_area_entered(area):
 		$Invinciblilty.start(invincibility_time)
 		knocked_back = true
 		invincible = true
-	elif (area.get_name().begins_with("WizardBall")):
+	elif (area.get_name().begins_with("Item")):
+		return
+	elif (area.get_name().begins_with("HitBox")):
+		return
+	else:
 		var enemy = area
+		if enemy.friend==true:return
 		damage_rat("fire",enemy.damage)
 		var direction = (enemy.position - position).normalized() * 100
 		knockback_direction = -direction.normalized() 
@@ -314,7 +320,7 @@ func _on_the_rat_area_2d_area_entered(area):
 		$Invinciblilty.start(invincibility_time)
 		knocked_back = true
 		invincible = true
-		print('hit')
+		
 		
 func _on_area_2d_body_entered(body):
 	#print(body)
@@ -345,9 +351,9 @@ func earn_experience(bonus):
 	exp.emit()
 	if (experience >= experience_to_next):
 		level_up()
-func earn_kill():
+func earn_kill(dps):
 	killcomble+=1
-	damage_count_fun(100)
+	damage_count_fun(dps)
 	if(killcomble%10==0):
 		killcomble_bonus_fun(killcomble)
 	elif(killcomble>=1000):
@@ -401,7 +407,7 @@ func endboost():
 	damage_bonus-=limited_damage_bonus #delete all power
 	limited_damage_bonus=0
 	endpow.emit()
-	#endeffect()
+	endeffect()
 
 func _on_dash_timeout():
 	in_dash = false
@@ -494,4 +500,4 @@ func killcomble_bonus_fun(k):
 	elif(k==20):killcomble_bonus+=200
 	elif(k==50):killcomble_bonus+=500
 	elif(k==100):killcomble_bonus+=1000
-	elif(k>100):killcomble+=20
+	elif(k>100):killcomble_bonus+=20
