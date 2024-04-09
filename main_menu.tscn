@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://binl84qqvsyx5"]
+[gd_scene load_steps=7 format=3 uid="uid://binl84qqvsyx5"]
 
 [ext_resource type="Script" path="res://MainMenu.gd" id="1_5aduo"]
+[ext_resource type="AudioStream" uid="uid://nidjid7mwxye" path="res://assets/music/Menu_Light Ambience 1.wav" id="2_rii4u"]
+[ext_resource type="AudioStream" uid="uid://ltq6wyllq6k2" path="res://assets/sound/menu_button.wav" id="3_p11vm"]
+[ext_resource type="AudioStream" uid="uid://co0q6rncsgqi6" path="res://assets/sound/gameover.wav" id="4_wom3u"]
+[ext_resource type="PackedScene" uid="uid://cfxvqlnvrp3p7" path="res://score_board.tscn" id="5_tyujk"]
+[ext_resource type="Script" path="res://score_board.gd" id="6_mmujv"]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_5aduo")
@@ -17,6 +22,7 @@ offset_right = 34.0
 offset_bottom = 21.5
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 25
 text = "Start"
 
@@ -33,6 +39,7 @@ theme_override_font_sizes/font_size = 40
 text = "Rat Knight!"
 
 [node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.5
 
 [node name="Label2" type="Label" parent="."]
 offset_left = 432.0
@@ -49,5 +56,74 @@ Press L to open the level menu
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Menu_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_rii4u")
+
+[node name="start_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_p11vm")
+
+[node name="Panel" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="gameover_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_wom3u")
+
+[node name="ScoreBoard" parent="." instance=ExtResource("5_tyujk")]
+visible = false
+script = ExtResource("6_mmujv")
+
+[node name="scoreRect" parent="ScoreBoard/bigScoreRect" index="1"]
+anchor_top = 0.174383
+anchor_bottom = 0.731481
+
+[node name="score" parent="ScoreBoard/bigScoreRect/scoreRect/EnemyKill" index="1"]
+text = ""
+
+[node name="score" parent="ScoreBoard/bigScoreRect/scoreRect/Damage" index="1"]
+text = ""
+
+[node name="score" parent="ScoreBoard/bigScoreRect/scoreRect/HPS" index="1"]
+text = ""
+
+[node name="score" parent="ScoreBoard/bigScoreRect/scoreRect/boss" index="1"]
+text = ""
+
+[node name="score" parent="ScoreBoard/bigScoreRect/scoreRect/Total_Mark" index="1"]
+text = ""
+
+[node name="Close_button" type="Button" parent="ScoreBoard/bigScoreRect" index="2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.439236
+anchor_top = 0.867284
+anchor_right = 0.555556
+anchor_bottom = 0.96142
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "CLOSE"
+
+[node name="Logs" type="Label" parent="ScoreBoard/bigScoreRect" index="3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.24566
+anchor_top = 0.733025
+anchor_right = 0.750868
+anchor_bottom = 0.861111
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
+[connection signal="pressed" from="ScoreBoard/bigScoreRect/Close_button" to="." method="_on_close_button_pressed"]
+
+[editable path="ScoreBoard"]

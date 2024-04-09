@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://ceuv5u0sy0aov"]
+
+[ext_resource type="Texture2D" uid="uid://ctjdp7k6mx3pw" path="res://assets/icon/attack_boost.png" id="1_asv2l"]
+
+[node name="ProgressBar" type="TextureProgressBar"]
+texture_filter = 3
+anchors_preset = -1
+anchor_left = 1.832
+anchor_right = 1.995
+anchor_bottom = 0.295
+offset_left = -0.464111
+offset_top = 2.0
+offset_right = -172.24
+offset_bottom = -173.16
+grow_horizontal = 0
+scale = Vector2(11.813, 11.813)
+value = 30.0
+fill_mode = 8
+texture_progress = ExtResource("1_asv2l")

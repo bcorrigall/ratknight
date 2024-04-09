@@ -24,18 +24,24 @@ func _on_area_entered(area):
 		var the_rat = area.get_parent()
 		print("what's going on")
 		if(type >= 3):
+			var old_hp=the_rat.health
 			the_rat.health += 20
+			the_rat.FXPlay("heart")
+			if(the_rat.health>20):
+				if(the_rat.dying==true):
+					the_rat.dying=false
+					the_rat.FXPlay("stopdying")
 			if(the_rat.maxHealth < the_rat.health):
 				the_rat.health = the_rat.maxHealth
-			print("healed")
-
+			#print("healed")
+			var hps=the_rat.health-old_hp
+			the_rat.hps_fun(hps)
 		if(type <= 2):
-			if(the_rat.boosted == false):
-				the_rat.damage_bonus += 25
-				print("damage boost")
-				the_rat.boosted = true
-				var time =  get_node("../theRat/BoostTimer")
-				time.start(5)
+			var timer = get_node("../theRat/Weapon/Damageboost")
+			the_rat.getboost(7)
+			#the_rat.damage_bonus += 25
+			#print("damage boost")
+			#$BoostTimer.start(5)
 
 		queue_free()
 

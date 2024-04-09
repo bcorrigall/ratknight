@@ -1,12 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2cs314jvy2yy"]
+[gd_scene load_steps=15 format=3 uid="uid://b2cs314jvy2yy"]
 
 [ext_resource type="Script" path="res://skill_tree.gd" id="1_5vrhb"]
 [ext_resource type="PackedScene" uid="uid://bqbswfmau18k" path="res://skill.tscn" id="1_6550d"]
-[ext_resource type="Texture2D" uid="uid://cepayxeh2frtq" path="res://assets/theRat/Attack_side/4.png" id="3_0mmol"]
-[ext_resource type="Texture2D" uid="uid://iumpcg2um3l4" path="res://assets/hearts/heart_4_4.png" id="4_fen5n"]
-[ext_resource type="Texture2D" uid="uid://c2qalgdxo80qu" path="res://assets/theRat/Dash_side/5.png" id="5_43j6v"]
-[ext_resource type="Texture2D" uid="uid://bgedj0hkpe1k" path="res://assets/star/star.png" id="5_76roj"]
-[ext_resource type="Texture2D" uid="uid://dipydihua6r5g" path="res://assets/theRat/Attack_side/5.png" id="6_xrlel"]
+[ext_resource type="Texture2D" uid="uid://ctjdp7k6mx3pw" path="res://assets/icon/attack_boost.png" id="3_q6oxy"]
+[ext_resource type="Texture2D" uid="uid://dlhek3nuccvjn" path="res://assets/icon/defense_boost.png" id="4_apfcp"]
+[ext_resource type="Texture2D" uid="uid://ddiilvg3gvk3o" path="res://assets/icon/heart.png" id="5_unnv7"]
+[ext_resource type="Texture2D" uid="uid://bwojx27q0q4ki" path="res://assets/icon/regeneration.png" id="6_cojlb"]
+[ext_resource type="Texture2D" uid="uid://ckgch58v550rl" path="res://assets/icon/Shuriken.png" id="7_sfqvj"]
+[ext_resource type="Texture2D" uid="uid://d2bx4835mq1ir" path="res://assets/icon/swiftness.png" id="8_58thj"]
+[ext_resource type="Texture2D" uid="uid://cqkjlb8nmafpe" path="res://assets/icon/spead2.png" id="9_xlmea"]
+[ext_resource type="Texture2D" uid="uid://dluh4oaejroo7" path="res://assets/icon/lucky_boost.png" id="10_jid5n"]
+[ext_resource type="Texture2D" uid="uid://dtvi1q76d71vx" path="res://assets/icon/cooldown.png" id="11_vu28u"]
+[ext_resource type="Texture2D" uid="uid://dw62o8krm7nmm" path="res://assets/icon/dash_attack.png" id="12_jvycv"]
+[ext_resource type="Texture2D" uid="uid://ck5qt71wkqahx" path="res://assets/icon/slowed.png" id="13_oyc3b"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v6k06"]
+load_path = "res://.godot/imported/attack_boost.png-a237031f644aeeb48f0c86601e52a692.ctex"
 
 [node name="SkillTree" type="Control"]
 layout_mode = 3
@@ -29,178 +38,212 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Skill" parent="Panel" instance=ExtResource("1_6550d")]
+texture_filter = 3
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -36.0
-offset_top = 38.0
-offset_right = 64.0
-offset_bottom = 138.0
+anchors_preset = -1
+anchor_left = 0.457
+anchor_top = 0.057
+anchor_right = 0.544
+anchor_bottom = 0.211
+offset_left = 0.536011
+offset_top = 0.0639992
+offset_right = 0.311951
+offset_bottom = 0.271988
 grow_horizontal = 2
-texture_normal = ExtResource("3_0mmol")
+texture_normal = ExtResource("3_q6oxy")
 skill_name = "Damage"
 
 [node name="Skill" parent="Panel/Skill" instance=ExtResource("1_6550d")]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -330.0
-offset_top = 161.0
-offset_right = -230.0
-offset_bottom = 261.0
+anchors_preset = -1
+anchor_left = -2.8
+anchor_top = 1.61
+anchor_right = -1.8
+anchor_bottom = 2.61
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 2
 disabled = true
+texture_normal = ExtResource("4_apfcp")
 skill_name = "Defence"
 skill_cost = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Skill" parent="Panel/Skill/Skill" instance=ExtResource("1_6550d")]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -202.0
-offset_top = 157.0
-offset_right = -102.0
-offset_bottom = 257.0
+anchors_preset = -1
+anchor_left = -1.52
+anchor_top = 1.57
+anchor_right = -0.52
+anchor_bottom = 2.57
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 2
 disabled = true
-texture_normal = ExtResource("4_fen5n")
+texture_normal = ExtResource("5_unnv7")
 skill_name = "Health"
 skill_cost = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Skill" parent="Panel/Skill/Skill/Skill" instance=ExtResource("1_6550d")]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -126.0
-offset_top = 143.0
-offset_right = -26.0
-offset_bottom = 243.0
+anchors_preset = -1
+anchor_left = -0.76
+anchor_top = 1.43
+anchor_right = 0.24
+anchor_bottom = 2.43
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 2
 disabled = true
-texture_normal = ExtResource("4_fen5n")
+texture_normal = ExtResource("5_unnv7")
 skill_name = "Health 2"
 skill_cost = 3
+metadata/_edit_use_anchors_ = true
 
 [node name="Skill2" parent="Panel/Skill/Skill/Skill" instance=ExtResource("1_6550d")]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 22.0
-offset_top = 143.0
-offset_right = 122.0
-offset_bottom = 243.0
+anchors_preset = -1
+anchor_left = 0.72
+anchor_top = 1.43
+anchor_right = 1.72
+anchor_bottom = 2.43
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 2
 disabled = true
-texture_normal = ExtResource("4_fen5n")
+texture_normal = ExtResource("6_cojlb")
 skill_name = "Regenerate"
 skill_cost = 5
+metadata/_edit_use_anchors_ = true
 
 [node name="Skill2" parent="Panel/Skill/Skill" instance=ExtResource("1_6550d")]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 93.0
-offset_top = 160.0
-offset_right = 193.0
-offset_bottom = 260.0
+anchors_preset = -1
+anchor_left = 1.43
+anchor_top = 1.6
+anchor_right = 2.43
+anchor_bottom = 2.6
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 2
 disabled = true
-texture_normal = ExtResource("5_76roj")
+texture_normal = ExtResource("7_sfqvj")
 skill_name = "Extra Throwing Star"
 skill_cost = 4
+metadata/_edit_use_anchors_ = true
 
 [node name="Skill2" parent="Panel/Skill/Skill/Skill2" instance=ExtResource("1_6550d")]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -118.0
-offset_top = 139.0
-offset_right = -18.0
-offset_bottom = 239.0
+anchors_preset = -1
+anchor_left = -0.68
+anchor_top = 1.39
+anchor_right = 0.32
+anchor_bottom = 2.39
+offset_right = 0.0
+offset_bottom = -1.52588e-05
 grow_horizontal = 2
 disabled = true
-texture_normal = ExtResource("5_76roj")
+texture_normal = ExtResource("7_sfqvj")
 skill_name = "Increase Throw Rate"
 skill_cost = 3
+metadata/_edit_use_anchors_ = true
 
 [node name="Skill3" parent="Panel/Skill/Skill/Skill2" instance=ExtResource("1_6550d")]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 29.0
-offset_top = 138.0
-offset_right = 129.0
-offset_bottom = 238.0
+anchors_preset = -1
+anchor_left = 0.79
+anchor_top = 1.38
+anchor_right = 1.79
+anchor_bottom = 2.38
+offset_right = 0.0
+offset_bottom = -1.52588e-05
 grow_horizontal = 2
 disabled = true
-texture_normal = ExtResource("5_76roj")
+texture_normal = ExtResource("7_sfqvj")
 skill_name = "Extra Throwing Star 2"
 skill_cost = 5
+metadata/_edit_use_anchors_ = true
 
 [node name="Skill2" parent="Panel/Skill" instance=ExtResource("1_6550d")]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 208.0
-offset_top = 150.0
-offset_right = 308.0
-offset_bottom = 250.0
+anchors_preset = -1
+anchor_left = 3.09
+anchor_top = 1.5
+anchor_right = 4.09
+anchor_bottom = 2.5
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 2
 disabled = true
+texture_normal = ExtResource("8_58thj")
 skill_name = "Speed"
 skill_cost = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Skill" parent="Panel/Skill/Skill2" instance=ExtResource("1_6550d")]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -171.0
-offset_top = 164.0
-offset_right = -71.0
-offset_bottom = 264.0
+anchors_preset = -1
+anchor_left = -1.5
+anchor_top = 1.65
+anchor_right = -0.5
+anchor_bottom = 2.65
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 2
 disabled = true
+texture_normal = ExtResource("9_xlmea")
 skill_name = "Dash Speed"
 skill_cost = 3
+metadata/_edit_use_anchors_ = true
 
 [node name="Skill" parent="Panel/Skill/Skill2/Skill" instance=ExtResource("1_6550d")]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 39.0
-offset_top = 149.0
-offset_right = 139.0
-offset_bottom = 249.0
+anchors_preset = -1
+anchor_left = 0.65
+anchor_top = 1.45
+anchor_right = 1.65
+anchor_bottom = 2.45
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 2
 disabled = true
+texture_normal = ExtResource("10_jid5n")
+skill_name = "Item Drops"
+skill_cost = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Skill2" parent="Panel/Skill/Skill2/Skill" instance=ExtResource("1_6550d")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.7
+anchor_top = 1.44
+anchor_right = 0.3
+anchor_bottom = 2.44
+offset_right = -1.90735e-06
+offset_bottom = 0.0
+grow_horizontal = 2
+disabled = true
+texture_normal = ExtResource("11_vu28u")
 skill_name = "Dash Cooldown"
 skill_cost = 5
+metadata/_edit_use_anchors_ = true
 
 [node name="Skill2" parent="Panel/Skill/Skill2" instance=ExtResource("1_6550d")]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 107.0
-offset_top = 160.0
-offset_right = 207.0
-offset_bottom = 260.0
+anchors_preset = -1
+anchor_left = 1.29
+anchor_top = 1.6
+anchor_right = 2.29
+anchor_bottom = 2.6
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 2
 disabled = true
-texture_normal = ExtResource("5_43j6v")
+texture_normal = ExtResource("12_jvycv")
 skill_name = "Dash Attack"
 skill_cost = 6
+metadata/_edit_use_anchors_ = true
 
 [node name="Skill2" parent="Panel/Skill/Skill2/Skill2" instance=ExtResource("1_6550d")]
 layout_mode = 1
@@ -213,15 +256,34 @@ offset_right = 118.0
 offset_bottom = 255.0
 grow_horizontal = 2
 disabled = true
-texture_normal = ExtResource("6_xrlel")
+texture_normal = SubResource("CompressedTexture2D_v6k06")
 skill_name = "Damage 2"
 skill_cost = 5
 
+[node name="Skill3" parent="Panel/Skill/Skill2/Skill2" instance=ExtResource("1_6550d")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.76
+anchor_top = 1.52
+anchor_right = 0.24
+anchor_bottom = 2.52
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+disabled = true
+texture_normal = ExtResource("13_oyc3b")
+skill_name = "Enemy Slowdown"
+skill_cost = 5
+metadata/_edit_use_anchors_ = true
+
 [node name="SkillPoints" type="RichTextLabel" parent="."]
+texture_filter = 3
 layout_mode = 0
-offset_left = 77.0
-offset_top = 55.0
-offset_right = 356.0
-offset_bottom = 115.0
+anchor_left = 0.0668403
+anchor_top = 0.0848765
+anchor_right = 0.309028
+anchor_bottom = 0.177469
+theme_override_font_sizes/normal_font_size = 42
 text = "0 level points"
 scroll_active = false
+metadata/_edit_use_anchors_ = true

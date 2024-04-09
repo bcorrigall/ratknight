@@ -3,7 +3,8 @@ extends CharacterBody2D
 
 @export var SPEED = 125
 @export var health = 100
-@export var damage = 5
+@export var maxhealth=100
+@export var damage = 10
 
 var playerposition
 var targetposition
@@ -25,6 +26,10 @@ var deltax=0# for the shake
 
 func _ready():
 	$JerkTimer.start(jerk_time)
+	deathAnimation.visible = false
+	HPbar.visible=false
+	randomize()
+
 
 func _physics_process(delta):
 	deltax=delta#store the value for shake
@@ -73,18 +78,38 @@ func _physics_process(delta):
 
 func death():
 	#animation stuff
-	randomize()
-	var type = randi_range(1,1)
-	if(type == 1):
-		var mob = Item.instantiate()
-		print(mob)
-		get_parent().add_child(mob)
-
-		mob.position = global_position
+	var type = randf()*100
+	type+=player.item_drop
+	if dropitem==false:
+		if(type >= 70):
+			print("drop item")
+			var mob = Item.instantiate()
+			get_parent().add_child(mob)
+			mob.set_animation(type)
+			mob.position = global_position
+			dropitem=true
+		else:
+			print("posi: "+str(type))
+			dropitem=true
 		player.earn_experience(experience)
+		player.earn_kill()
+	movineAnimation.visible=false
+	effects.pause()
+	deathAnimation.visible = true
+	HPbar.visible=false
+	coli.disabled=true
+	coli2.disabled=true
+	deathAnimation.play("default")
+	if(isDead!=true):
+		FX_play("die")
+	isDead=true
+	
 
-	queue_free()
+	
 
+func get_hurt_star(number):
+	health-=number
+	player.damage_count_fun(number)
 
 func _on_hurt_box_area_entered(area):
 	if(area.name.match("Sword") and area.get_parent().visible or area.name.match("AttackArea")):
@@ -95,6 +120,7 @@ func _on_hurt_box_area_entered(area):
 		
 		attacking = true
 	else:
+		
 		return
 
 func get_damage():
@@ -103,6 +129,17 @@ func get_damage():
 	shake._process(deltax)
 	shake.shake_false()
 	$Timer.start(0.4)
+	HPbar.visible=true
+	HPbar.update()
+	
+	
+	if(area is String):
+		FX_play("star")
+	elif area.name.match("Sword"):
+		FX_play("hit")
+	else:
+		FX_play("star")
+		print("else star play")
 	if(health <= 0):
 		death()
 		
@@ -115,3 +152,24 @@ func _on_jerk_timer_timeout():
 
 func _on_attack_timer_timeout():
 	attacking = false
+	
+func _on_death_animation_finished():
+	deathAnimation.visible = false
+	queue_free()
+
+	
+func FX_play(name):
+	if name=="die":
+		$SoundFX/die.play()
+	elif name=="star":
+		$SoundFX/star_hit.play()
+	elif name=="hit":
+		var type= randi() % 2
+		if(type==0):
+			$SoundFX/Ehit_1.play()
+			print("play hit1")
+		else:
+			$SoundFX/Ehit_2.play()
+			print("play hit2")
+	else:
+		print("error:" +str(name))

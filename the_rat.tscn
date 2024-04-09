@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=3 uid="uid://ct7akgrsmoosc"]
+[gd_scene load_steps=107 format=3 uid="uid://ct7akgrsmoosc"]
 
 [ext_resource type="Script" path="res://playerMovement.gd" id="1_8mm2x"]
 [ext_resource type="Texture2D" uid="uid://btsxflqogrgjs" path="res://assets/theRat/Attack_back/1.png" id="2_ttg8v"]
@@ -80,6 +80,19 @@
 [ext_resource type="Texture2D" uid="uid://b776f251fdwcl" path="res://assets/theRat/Move_side/15.png" id="77_1ldn8"]
 [ext_resource type="Texture2D" uid="uid://dv5mlau8alj32" path="res://assets/theRat/Move_side/16.png" id="78_r2lx0"]
 [ext_resource type="Script" path="res://sword.gd" id="80_pcu56"]
+[ext_resource type="Texture2D" uid="uid://btqb3r2ejtgs1" path="res://assets/FX/pow/pow.png" id="81_jvpo2"]
+[ext_resource type="AudioStream" uid="uid://dp0xd3cfxqnmm" path="res://assets/sound/player/dying.wav" id="82_en2fm"]
+[ext_resource type="AudioStream" uid="uid://cht6fk8ychmut" path="res://assets/sound/player/levelup.wav" id="82_ys5jc"]
+[ext_resource type="AudioStream" uid="uid://dabernhcuq307" path="res://assets/sound/player/dash.wav" id="82_yxfxd"]
+[ext_resource type="AudioStream" uid="uid://xwceavqf5lwr" path="res://assets/sound/player/PowerUp.wav" id="83_p46sq"]
+[ext_resource type="AudioStream" uid="uid://fav3nr1jivl8" path="res://assets/sound/player/get_hit/Punch1.wav" id="85_3lgr3"]
+[ext_resource type="AudioStream" uid="uid://difc1wsa276kn" path="res://assets/sound/player/get_hit/Punch2.wav" id="86_d1tw1"]
+[ext_resource type="AudioStream" uid="uid://bkqbsikgf6koj" path="res://assets/sound/player/get_hit/Punch3.wav" id="87_l07a7"]
+[ext_resource type="AudioStream" uid="uid://cw5jngu1ji7m7" path="res://assets/sound/player/trap.wav" id="88_ahp5e"]
+[ext_resource type="AudioStream" uid="uid://b8l35jt337til" path="res://assets/sound/player/heart.wav" id="90_42ije"]
+[ext_resource type="AudioStream" uid="uid://bkhobyg7o0t0n" path="res://assets/sound/attack/Slash_light.wav" id="91_g2066"]
+[ext_resource type="AudioStream" uid="uid://b0pyho0jeda7j" path="res://assets/sound/attack/slash_spin.wav" id="92_xb6di"]
+[ext_resource type="Script" path="res://followCamera.gd" id="93_gjec6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vciue"]
 radius = 133.333
@@ -609,7 +622,7 @@ animation = &"knocked_back"
 position = Vector2(-36, -21)
 rotation = -1.0472
 
-[node name="Sword" parent="Weapon" index="3"]
+[node name="Sword" parent="Weapon" index="2"]
 position = Vector2(0.5, 0.866028)
 scale = Vector2(7, 7)
 script = ExtResource("80_pcu56")
@@ -635,6 +648,48 @@ libraries = {
 
 [node name="BoostTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="SoundEffect" type="Node" parent="."]
+
+[node name="dash_fx" type="AudioStreamPlayer" parent="SoundEffect"]
+stream = ExtResource("82_yxfxd")
+
+[node name="dying_loop" type="AudioStreamPlayer" parent="SoundEffect"]
+stream = ExtResource("82_en2fm")
+
+[node name="levelup_fx" type="AudioStreamPlayer" parent="SoundEffect"]
+stream = ExtResource("82_ys5jc")
+
+[node name="PowerUp_fx" type="AudioStreamPlayer" parent="SoundEffect"]
+stream = ExtResource("83_p46sq")
+
+[node name="hit_fx_1" type="AudioStreamPlayer" parent="SoundEffect"]
+stream = ExtResource("85_3lgr3")
+
+[node name="hit_fx_2" type="AudioStreamPlayer" parent="SoundEffect"]
+stream = ExtResource("86_d1tw1")
+
+[node name="hit_fx_3" type="AudioStreamPlayer" parent="SoundEffect"]
+stream = ExtResource("87_l07a7")
+
+[node name="fire_hit" type="AudioStreamPlayer" parent="SoundEffect"]
+stream = ExtResource("88_ahp5e")
+
+[node name="heart" type="AudioStreamPlayer" parent="SoundEffect"]
+stream = ExtResource("90_42ije")
+
+[node name="Slash_light" type="AudioStreamPlayer" parent="SoundEffect"]
+stream = ExtResource("91_g2066")
+
+[node name="Slash_spin" type="AudioStreamPlayer" parent="SoundEffect"]
+stream = ExtResource("92_xb6di")
+
+[node name="followCamera" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
+limit_right = 5509
+limit_bottom = 2257
+script = ExtResource("93_gjec6")
 
 [connection signal="area_entered" from="theRatArea2D" to="." method="_on_the_rat_area_2d_area_entered"]
 [connection signal="body_entered" from="theRatArea2D" to="." method="_on_area_2d_body_entered"]

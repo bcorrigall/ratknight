@@ -20,29 +20,32 @@ func _ready():
 	
 	weapon = get_node("Sword")
 	rat = get_parent()
-	print(rat)
+	#print(rat)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if Input.is_action_pressed("left_click") and !timed_out and !rat.in_dash and !rat.attack_hold:
+	if Input.is_action_pressed("left_click") and !rat.attacking and !timed_out and !rat.in_dash and !rat.attack_hold:
 		fire()
 
 func fire():
 	var attacks = get_parent().extra_attacks + 1 
 	timed_out = true
+	rat.attack_star()
+	var shootanimation=false
 	while attacks > 0:
 		attack = attack_scene.instantiate()
 
 		attack.damage = damage + rat.damage_bonus
 		attack.position = global_position
 		attack.direction = (get_global_mouse_position() - global_position).normalized()
-
-		rat.attack_animation(attack.direction, rate_of_fire)
+		if !shootanimation:
+			shootanimation=true
+			rat.attack_animation(attack.direction, rate_of_fire)
 		get_parent().get_parent().add_child(attack)
-		print(attack.position)
-		print(position)
+		#print(attack.position)
+		#print(position)
 		
-		
+		FX_play(attacks)
 		await get_tree().create_timer(0.1).timeout
 		attacks = attacks - 1
 		print(attacks)
@@ -68,3 +71,12 @@ func disable():
 
 func _on_sword_body_entered(body):
 	pass # Replace with function body.
+
+func FX_play(name):
+	if name==1:
+		$star1.play()
+	elif name==2:
+		$star2.play()
+	else:
+		$star3.play()
+		
