@@ -119,7 +119,9 @@ func death():
 
 	
 
-
+func get_hurt_star(number):
+	health-=number
+	player.damage_count_fun(number)
 
 func _on_hurt_box_area_entered(area):
 	if isDead:pass
@@ -131,6 +133,7 @@ func _on_hurt_box_area_entered(area):
 		
 		attacking = true
 	else:
+		
 		return
 
 func shakey(area):
@@ -152,12 +155,15 @@ func get_damage(area):
 	$Timer.start(0.4)
 	HPbar.visible=true
 	HPbar.update()
+	
+	
 	if(area is String):
 		FX_play("star")
 	elif area.name.match("Sword"):
 		FX_play("hit")
 	else:
 		FX_play("star")
+		print("else star play")
 	if(health <= 0):
 		death()
 		

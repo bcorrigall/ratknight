@@ -23,6 +23,7 @@ func _on_area_entered(area):
 		var the_rat = area.get_parent()
 		#print("what's going on")
 		if(type >= 3):
+			var old_hp=the_rat.health
 			the_rat.health += 20
 			the_rat.FXPlay("heart")
 			if(the_rat.health>20):
@@ -32,7 +33,8 @@ func _on_area_entered(area):
 			if(the_rat.maxHealth < the_rat.health):
 				the_rat.health = the_rat.maxHealth
 			#print("healed")
-
+			var hps=the_rat.health-old_hp
+			the_rat.hps_fun(hps)
 		if(type <= 2):
 			var timer = get_node("../theRat/Weapon/Damageboost")
 			the_rat.getboost(7)

@@ -23,6 +23,8 @@ func _on_attack_area_area_entered(area):
 		var enemy = area.get_parent()
 		#print("damage: "+str(damage))
 		#print(enemy.health)
-		enemy.health = enemy.health - damage
+		if(damage==0):print("error: star damage is 0")
+		enemy.get_hurt_star(damage)
+		enemy.get_damage("star")
 		#print(enemy.health)
 		queue_free()

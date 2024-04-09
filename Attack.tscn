@@ -9,6 +9,7 @@
 script = ExtResource("1_3benm")
 
 [node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 shape = SubResource("CircleShape2D_6k2cw")

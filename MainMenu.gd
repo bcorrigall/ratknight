@@ -57,24 +57,25 @@ func update_Label(value:String):
 func update_Logs(value:int):
 	$ScoreBoard/bigScoreRect/Logs.text="Logs:"+str(value)
 
-func game_over():
+func game_over(killcomble,kill,damage,hps):
 	$ScoreBoard.visible=true
 	$gameover_music.play()
-	score_tween()
+	score_tween(killcomble,kill,damage,hps)
 	
 
 
 	
 	
-func score_tween():
+func score_tween(killcomble,kill,damage,hps):
 	var scoretween=get_tree().create_tween()
-	scoretween.parallel().tween_method(update_EnemyKill, 0, 3000, 1)
-	scoretween.parallel().tween_method(update_Damage, 0, 400, 1)
-	scoretween.parallel().tween_method(update_HPS, 0, 30, 1)
-	scoretween.parallel().tween_method(update_Boss, 0, 2, 1)
-	scoretween.tween_method(update_Total, 0, 99999, 1)
+	scoretween.parallel().tween_method(update_EnemyKill, 0, kill, 1)
+	scoretween.parallel().tween_method(update_Damage, 0, damage, 1)
+	scoretween.parallel().tween_method(update_HPS, 0, hps, 1)
+	scoretween.parallel().tween_method(update_Boss, 0, killcomble, 1)
+	var total_score=kill*10+damage+hps+killcomble
+	scoretween.tween_method(update_Total, 0, total_score, 1)
 	$ScoreBoard/bigScoreRect/Logs.visible=true
-	scoretween.tween_method(update_Logs, 0, 100, 1).set_delay(0.5).set_ease(Tween.EASE_IN_OUT)
+	scoretween.tween_method(update_Logs, 0, 100, 2).set_ease(Tween.EASE_IN_OUT)
 	$ScoreBoard/bigScoreRect/Close_button.show()
 	
 

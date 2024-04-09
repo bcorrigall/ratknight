@@ -1,7 +1,7 @@
 extends Node
 @export var enemy = preload("res://enemy.tscn")
-@export var monster_time = 10
-@export var starting_monsters = 3
+@export var monster_time = 5
+@export var starting_monsters = 10
 @export var starting_timer = 1
 var start_spawn = false
 

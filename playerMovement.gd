@@ -67,6 +67,15 @@ var throw_rate = 0
 var item_drop = 100
 var enemy_speed = 50
 
+
+
+#score
+var killcomble_bonus=0
+var kill_count=0
+var damage_count=0
+var hps=0
+var boss=0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
@@ -283,7 +292,7 @@ func death():
 	var simultaneous_scene = load("res://main_menu.tscn").instantiate()
 	get_node("/root/Main").queue_free()
 	get_tree().root.add_child(simultaneous_scene)
-	simultaneous_scene.game_over()
+	simultaneous_scene.game_over(killcomble_bonus,kill_count,damage_count,hps)
 
 func _on_the_rat_area_2d_area_entered(area):
 	if (area.get_name().begins_with("HurtBox") and invincible == false and in_dash == false):
@@ -338,6 +347,12 @@ func earn_experience(bonus):
 		level_up()
 func earn_kill():
 	killcomble+=1
+	damage_count_fun(100)
+	if(killcomble%10==0):
+		killcomble_bonus_fun(killcomble)
+	elif(killcomble>=1000):
+		killcomble_bonus_fun(killcomble)
+	kill_count+=1
 	kill.emit()
 
 func level_up():
@@ -414,6 +429,7 @@ func _on_regen_timer_timeout():
 	if(health < 20):
 		health += regenerate_bonus
 		current_regen += regenerate_bonus
+		hps_fun(regenerate_bonus)
 		if(health>=20):
 			FXPlay("stopdying")
 	$RegenTimer.start(5)
@@ -467,3 +483,15 @@ func FXPlay(name):
 		pass
 
 
+func damage_count_fun(number):
+	damage_count+=number
+func hps_fun(h):
+	hps+=h
+func boss_fun(b):
+	boss+=b
+func killcomble_bonus_fun(k):
+	if(k==10):killcomble_bonus+=100
+	elif(k==20):killcomble_bonus+=200
+	elif(k==50):killcomble_bonus+=500
+	elif(k==100):killcomble_bonus+=1000
+	elif(k>100):killcomble+=20
